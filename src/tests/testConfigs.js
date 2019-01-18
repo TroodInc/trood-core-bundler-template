@@ -17,7 +17,7 @@ import { STATE_REPLACE_ACTION } from '$trood/mainConstants'
 const LIBRARY_FOR_TEST = 'HandymanBusinessObjects'
 const currentLibraryApiName = flow(
   array => array.find(library => library.name === LIBRARY_FOR_TEST),
-  library => library.name + library.endpoint
+  library => library.name + library.endpoint,
 )(config.businessObjects)
 
 export const history = qhistory(
@@ -33,7 +33,7 @@ export const registeredBusinessObjects = Object.keys(RESTIFY_CONFIG.registeredMo
   return RESTIFY_CONFIG.registeredModels[key].apiName === currentLibraryApiName
 })
 
-export const beforeEachFunc = (config = {}) => {
+export const beforeEachFunc = () => {
   store.dispatch({
     type: STATE_REPLACE_ACTION,
   })

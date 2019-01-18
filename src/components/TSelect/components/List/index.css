@@ -29,6 +29,12 @@
   height: 100%;
 }
 
+.item,
+.itemTile {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .empty {
   composes: itemWrapper;
   color: var(--trood-gray-extra-dark);

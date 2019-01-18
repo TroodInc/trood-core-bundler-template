@@ -104,6 +104,7 @@ class DropDown extends PureComponent {
           onFocus()
         } else {
           onBlur()
+          this.handleSearch()
         }
       }
       this.setState({ open, innerSearch: undefined })

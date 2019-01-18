@@ -17,9 +17,9 @@ import qhistory from 'qhistory'
 
 import getStore from './store'
 import Root from './Root'
-import { stateKey, readStorage } from './storage'
+// import { stateKey, readStorage } from './storage'
 import addStorageWriter from './storeSerializer'
-import { STATE_REPLACE_ACTION } from './mainConstants'
+// import { STATE_REPLACE_ACTION } from './mainConstants'
 
 import configRestify from './configRestify'
 
@@ -56,6 +56,7 @@ if (!process.env.TEST) {
   )
   registerServiceWorker()
 
+  /*
   window.addEventListener('storage', e => {
     if (e.key === stateKey) {
       store.dispatch({
@@ -64,6 +65,7 @@ if (!process.env.TEST) {
       })
     }
   })
+  */
 
   // Remove loader
   setTimeout(() => {
