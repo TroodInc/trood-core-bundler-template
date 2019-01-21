@@ -4,11 +4,14 @@ import { api, forms, RESTIFY_CONFIG, RestifyForeignKeysArray } from 'redux-resti
 
 import modals from '$trood/modals'
 
+import history from '$trood/history'
+
 import {
   getBaseFormName,
   getEditModalName,
   getViewModalName,
   getEditFormName,
+  modalQueryToString,
 } from './constants'
 
 
@@ -79,11 +82,50 @@ export const createEntityForm = (modelName, parents = []) => (
 
 export const createChildForm = createEntityForm
 
-export const viewEntity = (modelName, parents) => (model) => (dispatch) => {
+const changeModalQuery = (modalProps, add) => {
+  let modalChanged = false
+  const modalQuery = modalQueryToString(modalProps)
+
+  let { modal = [] } = history.location.query
+  if (!Array.isArray(modal)) modal = [modal]
+
+  if (add && !modal.includes(modalQuery)) {
+    modalChanged = true
+    modal.push(modalQuery)
+  } else if (!add && modal.includes(modalQuery)) {
+    modalChanged = true
+    modal = modal.filter(m => m !== modalQuery)
+  }
+
+  if (modal.length === 1) modal = modal[0]
+
+  if (modalChanged) {
+    history.replace({
+      pathname: history.location.pathname,
+      query: {
+        ...history.location.query,
+        modal,
+      },
+    })
+  }
+}
+
+export const viewEntity = (modelName, parents) => (model, addToQuery = true) => (dispatch) => {
+  const modelId = typeof model === 'object' ? model.id : model
+  const modalProps = {
+    modalType: 'view',
+    modelName,
+    modelId,
+  }
+  if (addToQuery) {
+    changeModalQuery(modalProps, true)
+  }
+
   dispatch(modals.actions.showModal(true, getViewModalName(modelName), {
-    entityId: typeof model === 'object' ? model.id : model,
+    entityId: modelId,
     isEditing: true,
     parents,
+    closeAction: () => changeModalQuery(modalProps, false),
   }))
 }
 

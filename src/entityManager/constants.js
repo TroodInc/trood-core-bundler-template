@@ -70,6 +70,10 @@ export const parseModalQuery = (modalQuery = '') => {
   }
 }
 
+export const modalQueryToString = ({ modalType, modelName, modelId }) => {
+  return `${modalType}${MODAL_QUERY_DELIMITER}${modelName}${MODAL_QUERY_DELIMITER}${modelId}`
+}
+
 export const ENTITY_COMPONENT_EDIT = 'editComponent'
 export const ENTITY_COMPONENT_INLINE_EDIT = 'inlineEditComponent'
 export const ENTITY_COMPONENT_VIEW = 'viewComponent'

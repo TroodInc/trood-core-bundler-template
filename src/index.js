@@ -11,9 +11,7 @@ import { api, setRestifyStore } from 'redux-restify'
 import moment from 'moment'
 import 'moment/locale/ru'
 
-import createHistory from 'history/createBrowserHistory'
-import { stringify, parse } from 'qs'
-import qhistory from 'qhistory'
+import history from './history'
 
 import getStore from './store'
 import Root from './Root'
@@ -27,11 +25,6 @@ import registerServiceWorker from './registerServiceWorker'
 
 
 if (!process.env.TEST) {
-  const history = qhistory(
-    createHistory(),
-    stringify,
-    parse,
-  )
   configRestify()
   const store = getStore(history)
   setRestifyStore(store)
