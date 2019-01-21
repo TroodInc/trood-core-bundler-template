@@ -2,6 +2,8 @@ import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 import sanitizeHtml from 'sanitize-html'
+import Linkify, { linkify } from 'react-linkify'
+import { Parser, ProcessNodeDefinitions } from 'html-to-react'
 
 import style from './index.css'
 
@@ -13,6 +15,11 @@ import { html2text, getTagsFromHtml } from '$trood/helpers/format'
 
 import { FileListView } from '$trood/files'
 
+
+linkify.set({ fuzzyIP: true, fuzzyEmail: false })
+
+const html2reactParser = new Parser()
+const processNodeDefinitions = new ProcessNodeDefinitions()
 
 const createFromMailAvailableName = checkName => `${checkName}IsCreateAvailable`
 const attachMailAvailableName = checkName => `${checkName}IsAttachMailAvailable`
@@ -143,6 +150,32 @@ class Mail extends PureComponent {
       nonTextTags: excludeTags,
     }
     let body = sanitizeHtml(model.body, sanitizeProps)
+
+    const reactBody = html2reactParser.parseWithInstructions(body, () => true, [
+      {
+        shouldProcessNode: (node) => {
+          return node && node.name === 'a'
+        },
+        processNode: (node, children, index) => {
+          return processNodeDefinitions.processDefaultNode(
+            {
+              ...node,
+              attribs: {
+                ...node.attribs,
+                target: '_blank',
+                rel: 'nofollow noopener',
+              },
+            },
+            children,
+            index,
+          )
+        },
+      },
+      {
+        shouldProcessNode: () => true,
+        processNode: processNodeDefinitions.processDefaultNode,
+      },
+    ])
     if (!open) body = html2text(body)
 
     return (
@@ -150,12 +183,14 @@ class Mail extends PureComponent {
         <div className={style.header}>
           <div className={style.left} onClick={this.toggleOpen}>
             <div className={style.title}>
-              {open &&
+              {
+                open &&
                 <div className={style.subject}>
                   {model.subject}
                 </div>
               }
-              {!open &&
+              {
+                !open &&
                 <div className={style.contacts}>
                   {`От: ${model.fromAddress}`}
                 </div>
@@ -166,7 +201,8 @@ class Mail extends PureComponent {
                 format: SMART_DATE_FORMATS.shortWithTime,
               }} />
             </div>
-            {open &&
+            {
+              open &&
               <div className={style.contacts}>
                 <span>
                   {`От: ${model.fromAddress}`}
@@ -176,7 +212,8 @@ class Mail extends PureComponent {
                 </span>
               </div>
             }
-            {!open &&
+            {
+              !open &&
               <div className={style.shortBody}>
                 {body}
               </div>
@@ -193,30 +230,32 @@ class Mail extends PureComponent {
               const attachMailAction = actionsForCreateFormFromService[item.attachMailActionName]
               return (
                 <React.Fragment key={item.modelName}>
-                  {isCreateEntityAvailable && createAction &&
-                  <TIcon {...{
-                    className: style.dotMenuItem,
-                    type: ICONS_TYPES.plus,
-                    size: 15,
-                    label: item.createEntityActionTitle,
-                    onClick: () => createAction(
-                      model,
-                      createFormFromEntitiesActions[item.modelName],
-                      () => this.onMailAttach(item),
-                    ),
-                  }} />
+                  {
+                    isCreateEntityAvailable && createAction &&
+                    <TIcon {...{
+                      className: style.dotMenuItem,
+                      type: ICONS_TYPES.plus,
+                      size: 15,
+                      label: item.createEntityActionTitle,
+                      onClick: () => createAction(
+                        model,
+                        createFormFromEntitiesActions[item.modelName],
+                        () => this.onMailAttach(item),
+                      ),
+                    }} />
                   }
-                  {isAttachMailAvailable && attachMailAction &&
-                  <TIcon {...{
-                    className: style.dotMenuItem,
-                    type: ICONS_TYPES.plus,
-                    size: 15,
-                    label: item.attachMailActionTitle,
-                    onClick: () => attachMailAction(
-                      model,
-                      () => this.onMailAttach(item),
-                    ),
-                  }} />
+                  {
+                    isAttachMailAvailable && attachMailAction &&
+                    <TIcon {...{
+                      className: style.dotMenuItem,
+                      type: ICONS_TYPES.plus,
+                      size: 15,
+                      label: item.attachMailActionTitle,
+                      onClick: () => attachMailAction(
+                        model,
+                        () => this.onMailAttach(item),
+                      ),
+                    }} />
                   }
                 </React.Fragment>
               )
@@ -245,13 +284,18 @@ class Mail extends PureComponent {
             }} />
           </DotMenu>
         </div>
-        <div {...{
-          className: style.body,
-          dangerouslySetInnerHTML: {
-            __html: body,
+        <Linkify {...{
+          properties: {
+            target: '_blank',
+            rel: 'nofollow noopener',
           },
-        }} />
-        {!!model.attachments.length &&
+        }}>
+          <div className={style.body}>
+            {reactBody}
+          </div>
+        </Linkify>
+        {
+          !!model.attachments.length &&
           <FileListView {...{
             files: model.attachments,
             filesActions,

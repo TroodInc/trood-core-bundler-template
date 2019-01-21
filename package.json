@@ -13,6 +13,7 @@
     "babel-preset-react-app": "^3.1.1",
     "babel-preset-stage-1": "^6.24.1",
     "babel-runtime": "6.26.0",
+    "browser-env": "^3.2.5",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
     "chalk": "1.1.3",
     "classnames": "^2.2.5",
@@ -26,6 +27,7 @@
     "draft-js": "^0.10.5",
     "draftjs-to-html": "^0.8.4",
     "druid-query": "git+https://github.com/DeyLak/node-druid-query.git",
+    "empty-module-webpack-plugin": "git+https://github.com/AvokaTech/empty-module-webpack-plugin.git",
     "eslint": "4.10.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-react-app": "^2.1.0",
@@ -41,11 +43,13 @@
     "gulp-rename": "^1.2.2",
     "gulp-template": "^5.0.0",
     "history": "^4.7.2",
+    "html-to-react": "^1.3.4",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
     "lodash": "^4.17.10",
     "memoize-one": "^4.0.0",
     "moment": "^2.22.0",
+    "null-loader": "^0.1.1",
     "object-assign": "4.1.1",
     "object-hash": "^1.3.0",
     "postcss-cssnext": "^3.1.0",
@@ -53,6 +57,7 @@
     "postcss-global-import": "^1.0.6",
     "postcss-import": "^11.1.0",
     "postcss-loader": "2.0.8",
+    "pre-commit": "^1.2.2",
     "promise": "8.0.1",
     "qhistory": "^1.0.2",
     "qs": "^6.5.2",
@@ -79,18 +84,14 @@
     "sanitize-html": "^1.19.0",
     "scroll-into-view-if-needed": "^2.1.5",
     "style-loader": "0.19.0",
+    "stylelint": "^9.3.0",
+    "stylelint-config-standard": "^18.2.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
     "webpack": "3.8.1",
     "webpack-dev-server": "2.9.4",
     "webpack-manifest-plugin": "1.3.2",
-    "whatwg-fetch": "2.0.3",
-    "browser-env": "^3.2.5",
-    "empty-module-webpack-plugin": "git+https://github.com/AvokaTech/empty-module-webpack-plugin.git",
-    "null-loader": "^0.1.1",
-    "pre-commit": "^1.2.2",
-    "stylelint": "^9.3.0",
-    "stylelint-config-standard": "^18.2.0"
+    "whatwg-fetch": "2.0.3"
   },
   "scripts": {
     "build-gulp": "node scripts/build-gulp.js",
@@ -139,6 +140,5 @@
       "mjs"
     ]
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

@@ -137,3 +137,7 @@
   list-style: decimal inside;
   padding-left: 20px;
 }
+
+.body a {
+  color: var(--trood-blue);
+}
