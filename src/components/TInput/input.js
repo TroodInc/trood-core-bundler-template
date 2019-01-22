@@ -285,6 +285,8 @@ class Input extends PureComponent {
         i += 1
         newSplitFormattedValue = newFormattedValue.substr(0, splitValueLength + 1)
       }
+      const lastOfSplitFormattedValue = splitFormattedValue[splitFormattedValue.length - 1]
+      if (/[\u002c\u002e]/.test(lastOfSplitFormattedValue)) newSplitFormattedValue += lastOfSplitFormattedValue
     }
     this.selectionStart = newSplitFormattedValue.length
     this.selectionEnd = newSplitFormattedValue.length
