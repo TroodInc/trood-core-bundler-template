@@ -122,7 +122,7 @@ class App extends Component {
   }
 
   openLinkedModal() {
-    const { linkedModals, isAuthenticated } = this.props
+    const { history, linkedModals, isAuthenticated } = this.props
     if (isAuthenticated) {
       const firstLinkedModal = linkedModals[0]
       if (firstLinkedModal) {
@@ -134,7 +134,7 @@ class App extends Component {
         this.props[getModelEntitiesName(modelName)].asyncGetById(modelId)
           .then(model => {
             if (model && !model.$error) {
-              this.props[getModelEditorActionsName(modelName)][`${modalType}Entity`](model)
+              this.props[getModelEditorActionsName(modelName)][`${modalType}Entity`](model, { history })
             }
           })
       }
