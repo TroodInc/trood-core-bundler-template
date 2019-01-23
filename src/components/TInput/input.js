@@ -283,7 +283,7 @@ class Input extends PureComponent {
       let i = 0
       while (getValue(newSplitFormattedValue, false).length < splitValueLength) {
         i += 1
-        newSplitFormattedValue = newFormattedValue.substr(0, splitValueLength + 1)
+        newSplitFormattedValue = newFormattedValue.substr(0, splitValueLength + i)
       }
       const lastOfSplitFormattedValue = splitFormattedValue[splitFormattedValue.length - 1]
       if (/[\u002c\u002e]/.test(lastOfSplitFormattedValue)) newSplitFormattedValue += lastOfSplitFormattedValue
