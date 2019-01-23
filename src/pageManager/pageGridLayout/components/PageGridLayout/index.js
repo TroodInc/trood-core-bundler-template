@@ -166,9 +166,13 @@ const PageGridLayout = ({
         let marginLeft
         let marginRight
         let marginTop
+        let marginBottom
         if (comp.withMargin && !comp.components) {
           marginTop = GRID_MARGIN
           marginRight = GRID_MARGIN
+          if (comp.withMarginBottom) {
+            marginBottom = GRID_MARGIN
+          }
           if (currentColumnIndex === 0 && isFirstColumn) {
             marginLeft = TROOD_PAGE_PADDING
           }
@@ -185,6 +189,7 @@ const PageGridLayout = ({
               marginLeft,
               marginRight,
               marginTop,
+              marginBottom,
             },
           }}>
             {compToRender}

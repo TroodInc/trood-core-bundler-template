@@ -11,6 +11,7 @@
 }
 
 .primary {
+  flex-flow: row wrap;
   border-bottom: 1px solid var(--trood-gray-bg);
 }
 
@@ -48,8 +49,8 @@
   opacity: 1;
 }
 
-.primary .url:not(:first-child) {
-  margin-left: 20px;
+.primary .url:not(:last-child) {
+  margin-right: 20px;
 }
 
 .primary .url.active,

@@ -15,7 +15,6 @@ export default (fieldsToSyncArg) => (WrappedComponent) => {
     render() {
       const {
         location,
-        match,
         form,
       } = this.props
 
@@ -33,7 +32,7 @@ export default (fieldsToSyncArg) => (WrappedComponent) => {
         return (
           <QueryRedirect {...{
             to: {
-              pathname: match.url,
+              pathname: location.pathname,
               query: {
                 ...location.query,
                 ...newQuery,
