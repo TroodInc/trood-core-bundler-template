@@ -256,8 +256,8 @@ class Input extends PureComponent {
       formattedValue,
     }, () => {
       const newValue = getValue(formattedValue)
+      this.throttledOnChangeEvent(newValue)
       if (value !== newValue) {
-        this.throttledOnChangeEvent(newValue)
         this.debouncedOnSearchEvent(newValue)
       }
     })
@@ -310,7 +310,12 @@ class Input extends PureComponent {
     const char = String.fromCharCode(e.charCode)
     const {
       type,
-      settings: { include, exclude },
+      settings: {
+        include,
+        exclude,
+        getValue,
+        formatValue,
+      },
     } = this.props
     const { formattedValue } = this.state
     let shouldPreventDefault = false
@@ -318,6 +323,12 @@ class Input extends PureComponent {
       type === INPUT_TYPES.int || type === INPUT_TYPES.float) {
       shouldPreventDefault = char === '-' && (this.selectionStart !== 0 || formattedValue.includes('-'))
       shouldPreventDefault += (char === '.' || char === ',') && formattedValue.includes(',')
+      const roundValue = Math.floor(getValue(formattedValue)).toString()
+      const roundFormattedValue = formatValue(roundValue)
+      shouldPreventDefault += roundValue.length >= Number.MAX_SAFE_INTEGER.toString().length - 1 &&
+        this.selectionStart === this.selectionEnd &&
+        !(char === '.' || char === ',') &&
+        this.selectionStart <= roundFormattedValue.length
     }
     if (exclude && !include) {
       shouldPreventDefault += (Array.isArray(exclude) ? exclude.includes(e.key) : exclude.test(e.key))
