@@ -30,8 +30,10 @@ class TSelect extends PureComponent {
 
     type: PropTypes.oneOf(Object.values(SELECT_TYPES)),
     listType: PropTypes.oneOf(Object.values(LIST_TYPES)),
+    multi: PropTypes.bool,
     label: PropTypes.node,
     values: PropTypes.arrayOf(valueTypes),
+    clearable: PropTypes.bool,
 
     disabled: PropTypes.bool,
     errors: PropTypes.arrayOf(PropTypes.string),
@@ -80,6 +82,8 @@ class TSelect extends PureComponent {
   getSelectComponent(errors) {
     const {
       type,
+      multi,
+      clearable,
       listType,
     } = this.props
 
@@ -87,6 +91,7 @@ class TSelect extends PureComponent {
       ...this.props,
       className: undefined,
       type: listType,
+      clearable: clearable === undefined ? multi : clearable,
       errors,
       onBlur: this.toggleBlur,
       onFocus: () => this.toggleBlur(false),

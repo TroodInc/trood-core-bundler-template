@@ -54,6 +54,7 @@ class List extends PureComponent {
       label: PropTypes.node,
     })),
     values: PropTypes.arrayOf(valueTypes),
+    clearable: PropTypes.bool,
     emptyItemsLabel: PropTypes.node,
 
     maxRows: PropTypes.number,
@@ -143,6 +144,7 @@ class List extends PureComponent {
     const {
       multi,
       values,
+      clearable,
       onChange,
       onBlur,
     } = this.props
@@ -153,6 +155,8 @@ class List extends PureComponent {
       } else {
         onChange([value])
       }
+    } else if (!newValues.length && !clearable) {
+      onChange([value])
     } else {
       onChange(newValues)
     }
