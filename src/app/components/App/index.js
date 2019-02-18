@@ -157,6 +157,7 @@ class App extends Component {
     const {
       isAuthenticated,
       authLinkedObject,
+      activeAccount,
       authLinkedObjectIsLoading,
       permissions,
 
@@ -174,7 +175,7 @@ class App extends Component {
       return <LoadingIndicator className={style.loading} />
     }
 
-    const renderers = memoizedGetRenderers(authLinkedObject, permissions)
+    const renderers = memoizedGetRenderers(activeAccount, permissions)
     const registeredRoutesPaths = memoizedGetAllPaths(renderers)
     const pageManagerContextValue = memoizedGetPageManagerContext(registeredRoutesPaths)
 

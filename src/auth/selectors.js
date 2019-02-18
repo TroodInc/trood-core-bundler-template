@@ -35,6 +35,16 @@ export const getLinkedObjectIsLoading = state => {
   return api.selectors.entityManager[linkedObject].getEntities(state).getIsLoadingById(linkedObjectId)
 }
 
+export const getActiveAcoount = state => {
+  const authData = getAuthData(state)
+  const linkedObject = getLinkedObject(state)
+  return {
+    ...authData,
+    abac: undefined,
+    linkedObject,
+  }
+}
+
 export const getPermissions = state => {
   return forms.selectors.authDataForm.getField('abac')(state)
 }

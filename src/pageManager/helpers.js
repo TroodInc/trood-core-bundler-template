@@ -33,14 +33,15 @@ const allowedRules = [
   any,
 ]
 
-const checkRule = (value, rule) => {
+const checkRule = (value = {}, rule) => {
   if (typeof rule === 'string') return rule === any || rule === value || rule === value.id
   if (Array.isArray(rule.in)) return rule.in.some(item => item === any || item === value || item === value.id)
   return false
 }
 
 const getIsAllowPage = (pageId, permission) => {
-  const pageRules = (permission.rules || {})[pageId] || {}
+  const pageRules = (permission.rules || {})[pageId]
+  if (!pageRules) return true
   return (pageRules[pageViewAction] || [])
     .some(viewRule => {
       if (!allowedRules.includes(viewRule.result)) return false
@@ -61,8 +62,6 @@ export const getPagesRouteShemaRenderers = (
   } = {},
   permission,
 ) => {
-  if (permission && permission.sbj && !permission.sbj.id) return {}
-
   const hash = objectHash({
     pages: pages.map(p => p.title),
     entityPageModelName,
