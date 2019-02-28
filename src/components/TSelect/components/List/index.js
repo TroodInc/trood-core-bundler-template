@@ -15,6 +15,7 @@ import {
 import TRadioButton from '$trood/components/TRadioButton'
 import TCheckbox from '$trood/components/TCheckbox'
 import TToggle from '$trood/components/TToggle'
+import LoadingIndicator from '$trood/components/LoadingIndicator'
 
 import TileListItem from '../TileListItem'
 import TextListItem from '../TextListItem'
@@ -173,6 +174,7 @@ class List extends PureComponent {
       values,
       emptyItemsLabel,
       disabled,
+      isLoading,
     } = this.props
 
     const { maxHeight } = this.state
@@ -207,9 +209,18 @@ class List extends PureComponent {
             }} />
           </li>
         ))}
-        {!items.length && emptyItemsLabel &&
+        {
+          !items.length && emptyItemsLabel &&
           <li className={style.empty}>
             {emptyItemsLabel}
+          </li>
+        }
+        {
+          isLoading &&
+          <li className={classNames(style.itemWrapper, style.loader)}>
+            <LoadingIndicator {...{
+              size: 20,
+            }} />
           </li>
         }
       </ul>

@@ -40,3 +40,8 @@
   color: var(--trood-gray-extra-dark);
   cursor: default;
 }
+
+.loader {
+  align-items: center;
+  justify-content: center;
+}

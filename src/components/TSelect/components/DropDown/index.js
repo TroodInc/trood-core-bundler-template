@@ -4,6 +4,7 @@ import classNames from 'classnames'
 
 import TClickOutside from '$trood/components/TClickOutside'
 import TIcon, { ROTATE_TYPES, ICONS_TYPES } from '$trood/components/TIcon'
+import TButton, { BUTTON_SPECIAL_TYPES, BUTTON_TYPES } from '$trood/components/TButton'
 import TInput from '$trood/components/TInput'
 
 import List, { LIST_TYPES } from '../List'
@@ -42,6 +43,7 @@ class DropDown extends PureComponent {
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onSearch: PropTypes.func,
+    onAdd: PropTypes.func,
     missingValueResolver: PropTypes.func,
   }
 
@@ -159,11 +161,31 @@ class DropDown extends PureComponent {
 
       disabled,
       errors,
+      isLoading,
 
-      children,
+      onAdd,
     } = this.props
 
-    const { open } = this.state
+    const { open, innerSearch } = this.state
+
+    const items = this.getItems()
+
+    let { children } = this.props
+
+    if (!isLoading && onAdd && innerSearch && !items.length) {
+      children = [
+        <TButton {...{
+          key: 'add',
+          label: innerSearch,
+          specialType: BUTTON_SPECIAL_TYPES.add,
+          className: style.addButton,
+          onClick: () => {
+            onAdd(innerSearch)
+            this.toggleOpen(false)
+          },
+        }} />,
+      ].concat(children)
+    }
 
     return (
       <TClickOutside onClick={() => this.toggleOpen(false)}>
@@ -194,7 +216,7 @@ class DropDown extends PureComponent {
             <List {...{
               ...this.props,
               type,
-              items: this.getItems(),
+              items,
               onChange: this.handleChange,
             }} />
             {
