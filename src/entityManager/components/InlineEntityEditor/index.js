@@ -16,6 +16,7 @@ class InlineEntityEditor extends PureComponent {
     modelType: PropTypes.string.isRequired,
 
     onSuccess: PropTypes.func,
+    onDelete: PropTypes.func,
   }
 
   static defaultProps = {
@@ -30,6 +31,7 @@ class InlineEntityEditor extends PureComponent {
       modelType,
 
       onSuccess,
+      onDelete,
     } = this.props
 
     return (
@@ -38,6 +40,7 @@ class InlineEntityEditor extends PureComponent {
           return React.createElement(registeredEntityInlineEditors[modelType], {
             title,
             onSuccess,
+            onDelete,
             entityId: model.id || model.tempId,
             isEditing: !!model.id,
             parents: nextParents,
