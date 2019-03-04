@@ -129,6 +129,7 @@ class AsyncEntitiesList extends PureComponent {
       content = content.concat((
         <LoadingIndicator {...{
           key: 'loadMore',
+          animationStop: !isLoading,
           className: isLoading ? '' : style.hidden,
         }} />
       ))

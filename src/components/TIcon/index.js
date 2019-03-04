@@ -46,6 +46,7 @@ class TIcon extends PureComponent {
       labelPosition,
       disabled,
       onClick,
+      ...other
     } = this.props
 
     const inlineStyle = {
@@ -67,7 +68,7 @@ class TIcon extends PureComponent {
           className: style.svgWrapper,
           style: inlineStyle,
         }} >
-          {!!type && React.createElement(ICON_COMPS[type])}
+          {!!type && React.createElement(ICON_COMPS[type], other)}
         </div>
         {label &&
           <div {...{

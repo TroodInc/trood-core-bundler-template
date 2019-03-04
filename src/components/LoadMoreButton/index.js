@@ -37,7 +37,10 @@ class LoadMoreButton extends PureComponent {
       <div {...{
         className: classNames(style.root, className),
       }} >
-        <LoadingIndicator className={isLoading ? style.indicator : style.hidden} />
+        <LoadingIndicator {...{
+          className: isLoading ? style.indicator : style.hidden,
+          animationStop: !isLoading,
+        }} />
         <TButton {...{
           className: isLoading ? style.hidden : style.button,
           label,

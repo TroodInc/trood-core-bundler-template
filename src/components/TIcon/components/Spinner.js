@@ -18,7 +18,9 @@ const defaultAnimationProps = i => ({
   restart: 'always',
 })
 
-const Spiner = () => (
+const Spiner = ({
+  animationStop,
+}) => (
   <svg {...{
     xmlns: 'http://www.w3.org/2000/svg',
     viewBox: `0 0 ${viewBoxSize} ${viewBoxSize}`,
@@ -39,19 +41,25 @@ const Spiner = () => (
                 transform: minScale + ((maxScale - minScale) / (count - 1) * i),
               },
             }}>
-              <animate {...{
-                attributeName: 'opacity',
-                from: maxOpacity,
-                to: minOpacity,
-                ...defaultAnimationProps(i),
-              }} />
-              <animateTransform {...{
-                attributeName: 'transform',
-                type: 'scale',
-                from: maxScale,
-                to: minScale,
-                ...defaultAnimationProps(i),
-              }} />
+              {
+                !animationStop &&
+                <animate {...{
+                  attributeName: 'opacity',
+                  from: maxOpacity,
+                  to: minOpacity,
+                  ...defaultAnimationProps(i),
+                }} />
+              }
+              {
+                !animationStop &&
+                <animateTransform {...{
+                  attributeName: 'transform',
+                  type: 'scale',
+                  from: maxScale,
+                  to: minScale,
+                  ...defaultAnimationProps(i),
+                }} />
+              }
             </circle>
           </g>
         ))
