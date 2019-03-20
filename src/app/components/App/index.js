@@ -31,6 +31,8 @@ import {
   EntityManagerContext,
   getModelEditorActionsName,
   getModelEntitiesName,
+  getEditModalName,
+  getViewModalName,
   parseModalQuery,
 } from '$trood/entityManager'
 import { currentLayout } from '$trood/layoutsManager'
@@ -124,7 +126,13 @@ class App extends Component {
   }
 
   openLinkedModal() {
-    const { history, linkedModals, isAuthenticated } = this.props
+    const {
+      history,
+      linkedModals,
+      isAuthenticated,
+      getModalOpen,
+    } = this.props
+
     if (isAuthenticated) {
       const firstLinkedModal = linkedModals[0]
       if (firstLinkedModal) {
@@ -133,12 +141,18 @@ class App extends Component {
           modelName,
           modelId,
         } = parseModalQuery(firstLinkedModal)
-        this.props[getModelEntitiesName(modelName)].asyncGetById(modelId)
-          .then(model => {
-            if (model && !model.$error) {
-              this.props[getModelEditorActionsName(modelName)][`${modalType}Entity`](model, { history })
-            }
-          })
+
+        const getModalName = modalType !== 'view' ? getEditModalName : getViewModalName
+        const modalName = getModalName(modelName)
+        const modalOpen = getModalOpen(modalName)
+        if (!modalOpen) {
+          this.props[getModelEntitiesName(modelName)].asyncGetById(modelId)
+            .then(model => {
+              if (model && !model.$error) {
+                this.props[getModelEditorActionsName(modelName)][`${modalType}Entity`](model, { history })
+              }
+            })
+        }
       }
     }
   }

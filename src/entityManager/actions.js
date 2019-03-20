@@ -110,7 +110,7 @@ const changeModalQuery = (modalProps, history, add) => {
   }
 }
 
-export const viewEntity = (modelName, parents) => (model, { history }) => (dispatch) => {
+export const viewEntity = (modelName, parents) => (model, { history, title }) => (dispatch) => {
   const modelId = typeof model === 'object' ? model.id : model
   const modalProps = {
     modalType: 'view',
@@ -123,6 +123,7 @@ export const viewEntity = (modelName, parents) => (model, { history }) => (dispa
     entityId: modelId,
     isEditing: true,
     parents,
+    title,
     closeAction: () => changeModalQuery(modalProps, history, false),
   }))
 }

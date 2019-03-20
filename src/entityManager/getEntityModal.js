@@ -334,7 +334,7 @@ const getEntityEditComponent = (entityComponentName) => (modelName, modelConfig)
     // Calc props for viewing modal
     } else if (entityComponentName === ENTITY_COMPONENT_VIEW) {
       model = currentEntities[modelName].getById(props.entityId)
-      title = currentModel.name
+      title = props.title || currentModel.name
     }
 
     const childEntitiesByModel =

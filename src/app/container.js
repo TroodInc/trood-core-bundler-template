@@ -16,6 +16,8 @@ import entityManager, {
   parseModalQuery,
 } from '$trood/entityManager'
 
+import modals from '$trood/modals'
+
 
 const stateToProps = (state, props) => {
   let linkedModals = props.location.query.modal
@@ -50,6 +52,7 @@ const stateToProps = (state, props) => {
     authLinkedObjectIsLoading: auth.selectors.getLinkedObjectIsLoading(state),
     isAuthenticated: auth.selectors.getIsAuthenticated(state),
     isLoading: api.selectors.loadsManager.getIsLoading(state),
+    getModalOpen: modalName => modals.selectors.getModalOpen(modalName)(state),
   }
 }
 
