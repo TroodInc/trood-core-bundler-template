@@ -257,7 +257,7 @@ class DatePicker extends PureComponent {
                 {value ? moment(value).format('DD.MM.YYYY') : placeholder}
               </div>
               <TIcon {...{
-                size: 28,
+                size: 8,
                 type: ICONS_TYPES.triangleArrow,
                 rotate: open ? ROTATE_TYPES.up : ROTATE_TYPES.down,
                 className: style.icon,

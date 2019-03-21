@@ -6,6 +6,8 @@ import {
   EntityManagerContext,
 } from '../../constants'
 
+import modalsStyle from '$trood/styles/modals.css'
+
 
 class InlineEntityEditor extends PureComponent {
   static propTypes = {
@@ -38,6 +40,7 @@ class InlineEntityEditor extends PureComponent {
       <EntityManagerContext.Consumer>
         {({ nextParents, prevForm }) => {
           return React.createElement(registeredEntityInlineEditors[modelType], {
+            className: modalsStyle.inlineForm,
             title,
             onSuccess,
             onDelete,
