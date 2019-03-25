@@ -1,0 +1,26 @@
+@import 'styles/variables.css';
+
+.root {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-height: 100%;
+  cursor: pointer;
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+.icon:not(:last-child) {
+  margin-right: 10px;
+}
+
+.yellow {
+  color: #f5a623;
+}
+
+.gray {
+  color: #95979f;
+}

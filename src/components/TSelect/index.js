@@ -15,6 +15,7 @@ import {
 import List, { LIST_TYPES } from './components/List'
 import DropDown from './components/DropDown'
 import Tile from './components/Tile'
+import Rating from './components/Rating'
 
 
 const valueTypes = PropTypes.oneOfType([
@@ -108,6 +109,12 @@ class TSelect extends PureComponent {
       case SELECT_TYPES.tile:
         return (
           <Tile {...{
+            ...generalProps,
+          }} />
+        )
+      case SELECT_TYPES.rating:
+        return (
+          <Rating {...{
             ...generalProps,
           }} />
         )
