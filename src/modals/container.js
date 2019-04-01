@@ -5,6 +5,7 @@ import * as selectors from './selectors'
 
 import { registeredModals } from './constants'
 import ModalWrapper from './components/ModalWrapper'
+import PopupWrapper from './components/PopupWrapper'
 import ConfirmModal from './components/ConfirmModal'
 import InputModal from './components/InputModal'
 
@@ -28,6 +29,8 @@ class ModalsComp extends Component {
       confirmModalProps = {},
       inputModalOpen = false,
       inputModalProps = {},
+      popupOpen = false,
+      popupProps = {},
       ...other
     } = this.props
 
@@ -84,6 +87,16 @@ class ModalsComp extends Component {
         }}>
           <ConfirmModal {...confirmModalProps} />
         </ModalWrapper>
+        <PopupWrapper {...{
+          order: 9999999,
+          show: popupOpen,
+          timeout: popupProps.timeout,
+          color: popupProps.color,
+          closeAction: popupProps.onAny,
+          ...other,
+        }}>
+          {popupProps.text}
+        </PopupWrapper>
       </span>
     )
   }
@@ -99,6 +112,8 @@ const stateToProps = (state, props) => {
     confirmModalProps: selectors.getConfirmModal(state),
     inputModalOpen: selectors.getInputModalOpen(state),
     inputModalProps: selectors.getInputModal(state),
+    popupOpen: selectors.getPopupOpen(state),
+    popupProps: selectors.getPopup(state),
   })
 }
 

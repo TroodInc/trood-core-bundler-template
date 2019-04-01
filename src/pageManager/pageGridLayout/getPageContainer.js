@@ -5,6 +5,8 @@ import { forms, api, RESTIFY_CONFIG } from 'redux-restify'
 
 import PageGridLayout from './components/PageGridLayout'
 
+import modals from '$trood/modals'
+
 import entityManager, {
   getModelEditorActionsName,
   getFormActionsName,
@@ -114,7 +116,6 @@ const getPageContainer = (pageConfig, entityPageModelName, entityPageModelIdSele
         getChildEntitiesByModel(entityPageModelName, currentModel, currentEntityLists, modelId, { childForms, model })
     }
 
-
     return {
       modelId,
       model,
@@ -130,6 +131,7 @@ const getPageContainer = (pageConfig, entityPageModelName, entityPageModelIdSele
     const currentFormsActions = Object.keys(formsToGet).reduce((memo, key) => ({
       ...memo,
       [getFormActionsName(key)]: bindActionCreators(forms.getFormActions(key), dispatch),
+      modalsActions: bindActionCreators(modals.actions, dispatch),
     }), {})
     return {
       ...currentFormsActions,

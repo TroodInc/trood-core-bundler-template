@@ -1,0 +1,55 @@
+@import 'styles/variables.css';
+
+.hiddenOverlay {
+  position: fixed;
+  z-index: -1;
+  top: 30px;
+  right: 0;
+  left: 0;
+  pointer-events: none;
+  background-color: transparent;
+  transition:
+    transform 0.2s linear,
+    opacity 0.2s linear;
+}
+
+.hiddenRoot {
+  transform: scale(0);
+}
+
+.overlay {
+  composes: hiddenOverlay;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.root {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px 25px;
+  font-weight: 500;
+  max-width: 50%;
+  min-width: 300px;
+  min-height: 50px;
+  border-radius: 3px;
+  transform: scale(1);
+  transition: transform 0.3s;
+  background-color: color(var(--trood-blue) l(90%) a(80%));
+  border: 1px solid var(--trood-blue);
+}
+
+.green {
+  background-color: color(var(--trood-green) l(90%) a(80%));
+  border: 1px solid var(--trood-green);
+}
+
+.red {
+  background-color: color(var(--trood-red) l(90%) a(80%));
+  border: 1px solid var(--trood-red);
+}

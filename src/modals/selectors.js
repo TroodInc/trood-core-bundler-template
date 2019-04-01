@@ -1,6 +1,7 @@
 import {
   CONFIRM_MODAL_NAME,
   INPUT_MODAL_NAME,
+  POPUP_NAME,
 } from './constants'
 
 
@@ -38,3 +39,6 @@ export const getConfirmModal = (state) => state.modals[CONFIRM_MODAL_NAME] && st
 
 export const getInputModalOpen = getModalOpen(INPUT_MODAL_NAME)
 export const getInputModal = (state) => state.modals[INPUT_MODAL_NAME] && state.modals[INPUT_MODAL_NAME].params
+
+export const getPopupOpen = getModalOpen(POPUP_NAME)
+export const getPopup = (state) => state.modals[POPUP_NAME] && state.modals[POPUP_NAME].params

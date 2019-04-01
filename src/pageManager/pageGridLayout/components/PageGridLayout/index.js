@@ -172,6 +172,7 @@ const PageGridLayout = ({
             model: other.model,
             form: other[getFormPropName(comp.type)],
             formActions: other[getFormActionsName(comp.type)],
+            modalsActions: other.modalsActions,
             ...componentServices,
           })
 

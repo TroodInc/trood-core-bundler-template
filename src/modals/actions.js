@@ -2,7 +2,9 @@ import {
   ACTIONS_TYPES,
   CONFIRM_MODAL_NAME,
   INPUT_MODAL_NAME,
+  POPUP_NAME,
   MODAL_SIZES,
+  POPUP_COLORS,
 } from './constants'
 
 
@@ -53,3 +55,16 @@ export const showMessageBoxModal = ({
     ...other,
   }))
 }
+
+const showPopup = color => (text, props) => (dispatch) => {
+  dispatch(showModal(true, POPUP_NAME, {
+    color,
+    text,
+    onAny: () => dispatch(showModal(false, POPUP_NAME)),
+    ...props,
+  }))
+}
+
+export const showInfoPopup = showPopup(POPUP_COLORS.blue)
+export const showSuccessPopup = showPopup(POPUP_COLORS.green)
+export const showErrorPopup = showPopup(POPUP_COLORS.red)
