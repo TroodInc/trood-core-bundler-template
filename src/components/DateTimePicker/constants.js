@@ -10,6 +10,11 @@ export const CALENDAR_TYPES = {
   year: 'year',
 }
 
+export const CALENDAR_POSITIONS = {
+  left: 'left',
+  right: 'right',
+}
+
 export const CALENDAR_TYPES_FORMAT = {
   [CALENDAR_TYPES.day]: 'D',
   [CALENDAR_TYPES.month]: 'MMMM',

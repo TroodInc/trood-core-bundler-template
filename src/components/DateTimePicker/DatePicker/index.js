@@ -12,7 +12,7 @@ import TLabel from '$trood/components/TLabel'
 
 import { DEFAULT_DATE_FORMAT } from '$trood/mainConstants'
 
-import { PICKER_ERRORS, CALENDAR_TYPES, CALENDAR_TYPES_FORMAT } from '../constants'
+import { PICKER_ERRORS, CALENDAR_TYPES, CALENDAR_TYPES_FORMAT, CALENDAR_POSITIONS } from '../constants'
 
 
 const allMomentPropTypes = PropTypes.oneOfType([
@@ -25,6 +25,7 @@ class DatePicker extends PureComponent {
   static propTypes = {
     value: allMomentPropTypes,
     label: PropTypes.node,
+    calendarPosition: PropTypes.oneOf(Object.values(CALENDAR_POSITIONS)),
     validate: PropTypes.shape({
       minDate: allMomentPropTypes,
       maxDate: allMomentPropTypes,
@@ -36,6 +37,7 @@ class DatePicker extends PureComponent {
   }
 
   static defaultProps = {
+    calendarPosition: CALENDAR_POSITIONS.left,
     validate: {},
     onChange: () => {},
     onValid: () => {},
@@ -204,6 +206,7 @@ class DatePicker extends PureComponent {
 
   render() {
     const {
+      calendarPosition,
       value,
       placeholder,
       label,
@@ -264,7 +267,7 @@ class DatePicker extends PureComponent {
               }} />
             </div>
             {open &&
-              <div className={style.body}>
+              <div className={classNames(style.body, style[calendarPosition])}>
                 <div className={style.bodyHeader}>
                   <TIcon {...{
                     type: ICONS_TYPES.arrowWithTail,

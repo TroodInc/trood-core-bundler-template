@@ -9,7 +9,7 @@ import style from './index.css'
 import DatePicker from './DatePicker'
 import TimePicker from './TimePicker'
 
-import { PICKER_ERRORS, PICKER_TYPES, TIME_FORMAT } from './constants'
+import { PICKER_ERRORS, PICKER_TYPES, TIME_FORMAT, CALENDAR_POSITIONS } from './constants'
 import { DEFAULT_DATE_TIME_FORMAT, DEFAULT_DATE_FORMAT } from '$trood/mainConstants'
 
 
@@ -22,6 +22,7 @@ const allMomentPropTypes = PropTypes.oneOfType([
 class DateTimePicker extends PureComponent {
   static propTypes = {
     type: PropTypes.oneOf(Object.values(PICKER_TYPES)),
+    calendarPosition: PropTypes.oneOf(Object.values(CALENDAR_POSITIONS)),
     value: allMomentPropTypes,
     label: PropTypes.node,
     timeLabel: PropTypes.node,
@@ -159,6 +160,7 @@ class DateTimePicker extends PureComponent {
   render() {
     const {
       className,
+      calendarPosition,
       placeholder,
       label,
       timeLabel,
@@ -189,6 +191,7 @@ class DateTimePicker extends PureComponent {
         <div className={style.wrapper}>
           {showDate &&
             <DatePicker {...{
+              calendarPosition,
               value: dateValue,
               placeholder,
               label,

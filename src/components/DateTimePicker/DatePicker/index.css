@@ -56,7 +56,6 @@
   position: absolute;
   z-index: 1000;
   top: calc(100% + 12px);
-  left: 0;
   width: 280px;
   border: 1px solid var(--trood-gray-bg);
   border-radius: 3px;
@@ -64,11 +63,18 @@
   box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
 }
 
+.body.left {
+  left: 0;
+}
+
+.body.right {
+  right: 0;
+}
+
 .body:before {
   content: '';
   position: absolute;
   top: -16px;
-  left: 30px;
   border: 10px solid transparent;
   border-top-width: 8px;
   border-bottom-width: 8px;
@@ -79,11 +85,20 @@
   content: '';
   position: absolute;
   top: -15px;
-  left: 30px;
   border: 10px solid transparent;
   border-top-width: 8px;
   border-bottom-width: 8px;
   border-bottom-color: var(--trood-white);
+}
+
+.body.left:before,
+.body.left:after {
+  left: 30px;
+}
+
+.body.right:before,
+.body.right:after {
+  right: 30px;
 }
 
 .bodyHeader {
