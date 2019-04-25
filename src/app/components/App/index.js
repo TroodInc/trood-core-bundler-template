@@ -14,7 +14,6 @@ import auth, { AuthManagerContext, LOGIN_PAGE_URL, RECOVERY_PAGE_URL } from '$tr
 import systemConfig from '$trood/config'
 
 import {
-  RouteSchema,
   PageManagerContext,
   defaultPageManagerContext,
   getPagesRouteShemaRenderers,
@@ -23,8 +22,6 @@ import {
 } from '$trood/pageManager'
 
 import LoadingIndicator from '$trood/components/LoadingIndicator'
-
-import { DEFAULT_SCROLLING_CONTAINER_ID } from '$trood/mainConstants'
 
 import { MailServiceContext } from '$trood/mailService'
 import {
@@ -174,7 +171,7 @@ class App extends Component {
       isAuthenticated,
       authLinkedObject,
       activeAccount,
-      authLinkedObjectIsLoading,
+      // authLinkedObjectIsLoading,
       permissions,
 
       authData = {},

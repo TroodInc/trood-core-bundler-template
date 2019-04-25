@@ -18,8 +18,6 @@ import {
 } from '../../../constants'
 
 import {
-  HeaderMenu,
-  HEADER_TYPES,
   RouteSchema,
 } from '../../../components'
 

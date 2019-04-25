@@ -180,6 +180,25 @@ const configRestify = () => {
     apiHost: JOURNAL_API_HOST,
     apiPrefix: JOURNAL_API_PREFIX,
     allowedNoTokenEndpoints: JOURNAL_ALLOWED_NO_TOKEN_ENDPOINTS,
+    getPaginationQuery: (query, page, pageSize) => {
+      const limitStr = `limit(${(page - 1) * pageSize},${pageSize})`
+      return {
+        ...query,
+        rql: query.rql ? `${query.rql},${limitStr}` : limitStr,
+      }
+    },
+    transformArrayResponse: response => {
+      if (Array.isArray(response)) {
+        return {
+          data: response,
+          count: response.length,
+        }
+      }
+      return {
+        data: response.data,
+        count: response.totalCount,
+      }
+    },
     httpCodesCallbacks: defaultHttpCodesAllbacks,
   }
   apiDefinitions[REPORTING_API_NAME] = {

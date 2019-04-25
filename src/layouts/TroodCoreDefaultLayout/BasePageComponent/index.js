@@ -1,6 +1,4 @@
-import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
-import classNames from 'classnames'
 
 import style from './index.css'
 

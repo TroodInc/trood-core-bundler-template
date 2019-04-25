@@ -9,3 +9,9 @@ a.root {
   cursor: pointer;
   color: var(--trood-blue);
 }
+
+.root.error {
+  text-decoration: line-through var(--trood-gray-extra-dark);
+  pointer-events: none;
+  cursor: default;
+}

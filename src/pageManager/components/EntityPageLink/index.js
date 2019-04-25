@@ -31,7 +31,7 @@ const EntityPageLink = ({
         return (
           <Component {...{
             to,
-            className: classNames(style.root, className),
+            className: classNames(style.root, className, model.$error && style.error),
             'data-cy': `${model.$modelType}Link_${model.id}`,
           }}>
             {children}

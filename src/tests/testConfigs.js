@@ -1,6 +1,6 @@
 import flow from 'lodash/flow'
 
-import { RESTIFY_CONFIG, api, setRestifyStore } from 'redux-restify'
+import { RESTIFY_CONFIG, setRestifyStore } from 'redux-restify'
 
 import { createBrowserHistory } from 'history'
 import { stringify, parse } from 'qs'

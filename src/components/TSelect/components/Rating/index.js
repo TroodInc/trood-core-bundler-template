@@ -66,8 +66,6 @@ class Rating extends PureComponent {
 
       icon,
 
-      onBlur,
-      onFocus,
       onChange,
     } = this.props
 

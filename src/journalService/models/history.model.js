@@ -13,6 +13,7 @@ export default {
       login: undefined,
       role: undefined,
       status: undefined,
+      linkedObject: undefined,
     },
     action: undefined,
     v: undefined,
@@ -21,6 +22,5 @@ export default {
     revision: undefined,
     journal: new RestifyForeignKey('journals'),
   },
-  pagination: false,
   warnAboutUnregisteredFields: false,
 }

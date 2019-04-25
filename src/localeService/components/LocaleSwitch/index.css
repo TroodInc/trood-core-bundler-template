@@ -13,8 +13,8 @@
   border-color: var(--trood-gray-extra-dark);
 }
 
-.selectedFlag:hover,
-.selectedFlag {
+.selectedFlag,
+.selectedFlag:hover {
   border-color: var(--trood-black);
 }
 

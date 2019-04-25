@@ -17,7 +17,7 @@ const reducePages = (modelType, prevPageId) => (memo, page) => {
     [currentPageProps.id]: {
       header: HEADER_SHOW,
       url: realConfig.url,
-      pages:realConfig.pages && realConfig.pages.reduce(
+      pages: realConfig.pages && realConfig.pages.reduce(
         reducePages(pageModelType || modelType, currentPageProps.baseId),
         {},
       ),

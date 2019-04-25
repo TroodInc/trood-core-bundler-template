@@ -1,13 +1,10 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
-import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { addLocaleData, IntlProvider } from 'react-intl'
 
 import { api, forms } from 'redux-restify'
-
-import style from './index.css'
 
 import { STATIC_API_NAME } from '$trood/staticApiUrlSchema'
 import { noSlashEnforceUrl } from '$trood/apiUrlSchema'
@@ -67,7 +64,7 @@ class LocalizeServiceProvider extends PureComponent {
 
     // Load new intl locale
     const currentScriptTag = document.getElementsByTagName('script')[0]
-    let newScript = document.createElement('script')
+    const newScript = document.createElement('script')
     newScript.type = 'text/javascript'
     newScript.src = `https://unpkg.com/react-intl@latest/locale-data/${localeServiceForm.selectedLocale}.js`
     newScript.async = true
@@ -103,24 +100,24 @@ class LocalizeServiceProvider extends PureComponent {
       })
     }
 
-    // addLocaleData([...intlLocale])
+    /*
+    addLocaleData([...intlLocale])
     const reactIntlConfig = {
       locale: localeServiceForm.selectedLocale,
       messages: {},
     }
 
-    // const intlProvider = new IntlProvider(reactIntlConfig)
-    // const appIntl = intlProvider.getChildContext().intl
+    const intlProvider = new IntlProvider(reactIntlConfig)
+    const appIntl = intlProvider.getChildContext().intl
+    */
   }
 
   render() {
     const {
-      className,
-
-      localeServiceForm,
+      // localeServiceForm,
 
       children,
-      intl,
+      // intl,
     } = this.props
     return (
       <IntlProvider {...{

@@ -1,9 +1,5 @@
-import PropTypes from 'prop-types'
-import React, { PureComponent } from 'react'
-import classNames from 'classnames'
+import { PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
-
-import style from './index.css'
 
 import {
   intlRenderCallback,

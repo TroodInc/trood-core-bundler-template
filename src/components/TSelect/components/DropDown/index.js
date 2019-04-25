@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 import TClickOutside from '$trood/components/TClickOutside'
 import TIcon, { ROTATE_TYPES, ICONS_TYPES } from '$trood/components/TIcon'
-import TButton, { BUTTON_SPECIAL_TYPES, BUTTON_TYPES } from '$trood/components/TButton'
+import TButton, { BUTTON_SPECIAL_TYPES } from '$trood/components/TButton'
 import TInput from '$trood/components/TInput'
 
 import List, { LIST_TYPES } from '../List'
