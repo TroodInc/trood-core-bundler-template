@@ -122,7 +122,7 @@ class DateTimePicker extends PureComponent {
     this.handleOnChange({ timeValue: value || '', dateValue })
   }
 
-  handleOnChange({ dateValue, timeValue } = this.state) {
+  handleOnChange({ dateValue, timeValue = '' } = this.state) {
     const { type, onChange } = this.props
     if (type !== PICKER_TYPES.time && !dateValue || type === PICKER_TYPES.time && !timeValue) {
       onChange()

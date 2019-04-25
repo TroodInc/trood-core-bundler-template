@@ -171,7 +171,7 @@ class TTable extends PureComponent {
                         type: ICONS_TYPES.arrow,
                         rotate: sortingOrder === -1 ? ROTATE_TYPES.up : ROTATE_TYPES.down,
                         className: style.sortIcon,
-                        size: 17,
+                        size: 16,
                       }} />
                     }
                     {item.sortable && sortingColumn !== item.name &&
