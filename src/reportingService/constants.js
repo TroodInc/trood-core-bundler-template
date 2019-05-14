@@ -1,6 +1,11 @@
 import { capitalize } from '$trood/helpers/namingNotation'
 
 
+export const REPORT_TYPES = {
+  prepared: 'PREPARED',
+  config: 'CONFIG',
+}
+
 export const getReportingId = (reportName) => `reporting${capitalize(reportName)}`
 export const getReportingLoadingPropName = (reportName) => `${reportName}IsLoading`
 

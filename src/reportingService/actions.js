@@ -1,33 +1,49 @@
 import { api, forms } from 'redux-restify'
 
-import { getReportingId, getReportingLoadingPropName } from './constants'
+import { REPORT_TYPES, getReportingId, getReportingLoadingPropName } from './constants'
 
-import { REPORTING_API_NAME } from '$trood/reportingApiUrlSchema'
+import { REPORTING_API_NAME, PREPARED_REPORT_ENDPOINT, CONFIG_REPORT_ENDPOINT } from '$trood/reportingApiUrlSchema'
 
 
 const ReportingRequests = {}
 
-export const getReportByQuery = (reportName, query) => (dispatch) => {
-  const loadingPropName = getReportingLoadingPropName(reportName)
-  if (ReportingRequests[reportName]) {
-    ReportingRequests[reportName].abort()
+export const getReportByQuery = ({
+  propName,
+  reportId,
+  type,
+  connectionCode,
+  query,
+  filter,
+}) => (dispatch) => {
+  const isConfigReport = type === REPORT_TYPES.config
+  let url = isConfigReport ? CONFIG_REPORT_ENDPOINT : PREPARED_REPORT_ENDPOINT
+  if (isConfigReport) {
+    url = url.replace('$connectionCode', connectionCode)
+  } else {
+    url = `${url}${reportId}`
+  }
+
+  const loadingPropName = getReportingLoadingPropName(propName)
+  if (ReportingRequests[propName]) {
+    ReportingRequests[propName].abort()
   }
   dispatch(forms.actions.reportingServiceDataForm.changeField(loadingPropName, true))
-  dispatch(api.actions.callPost({
-    url: '',
+
+  const apiMethod = isConfigReport ? api.actions.callPost : api.actions.callGet
+
+  dispatch(apiMethod({
+    url,
     apiName: REPORTING_API_NAME,
-    urlHash: getReportingId(reportName),
-    query: {
-      reportName,
-    },
-    data: query._query,
+    urlHash: getReportingId(propName),
+    query: isConfigReport ? { name: propName } : { ...filter },
+    data: isConfigReport ? { query } : undefined,
     convertToCamelCase: false,
     onXhrReady: (xhr) => {
-      ReportingRequests[reportName] = xhr
+      ReportingRequests[propName] = xhr
     },
   })).then(res => {
     dispatch(forms.actions.reportingServiceDataForm.changeSomeFields({
-      [reportName]: res.data,
+      [propName]: res.data,
       [loadingPropName]: false,
     }))
   })
