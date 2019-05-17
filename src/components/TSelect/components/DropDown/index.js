@@ -23,6 +23,7 @@ const valueTypes = PropTypes.oneOfType([
 class DropDown extends PureComponent {
   static propTypes = {
     controlClassName: PropTypes.string,
+    valueClassName: PropTypes.string,
 
     type: PropTypes.oneOf(Object.values(LIST_TYPES)),
     multi: PropTypes.bool,
@@ -32,6 +33,7 @@ class DropDown extends PureComponent {
     })),
     values: PropTypes.arrayOf(valueTypes),
     label: PropTypes.node,
+    iconProps: PropTypes.object,
 
     defaultOpen: PropTypes.bool,
     maxRows: PropTypes.number,
@@ -50,6 +52,7 @@ class DropDown extends PureComponent {
   static defaultProps = {
     items: [],
     values: [],
+    iconProps: {},
 
     defaultOpen: false,
     maxRows: DEFAULT_MAX_ROWS,
@@ -152,12 +155,14 @@ class DropDown extends PureComponent {
   render() {
     const {
       controlClassName,
+      valueClassName,
 
       type = (this.props.multi ? LIST_TYPES.checkbox : LIST_TYPES.text),
       values,
       label,
       placeHolder,
       showSearch,
+      iconProps,
 
       disabled,
       errors,
@@ -201,16 +206,17 @@ class DropDown extends PureComponent {
             onClick: showSearch && open ? undefined : () => this.toggleOpen(),
             'data-cy': label || placeHolder,
           }}>
-            <span className={values.length ? style.value : style.placeholder}>
+            <span className={classNames(values.length ? style.value : style.placeholder, valueClassName)}>
               {this.renderDisplayValue()}
             </span>
           </span>
           <TIcon {...{
-            className: style.control,
             size: 8,
             type: ICONS_TYPES.triangleArrow,
             rotate: open ? ROTATE_TYPES.up : ROTATE_TYPES.down,
             onClick: () => this.toggleOpen(),
+            ...iconProps,
+            className: classNames(style.control, iconProps.className),
           }} />
           <div className={classNames(style.optionsContainer, !open && style.hide)}>
             <List {...{
