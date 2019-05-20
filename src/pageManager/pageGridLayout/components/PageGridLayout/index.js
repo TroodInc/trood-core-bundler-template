@@ -77,6 +77,7 @@ const PageGridLayout = ({
   entityPageModelIdSelector,
   ...other
 }) => {
+  if (entityPageModelName && !modelId) return null
   let prevColumn = 0
   const currentGridColumns = columns || GRID_COLUMNS
   const pageComponent = (
@@ -171,6 +172,7 @@ const PageGridLayout = ({
             form: other[getFormPropName(comp.type)],
             formActions: other[getFormActionsName(comp.type)],
             modalsActions: other.modalsActions,
+            PageChildContainer: other.PageChildContainer,
             ...componentServices,
           })
 

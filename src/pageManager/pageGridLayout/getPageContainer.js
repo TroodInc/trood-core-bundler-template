@@ -1,5 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
+import getPageChildContainer from './getPageChildContainer'
 
 import { forms, api, RESTIFY_CONFIG } from 'redux-restify'
 
@@ -162,6 +163,7 @@ const getPageContainer = (pageConfig, entityPageModelName, entityPageModelIdSele
         [getModelEditorActionsName(modelName)]: bindActionCreators(mapedActions, dispatchProps.dispatch),
         [getModelActionsName(modelName)]: bindActionCreators(currentModel.actions, dispatchProps.dispatch),
         [getModelApiActionsName(modelName)]: bindActionCreators(apiActions, dispatchProps.dispatch),
+        PageChildContainer: dispatchProps.dispatch(getPageChildContainer),
       }
     }, {})
 

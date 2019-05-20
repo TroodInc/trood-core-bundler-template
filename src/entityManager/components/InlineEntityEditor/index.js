@@ -31,6 +31,7 @@ class InlineEntityEditor extends PureComponent {
 
       model,
       modelType,
+      parents,
 
       onSuccess,
       onDelete,
@@ -46,7 +47,7 @@ class InlineEntityEditor extends PureComponent {
             onDelete,
             entityId: model.id || model.tempId,
             isEditing: !!model.id,
-            parents: nextParents,
+            parents: parents || nextParents,
             nextParents,
             prevForm,
           })
