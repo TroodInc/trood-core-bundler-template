@@ -12,6 +12,7 @@ export const RELATIVE_FULL_FORMAT = 'relativeFull'
 export const RELATIVE_FULL_WITH_TIME_FORMAT = 'relativeFullWithTime'
 export const RELATIVE_SHORT_FORMAT = 'relativeShort'
 export const RELATIVE_SHORT_WITH_TIME_FORMAT = 'relativeShortWithTime'
+export const WITHOUT_DAY = 'withoutDay'
 
 export const SMART_DATE_FORMATS = {
   [FULL_FORMAT_WITH_TIME]: FULL_FORMAT_WITH_TIME,
@@ -25,6 +26,7 @@ export const SMART_DATE_FORMATS = {
   [RELATIVE_SHORT_FORMAT]: RELATIVE_SHORT_FORMAT,
   [RELATIVE_FULL_WITH_TIME_FORMAT]: RELATIVE_FULL_WITH_TIME_FORMAT,
   [RELATIVE_SHORT_WITH_TIME_FORMAT]: RELATIVE_SHORT_WITH_TIME_FORMAT,
+  [WITHOUT_DAY]: WITHOUT_DAY,
 }
 
 const relativeDate = (value, full) => {
@@ -58,4 +60,5 @@ export const SMART_DATE_FORMATS_FUNCTIONS = {
   [RELATIVE_SHORT_WITH_TIME_FORMAT]: value => {
     return relativeDate(value, false) + value.format(' в HH:mm')
   },
+  [WITHOUT_DAY]: value => value.format('MMM YYYY'),
 }
