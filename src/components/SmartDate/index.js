@@ -18,6 +18,7 @@ const SmartDate = ({
   className = '',
   date,
   format = FULL_FORMAT,
+  customFormat,
   defaultEmptyMessage = 'Неизвестно',
 }) => {
   let realDate = date
@@ -26,10 +27,14 @@ const SmartDate = ({
   }
   const dateToDisplay = moment(realDate)
   const hasDate = realDate && dateToDisplay.isValid()
+  const getValueFormatted = () => {
+    if (customFormat) return customFormat(dateToDisplay)
+    return SMART_DATE_FORMATS_FUNCTIONS[format](dateToDisplay)
+  }
 
   return (
     <div className={classNames(style.root, className)}>
-      {hasDate ? SMART_DATE_FORMATS_FUNCTIONS[format](dateToDisplay) : defaultEmptyMessage}
+      {hasDate ? getValueFormatted() : defaultEmptyMessage}
     </div>
   )
 }
