@@ -34,7 +34,8 @@ class TClickOutside extends PureComponent {
   }
 
   handleOutsideClick(e) {
-    if (!e.path.includes(findDOMNode(this))) {
+    const path = e.path || e.composedPath();
+    if (!path.includes(findDOMNode(this))) {
       this.props.onClick()
     }
   }

@@ -402,7 +402,7 @@ class Input extends PureComponent {
         if (node) {
           this.inputWidth = node.offsetWidth
         }
-        if (node && caretPosition !== undefined) {
+        if (node && caretPosition !== undefined && active) {
           node.setSelectionRange(caretPosition, caretPosition)
         }
       },
