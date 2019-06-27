@@ -24,17 +24,25 @@ export const uploadFile = (file) => (dispatch) => {
 
 export const canOpenFile = (file) => () => OPENING_FILE_TYPES.includes(file.type)
 
-export const openFile = (file) => (dispatch) => {
+export const openFile = (file, windowRef) => (dispatch) => {
   const { type, fileUrl } = file
   const href = /^https?:\/\//.test(fileUrl) ? fileUrl : `${FILE_API_HOST}${fileUrl}`
+  const openFileInNewTab = url => {
+    if (windowRef && windowRef.location) {
+      // eslint-disable-next-line
+      windowRef.location = url
+    } else {
+      window.open(url, '_blank')
+    }
+  }
 
   switch (type) {
     case FILE_TYPES.office:
-      window.open(`${MS_OFFICE_VIEWER}${href}`, '_blank')
+      openFileInNewTab(`${MS_OFFICE_VIEWER}${href}`)
       break
     case FILE_TYPES.docs:
     case FILE_TYPES.pdf:
-      window.open(`${GOOGLE_DOCS_VIEWER}${href}`, '_blank')
+      openFileInNewTab(`${GOOGLE_DOCS_VIEWER}${href}`)
       break
     case FILE_TYPES.image:
       dispatch(modals.actions.showModal(true, IMAGE_VIEWER_MODAL, { file }))
