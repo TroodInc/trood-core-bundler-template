@@ -58,7 +58,7 @@ export const showMessageBoxModal = ({
     onAccept,
     showDecline: false,
     size: MODAL_SIZES.confirm,
-    acceptButtonText: intlObject.intl.formatMessage(messages.yes),
+    acceptButtonText: intlObject.intl.formatMessage(messages.ok),
     ...other,
   }))
 }
