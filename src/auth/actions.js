@@ -70,10 +70,8 @@ export const recovery = (token) => (dispatch, getState) => {
   }))
     .then(({ data, status }) => {
       if (status === 200) {
-        dispatch(modals.actions.showMessageBoxModal({
-          text: intlObject.intl.formatMessage(messages[data.data.detail]) || data.data.detail,
-          size: MODAL_SIZES.small,
-        }))
+        dispatch(modals.actions.showInfoPopup(intlObject.intl.formatMessage(messages[data.data.detail]) ||
+          data.data.detail))
       }
     })
     .then(() => dispatch(forms.actions.recoveryForm.resetForm()))
