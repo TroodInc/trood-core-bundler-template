@@ -64,7 +64,7 @@ const sendData = data => {
   }
 }
 
-export const init = (externalOnMessage, config) => dispatch => {
+export const init = (externalOnMessage, data) => dispatch => {
   const token = getToken()
 
   if (token && !socket) {
@@ -75,7 +75,7 @@ export const init = (externalOnMessage, config) => dispatch => {
         () => sendData(WS_PING_MESSAGE_TEXT),
         WS_PING_MESSAGE_INTERVAL,
       )
-      sendData(config)
+      sendData(data)
     }
     socket.onclose = () => clearInterval(pingInterval)
     socket.onerror = e => console.warn('An error in socket.onerror appeared', e)
