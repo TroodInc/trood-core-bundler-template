@@ -22,6 +22,8 @@ class PopupBox extends PureComponent {
 
     onOpen: PropTypes.func,
     onClose: PropTypes.func,
+
+    children: PropTypes.node,
   }
 
   static defaultProps = {

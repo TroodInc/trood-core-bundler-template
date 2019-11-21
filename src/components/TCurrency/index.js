@@ -21,6 +21,7 @@ class TCurrency extends PureComponent {
     short: PropTypes.bool,
     showSign: PropTypes.bool,
     className: PropTypes.string,
+    signClassName: PropTypes.string,
     sign: PropTypes.string,
   }
 

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import TIcon from '../../../TIcon'
@@ -7,6 +8,20 @@ import styles from './index.css'
 
 
 class StyleButton extends PureComponent {
+  static propTypes = {
+    editorState: PropTypes.object,
+    color: PropTypes.string,
+    label: PropTypes.node,
+    icon: PropTypes.oneOf(Object.keys(TIcon.ICONS_TYPES)),
+    style: PropTypes.object,
+    onToggle: PropTypes.func,
+  }
+
+  static defaultProps = {
+    editorState: {},
+    onToggle: () => {},
+  }
+
   constructor(props) {
     super(props)
     this.onToggle = this.onToggle.bind(this)
@@ -18,7 +33,7 @@ class StyleButton extends PureComponent {
 
   render() {
     const {
-      editorState = {},
+      editorState,
       color,
       label,
       icon,

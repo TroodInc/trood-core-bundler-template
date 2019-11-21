@@ -17,6 +17,7 @@ class AsyncEntitiesList extends PureComponent {
   static propTypes = {
     id: PropTypes.string,
     className: PropTypes.string,
+    contentClassName: PropTypes.string,
 
     nextPage: PropTypes.number,
     isLoading: PropTypes.bool,
@@ -29,6 +30,8 @@ class AsyncEntitiesList extends PureComponent {
     ]),
 
     type: PropTypes.oneOf(Object.values(LIST_TYPES)),
+
+    children: PropTypes.node,
   }
 
   static defaultProps = {

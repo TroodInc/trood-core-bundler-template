@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import TIcon, { ICONS_TYPES, ROTATE_TYPES } from '../TIcon'
@@ -6,6 +7,12 @@ import TIcon, { ICONS_TYPES, ROTATE_TYPES } from '../TIcon'
 import style from './index.css'
 
 class HideableContent extends PureComponent {
+  static propTypes = {
+    className: PropTypes.node,
+    title: PropTypes.sttring,
+    children: PropTypes.node,
+  }
+
   constructor(props) {
     super(props)
     this.state = {

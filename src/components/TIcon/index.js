@@ -24,6 +24,7 @@ class TIcon extends PureComponent {
     label: PropTypes.node,
     labelPosition: PropTypes.oneOf(Object.keys(LABEL_POSITION_TYPES)),
     className: PropTypes.string,
+    color: PropTypes.string,
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
   }

@@ -30,11 +30,16 @@ class DatePicker extends PureComponent {
     validate: PropTypes.shape({
       minDate: allMomentPropTypes,
       maxDate: allMomentPropTypes,
+      checkOnBlur: PropTypes.bool,
+      required: PropTypes.bool,
     }),
     onChange: PropTypes.func,
     onValid: PropTypes.func,
     onInvalid: PropTypes.func,
     onBlur: PropTypes.func,
+    placeholder: PropTypes.node,
+    disabled: PropTypes.bool,
+    errors: PropTypes.arrayOf(PropTypes.string),
   }
 
   static defaultProps = {

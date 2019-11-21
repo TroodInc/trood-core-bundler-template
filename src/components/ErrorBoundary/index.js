@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import style from './index.css'
@@ -9,6 +10,11 @@ import { intlObject } from '$trood/localeService'
 
 
 class ErrorBoundary extends PureComponent {
+  static propTypes = {
+    errorClassName: PropTypes.string,
+    children: PropTypes.node,
+  }
+
   static getDerivedStateFromError(error) {
     return {
       error,

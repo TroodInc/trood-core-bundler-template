@@ -58,6 +58,7 @@ class List extends PureComponent {
     })),
     values: PropTypes.arrayOf(valueTypes),
     clearable: PropTypes.bool,
+    isLoading: PropTypes.bool,
     emptyItemsLabel: PropTypes.node,
 
     maxRows: PropTypes.number,

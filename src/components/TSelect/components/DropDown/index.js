@@ -24,6 +24,7 @@ class DropDown extends PureComponent {
   static propTypes = {
     controlClassName: PropTypes.string,
     valueClassName: PropTypes.string,
+    mainSelectContainerStyle: PropTypes.object,
 
     type: PropTypes.oneOf(Object.values(LIST_TYPES)),
     multi: PropTypes.bool,
@@ -34,6 +35,9 @@ class DropDown extends PureComponent {
     values: PropTypes.arrayOf(valueTypes),
     label: PropTypes.node,
     iconProps: PropTypes.object,
+    placeHolder: PropTypes.node,
+    showSearch: PropTypes.bool,
+    isLoading: PropTypes.bool,
 
     defaultOpen: PropTypes.bool,
     maxRows: PropTypes.number,
@@ -47,6 +51,8 @@ class DropDown extends PureComponent {
     onSearch: PropTypes.func,
     onAdd: PropTypes.func,
     missingValueResolver: PropTypes.func,
+
+    children: PropTypes.node,
   }
 
   static defaultProps = {

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { Modifier, EditorState, RichUtils } from 'draft-js'
 
 import TClickOutside from '../../../TClickOutside'
@@ -9,6 +10,20 @@ import style from './index.css'
 import classNames from 'classnames'
 
 class StyleColorPicker extends PureComponent {
+  static propTypes = {
+    className: PropTypes.string,
+    placeholder: PropTypes.node,
+    editorState: PropTypes.object,
+    colorStyles: PropTypes.arrayOf(PropTypes.object),
+    onToggle: PropTypes.func,
+  }
+
+  static defaultProps = {
+    colorStyles: [],
+    editorState: {},
+    onToggle: () => {},
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -49,8 +64,8 @@ class StyleColorPicker extends PureComponent {
     const {
       className,
       placeholder,
-      colorStyles = [],
-      editorState = {},
+      colorStyles,
+      editorState,
     } = this.props
 
     const { open } = this.state

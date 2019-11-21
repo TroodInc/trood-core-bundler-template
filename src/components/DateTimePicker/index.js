@@ -22,6 +22,7 @@ const allMomentPropTypes = PropTypes.oneOfType([
 
 class DateTimePicker extends PureComponent {
   static propTypes = {
+    className: PropTypes.string,
     type: PropTypes.oneOf(Object.values(PICKER_TYPES)),
     calendarPosition: PropTypes.oneOf(Object.values(CALENDAR_POSITIONS)),
     zeroTimeIsValue: PropTypes.bool,
@@ -39,6 +40,7 @@ class DateTimePicker extends PureComponent {
     onChange: PropTypes.func,
     onValid: PropTypes.func,
     onInvalid: PropTypes.func,
+    placeholder: PropTypes.node,
   }
 
   static defaultProps = {

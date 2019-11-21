@@ -11,6 +11,7 @@ class LoadingBlockContainer extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     isBlocked: PropTypes.bool,
+    children: PropTypes.node,
   }
 
   static defaultProps = {

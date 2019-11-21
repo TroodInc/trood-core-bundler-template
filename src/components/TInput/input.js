@@ -68,6 +68,7 @@ class Input extends PureComponent {
       required: PropTypes.bool,
       maxLen: PropTypes.number,
       minLen: PropTypes.number,
+      requiredError: PropTypes.string,
       format: PropTypes.oneOfType([
         PropTypes.instanceOf(RegExp),
         PropTypes.shape({

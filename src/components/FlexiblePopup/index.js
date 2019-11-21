@@ -17,6 +17,7 @@ class FlexiblePopup extends PureComponent {
     close: PropTypes.bool,
 
     onClose: PropTypes.func,
+    children: PropTypes.node,
   }
 
   static defaultProps = {

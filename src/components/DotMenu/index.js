@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
 import TIcon, { ICONS_TYPES } from '$trood/components/TIcon'
 import PopupBox from '$trood/components/PopupBox'
@@ -7,6 +8,11 @@ import style from './index.css'
 
 
 class DotMenu extends PureComponent {
+  static propTypes = {
+    size: PropTypes.number,
+    menuRef: PropTypes.func,
+  }
+
   render() {
     const {
       size,
