@@ -16,7 +16,7 @@ const PHONE_WITH_EXT = 'phoneWithExt'
 const MONEY = 'money'
 const MONEY_NUMBER = 'moneyNumber'
 const EMAIL = 'email'
-const DATE = 'date'
+// const DATE = 'date'
 const URL = 'url'
 const COLOR = 'color'
 const SEARCH = 'search'
@@ -35,7 +35,7 @@ export const INPUT_TYPES = {
   [MONEY]: MONEY,
   [MONEY_NUMBER]: MONEY_NUMBER,
   [EMAIL]: EMAIL,
-  [DATE]: DATE,
+  // TODO const DATE = 'date'
   [URL]: URL,
   [COLOR]: COLOR,
   [SEARCH]: SEARCH,
@@ -53,7 +53,7 @@ export const INNER_INPUT_TYPES = {
   [MONEY]: TEXT,
   [MONEY_NUMBER]: TEXT,
   [EMAIL]: TEXT,
-  [DATE]: TEXT,
+  // [DATE]: TEXT,
   [URL]: TEXT,
   [COLOR]: TEXT,
   [SEARCH]: TEXT,
@@ -97,7 +97,7 @@ export const formatToFunctions = {
   [MONEY_NUMBER]: value => formatToFunctions[FLOAT](value, MONEY_MAX_FRACTIONALS),
   [PHONE]: format.toPhone,
   [PHONE_WITH_EXT]: format.toPhone,
-  [DATE]: format.toDate,
+  // [DATE]: format.toDate,
   [URL]: value => {
     return value.replace(/https?:\/\//ig, '')
   },
@@ -118,7 +118,7 @@ export const formatFromFunctions = {
   [MONEY_NUMBER]: (value, toType = true) => formatFromFunctions[FLOAT](value, toType, MONEY_MAX_FRACTIONALS),
   [PHONE]: format.fromPhone,
   [PHONE_WITH_EXT]: value => format.fromPhone(value, -1),
-  [DATE]: format.fromDate,
+  // [DATE]: format.fromDate,
   [URL]: value => `http://${value.replace(/https?:\/\//ig, '')}`,
   [COLOR]: value => `#${value.replace(/#/ig, '')}`,
   [TIME]: format.fromTime,
@@ -140,7 +140,7 @@ export const includeForTypes = {
   [PHONE_WITH_EXT]: /\d/,
   [MONEY]: floatRegexp,
   [MONEY_NUMBER]: floatRegexp,
-  [DATE]: /\d/,
+  // [DATE]: /\d/,
   [COLOR]: /[\da-f]/i,
   [TIME]: /\d/,
 }

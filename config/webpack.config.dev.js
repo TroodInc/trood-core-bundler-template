@@ -1,8 +1,5 @@
 'use strict';
 
-const cssnext = require('postcss-cssnext');
-const cssimport = require('postcss-import');
-const cssGlobalImport = require('postcss-global-import');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -11,6 +8,7 @@ const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
@@ -29,6 +27,7 @@ const env = getClientEnvironment(publicUrl);
 // It is focused on developer experience and fast rebuilds.
 // The production configuration is different and lives in a separate file.
 module.exports = {
+  mode: 'development',
   // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
   // See the discussion in https://github.com/facebookincubator/create-react-app/issues/343.
   devtool: 'cheap-module-source-map',
@@ -148,26 +147,25 @@ module.exports = {
                 loader: require.resolve('css-loader'),
                 options: {
                   importLoaders: 1,
-                  modules: true,
                   sourceMap: true,
-                  localIdentName: '[name]__[local]___[hash:base64:5]',
+                  modules: {
+                    localIdentName: '[name]__[local]___[hash:base64:5]',
+                  },
                 },
               },
               {
                 loader: require.resolve('postcss-loader'),
                 options: {
-                  // Necessary for external CSS imports to work
-                  // https://github.com/facebookincubator/create-react-app/issues/2677
                   ident: 'postcss',
                   plugins: () => [
+                    require('postcss-global-import')({
+                      path: ['src'],
+                    }),
+                    require('postcss-import')({
+                      path: ['src'],
+                    }),
                     require('postcss-flexbugs-fixes'),
-                    cssimport({
-                      path: ['src'],
-                    }),
-                    cssGlobalImport({
-                      path: ['src'],
-                    }),
-                    cssnext({
+                    require('postcss-preset-env')({
                       browsers: [
                         '>1%',
                         'last 4 versions',
@@ -208,7 +206,7 @@ module.exports = {
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     // In development, this will be an empty string.
-    new InterpolateHtmlPlugin(env.raw),
+    new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
       inject: true,

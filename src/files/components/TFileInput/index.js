@@ -12,7 +12,7 @@ import style from './index.css'
 import TIcon from '$trood/components/TIcon'
 import { ICONS_TYPES } from '$trood/components/TIcon/constants'
 
-import { DEFAULT_API_HOST } from '$trood/apiUrlSchema'
+import { FILE_API_HOST } from '$trood/fileApiUrlSchema'
 
 
 const messages = defineMessages({
@@ -69,7 +69,7 @@ class TFileInput extends PureComponent {
     withStyling: true,
     multiple: false,
     disabled: false,
-    host: DEFAULT_API_HOST,
+    host: FILE_API_HOST,
     isUploading: false,
     loadingProgress: 0,
     onChange: () => {},
