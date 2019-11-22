@@ -3,7 +3,6 @@ const path = require('path')
 const paths = require('../config/paths');
 var fs = require('fs')
 const webpack = require('webpack')
-const EmptyModulePlugin = require('empty-module-webpack-plugin')
 
 
 const nodeModules = {}
