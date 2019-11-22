@@ -9,7 +9,7 @@ import style from './index.css'
 class HideableContent extends PureComponent {
   static propTypes = {
     className: PropTypes.node,
-    title: PropTypes.sttring,
+    title: PropTypes.string,
     children: PropTypes.node,
   }
 
