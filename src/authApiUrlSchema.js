@@ -13,4 +13,5 @@ export const AUTH_ALLOWED_NO_TOKEN_ENDPOINTS = [
 
 export const LOGOUT_ENDPOINT = 'logout/'
 export const ACCOUNT_ENDPOINT = 'account/'
+export const ROLE_ENDPOINT = 'role/'
 export const VERIFY_TOKEN_ENDPOINT = 'verify-token/'
