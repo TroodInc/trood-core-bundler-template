@@ -52,7 +52,7 @@ webpack({
     // We will try to load a lot of npm modules, when parsing project structure,
     // but we don't really need them , we need only local requires
     // new EmptyModulePlugin(/^[^.](?!.*(ulp-|abel-polyfill|trood))|\.css$/),
-    new EmptyModulePlugin(/\.css$/),
+    new webpack.NormalModuleReplacementPlugin(/\.css$/, () => {}),
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1,
     }),

@@ -30,7 +30,6 @@
     "draft-js": "^0.10.5",
     "draftjs-to-html": "^0.8.4",
     "druid-query": "git+https://github.com/DeyLak/node-druid-query.git",
-    "empty-module-webpack-plugin": "git+https://github.com/AvokaTech/empty-module-webpack-plugin.git",
     "eslint": "4.10.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-react-app": "^2.1.0",
