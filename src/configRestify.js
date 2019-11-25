@@ -26,6 +26,13 @@ import {
 } from './fileApiUrlSchema'
 
 import {
+  SEARCH_API_NAME,
+  SEARCH_ALLOWED_NO_TOKEN_ENDPOINTS,
+  SEARCH_API_PREFIX,
+  SEARCH_API_HOST,
+} from './searchApiUrlSchema'
+
+import {
   REPORTING_API_NAME,
   REPORTING_ALLOWED_NO_TOKEN_ENDPOINTS,
   REPORTING_API_PREFIX,
@@ -175,6 +182,13 @@ const configRestify = () => {
     apiHost: FILE_API_HOST,
     apiPrefix: FILE_API_PREFIX,
     allowedNoTokenEndpoints: FILE_ALLOWED_NO_TOKEN_ENDPOINTS,
+    httpCodesCallbacks: defaultHttpCodesCallbacks,
+  }
+  apiDefinitions[SEARCH_API_NAME] = {
+    getToken,
+    apiHost: SEARCH_API_HOST,
+    apiPrefix: SEARCH_API_PREFIX,
+    allowedNoTokenEndpoints: SEARCH_ALLOWED_NO_TOKEN_ENDPOINTS,
     httpCodesCallbacks: defaultHttpCodesCallbacks,
   }
   apiDefinitions[MAIL_API_NAME] = {
