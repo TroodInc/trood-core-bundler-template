@@ -222,7 +222,7 @@ class Input extends PureComponent {
 
     const errors = []
 
-    const regexpToMatch = format && format.regexp || format
+    const regexpToMatch = (format && format.regexp) || format
     if (value && regexpToMatch && !regexpToMatch.test(value)) {
       errors.push(format.error || intlObject.intl.formatMessage(messages.incorrectFormat))
     }
@@ -433,7 +433,7 @@ class Input extends PureComponent {
     }
 
     let currentErrors = errors
-    if (checkOnBlur && !wasBlured || !Array.isArray(currentErrors)) {
+    if ((checkOnBlur && !wasBlured) || !Array.isArray(currentErrors)) {
       currentErrors = []
     }
 

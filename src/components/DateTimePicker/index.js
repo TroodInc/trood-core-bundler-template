@@ -129,7 +129,7 @@ class DateTimePicker extends PureComponent {
 
   handleOnChange({ dateValue, timeValue = '' } = this.state) {
     const { type, onChange } = this.props
-    if (type !== PICKER_TYPES.time && !dateValue || type === PICKER_TYPES.time && !timeValue) {
+    if ((type !== PICKER_TYPES.time && !dateValue) || (type === PICKER_TYPES.time && !timeValue)) {
       onChange()
     } else {
       const date = moment(dateValue, dateValue && DEFAULT_DATE_FORMAT)
@@ -152,7 +152,7 @@ class DateTimePicker extends PureComponent {
   handleValidate(value = this.props.value) {
     const { minDate, maxDate } = this.props.validate
     const errors = []
-    if (minDate && moment(value).isBefore(minDate) || maxDate && moment(value).isAfter(maxDate)) {
+    if ((minDate && moment(value).isBefore(minDate)) || (maxDate && moment(value).isAfter(maxDate))) {
       errors.push(intlObject.intl.formatMessage(messages.outOfRangeValue))
     }
     this.setState({ dateTimeErrors: errors }, this.callOnInvalid)
@@ -225,7 +225,7 @@ class DateTimePicker extends PureComponent {
             showTime &&
             <TimePicker {...{
               value: timeValue,
-              label: timeLabel || type === PICKER_TYPES.time && label,
+              label: timeLabel || (type === PICKER_TYPES.time && label),
               errors: [...dateTimeErrors, ...timeErrors],
               className: style.time,
               disabled: !dateValue && showDate,

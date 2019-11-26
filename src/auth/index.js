@@ -5,14 +5,14 @@ import * as constants from './constants'
 import * as selectors from './selectors'
 import container from './container'
 
+import systemConfig from '$trood/config'
+
+
 const {
   TROOD_PERSONAL_ACCOUNT_PAGE_ID,
   TROOD_PERSONAL_ACCOUNT_PAGE_DEFAULT_TITLE,
   TROOD_PERSONAL_ACCOUNT_PAGE_DEFAULT_ICON,
 } = constants
-
-import systemConfig from '$trood/config'
-
 
 export * from './constants'
 

@@ -93,10 +93,12 @@ class PageAuth extends PureComponent {
                 </div>
               }
               {
-                /^https?:/.test(pageType.linkTo) &&
-                <a className={style.link} href={pageType.linkTo}>
-                  {intlObject.intl.formatMessage(pageType.linkToTitle)}
-                </a>
+                (
+                  /^https?:/.test(pageType.linkTo) &&
+                  <a className={style.link} href={pageType.linkTo}>
+                    {intlObject.intl.formatMessage(pageType.linkToTitle)}
+                  </a>
+                )
                 ||
                 <Link className={style.link} to={pageType.linkTo}>
                   {intlObject.intl.formatMessage(pageType.linkToTitle)}

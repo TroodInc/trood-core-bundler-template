@@ -81,7 +81,7 @@ export const noSlashEnforceUrl = ({
   specialAction,
 }) => {
   let slashAfterId = ''
-  if (entityId && (typeof entityId === 'number' || typeof entityId === 'string' && !entityId.endsWith('/'))) {
+  if (entityId && (typeof entityId === 'number' || (typeof entityId === 'string' && !entityId.endsWith('/')))) {
     slashAfterId = '/'
   }
   const baseUrl = `${modelEndpoint}${entityId || ''}${slashAfterId}${specialAction || ''}`
