@@ -1,6 +1,6 @@
 'use strict'
 const path = require('path')
-const paths = require('../config/paths');
+const paths = require('../config/paths')
 var fs = require('fs')
 const webpack = require('webpack')
 
@@ -15,6 +15,7 @@ fs.readdirSync('node_modules')
   })
 
 webpack({
+  mode: 'production',
   externals: nodeModules,
   entry: './gulpfileTemplate.js',
   target: 'node',
