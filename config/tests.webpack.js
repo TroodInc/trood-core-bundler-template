@@ -3,7 +3,8 @@ import Adapter from 'enzyme-adapter-react-16'
 
 Enzyme.configure({ adapter: new Adapter() })
 
-require('babel-polyfill')
+require('core-js/stable')
+require('regenerator-runtime/runtime')
 require('jasmine-ajax')
 require('../src/index.js')
 

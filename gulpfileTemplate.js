@@ -1,4 +1,5 @@
-require('babel-polyfill')
+require('core-js/stable')
+require('regenerator-runtime/runtime')
 const gulp = require('gulp')
 const template = require('gulp-template')
 const rename = require('gulp-rename')

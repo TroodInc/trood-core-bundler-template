@@ -1,4 +1,5 @@
-import 'babel-polyfill'
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import './styles/reset.css'
 import './styles/fonts.css'
 import './styles/global.css'
