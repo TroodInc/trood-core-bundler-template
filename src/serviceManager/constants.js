@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { api, forms } from 'redux-restify'
 
 import files from '$trood/files'
+import search from '$trood/search'
 import webSocket from '$trood/webSocket'
 import reportingService from '$trood/reportingService'
 
@@ -10,6 +11,7 @@ import reportingService from '$trood/reportingService'
 export const SERVICE_MAIL_SERVICE = 'mailService'
 export const SERVICE_JOURNAL_SERVICE = 'journalService'
 export const SERVICE_FILE_SERVICE = 'fileService'
+export const SERVICE_SEARCH_SERVICE = 'searchService'
 export const SERVICE_WS_SERVICE = 'webSocketService'
 export const SERVICE_REPORTING_SERVICE = 'reportingService'
 
@@ -17,6 +19,7 @@ export const TROOD_SERVICES = {
   [SERVICE_MAIL_SERVICE]: SERVICE_MAIL_SERVICE,
   [SERVICE_JOURNAL_SERVICE]: SERVICE_JOURNAL_SERVICE,
   [SERVICE_FILE_SERVICE]: SERVICE_FILE_SERVICE,
+  [SERVICE_SEARCH_SERVICE]: SERVICE_SEARCH_SERVICE,
   [SERVICE_WS_SERVICE]: SERVICE_WS_SERVICE,
   [SERVICE_REPORTING_SERVICE]: SERVICE_REPORTING_SERVICE,
 }
@@ -44,6 +47,14 @@ export const SERVICES_PROPS = {
     },
     dispatchProps: {
       filesActions: (dispatch) => bindActionCreators(files.actions, dispatch),
+    },
+  },
+  [TROOD_SERVICES.searchService]: {
+    stateProps: {
+      searchEntities: (state) => api.selectors.entityManager.search.getEntities(state),
+    },
+    dispatchProps: {
+      searchActions: (dispatch) => bindActionCreators(search.actions, dispatch),
     },
   },
   [TROOD_SERVICES.webSocketService]: {
