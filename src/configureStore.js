@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import { connectRouter, routerMiddleware } from 'connected-react-router'
+import { routerMiddleware } from 'connected-react-router'
 
 import thunk from 'redux-thunk'
 
@@ -15,7 +15,7 @@ const configureStore = (history, initialState) => {
   const middlewares = applyMiddleware(...middlewareList)
   const devTool = window.devToolsExtension
   const store = createStore(
-    connectRouter(history)(getRootReducer()),
+    getRootReducer(history),
     initialState,
     compose(
       middlewares,
@@ -26,7 +26,7 @@ const configureStore = (history, initialState) => {
   if (module.hot) {
     module.hot.accept('./reducer', () => {
       const nextRootReducer = require('./reducer').default
-      store.replaceReducer(nextRootReducer)
+      store.replaceReducer(nextRootReducer(history))
     })
   }
 
