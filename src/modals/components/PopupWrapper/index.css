@@ -40,17 +40,17 @@
   border-radius: 3px;
   transform: scale(1);
   transition: transform 0.3s;
-  background-color: color(var(--trood-blue) l(90%) a(80%));
+  background-color: color-mod(var(--trood-blue) l(90%) a(80%));
   border: 1px solid var(--trood-blue);
   outline: none;
 }
 
 .green {
-  background-color: color(var(--trood-green) l(90%) a(80%));
+  background-color: color-mod(var(--trood-green) l(90%) a(80%));
   border: 1px solid var(--trood-green);
 }
 
 .red {
-  background-color: color(var(--trood-red) l(90%) a(80%));
+  background-color: color-mod(var(--trood-red) l(90%) a(80%));
   border: 1px solid var(--trood-red);
 }

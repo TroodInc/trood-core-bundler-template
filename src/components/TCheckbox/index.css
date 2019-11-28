@@ -22,7 +22,7 @@
 .root.checked {
   background-color: var(--trood-blue);
   border: 1px solid var(--trood-blue);
-  box-shadow: 0 2px 10px 0 color(var(--trood-blue) a(50%));
+  box-shadow: 0 2px 10px 0 color-mod(var(--trood-blue) a(50%));
 }
 
 .root:not(.checked) {

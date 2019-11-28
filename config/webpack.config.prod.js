@@ -214,7 +214,7 @@ module.exports = {
                 options: {
                   importLoaders: 1,
                   sourceMap: shouldUseSourceMap,
-                  modules: false,
+                  modules: true,
                 },
               },
               {
@@ -230,6 +230,11 @@ module.exports = {
                       path: ['src'],
                     }),
                     require('postcss-preset-env')({
+                      preserve: false,
+                      features: {
+                        'custom-media-queries': true,
+                        'color-mod-function': true,
+                      },
                       browsers: [
                         '>1%',
                         'last 4 versions',

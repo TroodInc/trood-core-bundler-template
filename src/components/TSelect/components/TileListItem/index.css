@@ -8,7 +8,7 @@
   padding: 0 10px;
   cursor: pointer;
   color: var(--trood-orange);
-  background-color: color(var(--trood-orange) whiteness(90%));
+  background-color: color-mod(var(--trood-orange) whiteness(90%));
   margin: 0 5px;
 }
 

@@ -75,7 +75,7 @@
 .uploadLabel {
   height: 32px;
   width: 100%;
-  background-color: color(var(--trood-blue) a(10%));
+  background-color: color-mod(var(--trood-blue) a(10%));
   color: var(--trood-blue);
   display: flex;
   align-items: center;
