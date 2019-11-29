@@ -1,5 +1,3 @@
-@import 'styles/variables.css';
-
 .components {
   flex: 1;
   background-color: var(--trood-gray);

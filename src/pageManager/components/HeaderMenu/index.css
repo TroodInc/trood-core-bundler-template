@@ -1,5 +1,3 @@
-@import 'styles/variables.css';
-
 .rootContainer {
   background-color: var(--trood-white);
 }

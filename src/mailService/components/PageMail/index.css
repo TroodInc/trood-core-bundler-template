@@ -1,5 +1,3 @@
-@import 'styles/variables.css';
-
 .root {
   height: calc(100% - var(--trood-header-height));
   display: flex;

@@ -1,5 +1,3 @@
-@import 'styles/variables.css';
-
 @global-import './draftEditor.css';
 
 .root {

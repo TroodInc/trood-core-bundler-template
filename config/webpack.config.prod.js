@@ -235,6 +235,7 @@ module.exports = {
                         'custom-media-queries': true,
                         'color-mod-function': true,
                       },
+                      importFrom: 'src/styles/variables.css',
                       browsers: [
                         '>1%',
                         'last 4 versions',
