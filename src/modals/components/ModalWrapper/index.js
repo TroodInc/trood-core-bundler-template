@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import { CSSTransition } from 'react-transition-group'
 import classNames from 'classnames'
 import Modal from 'react-modal'
 
@@ -76,10 +76,11 @@ class ModalWrapper extends PureComponent {
 
     const transitionProps = {
       key: 'modalTransitions',
-      component: React.Fragment,
-      transitionName: fadeInUp,
-      transitionEnterTimeout: 500,
-      transitionLeaveTimeout: 500,
+      className: fadeInUp,
+      timeout: {
+        enter: 500,
+        exit: 500,
+      },
     }
 
     const modalProps = {
@@ -96,7 +97,9 @@ class ModalWrapper extends PureComponent {
           className: style.hiddenModal,
           overlayClassName: style.hiddenOverlay,
         }} >
-          <CSSTransitionGroup {...transitionProps} />
+          <CSSTransition {...transitionProps}>
+            <div />
+          </CSSTransition>
         </Modal>
       )
     }
@@ -116,12 +119,14 @@ class ModalWrapper extends PureComponent {
         overlayClassName: style.overlay,
       }} >
         <div className={style.closeOverlay} onClick={(shouldCloseOnOverlayClick ? closeAndCancel : undefined)} />
-        <CSSTransitionGroup {...transitionProps}>
+        <CSSTransition {...transitionProps}>
           <div className={classNames(style.root, className)} data-cy={name}>
-            {title &&
+            {
+              title &&
               <div className={style.title}>
                 <div className={style.titleText}>{title}</div>
-                {editAction &&
+                {
+                  editAction &&
                   <React.Fragment>
                     <TIcon {...{
                       type: ICONS_TYPES.edit,
@@ -132,12 +137,14 @@ class ModalWrapper extends PureComponent {
                       },
                       size: 17,
                     }} />
-                    {size !== MODAL_SIZES.full &&
+                    {
+                      size !== MODAL_SIZES.full &&
                       <div className={style.delimeter} />
                     }
                   </React.Fragment>
                 }
-                {deleteAction &&
+                {
+                  deleteAction &&
                   <React.Fragment>
                     <TIcon {...{
                       type: ICONS_TYPES.trashBin,
@@ -148,13 +155,15 @@ class ModalWrapper extends PureComponent {
                       },
                       size: 17,
                     }} />
-                    {size !== MODAL_SIZES.full &&
+                    {
+                      size !== MODAL_SIZES.full &&
                       <div className={style.delimeter} />
                     }
                   </React.Fragment>
                 }
                 {closeAction && closeButton}
-                {!!buttons && size === MODAL_SIZES.full &&
+                {
+                  !!buttons && size === MODAL_SIZES.full &&
                   <div className={style.fullButtons}>
                     {buttons(this.props)}
                   </div>
@@ -164,7 +173,8 @@ class ModalWrapper extends PureComponent {
             <div className={style.children}>
               <ErrorBoundary errorClassName={modalsStyle.root}>
                 {children}
-                {!!buttons && size !== MODAL_SIZES.full &&
+                {
+                  !!buttons && size !== MODAL_SIZES.full &&
                   <div className={modalsStyle.buttonsContainer}>
                     {buttons(this.props)}
                   </div>
@@ -173,7 +183,7 @@ class ModalWrapper extends PureComponent {
             </div>
             {!title && closeAction && closeButton}
           </div>
-        </CSSTransitionGroup>
+        </CSSTransition>
       </Modal>
     )
   }

@@ -207,10 +207,9 @@ gulp.task('make-locale', () => {
       .pipe(gulp.dest('./src'))
 })
 
-gulp.task('default', [
+gulp.task('default', gulp.parallel(
   'make-components',
   'make-business-objects',
   'make-layouts',
   'make-locale',
-], () => {
-})
+))

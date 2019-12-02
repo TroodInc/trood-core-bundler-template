@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import { CSSTransition } from 'react-transition-group'
 import classNames from 'classnames'
 import Modal from 'react-modal'
 import debounce from 'lodash/debounce'
@@ -44,10 +44,11 @@ class PopupWrapper extends PureComponent {
 
     const transitionProps = {
       key: 'modalTransitions',
-      component: React.Fragment,
-      transitionName: fadeInUp,
-      transitionEnterTimeout: 500,
-      transitionLeaveTimeout: 500,
+      className: fadeInUp,
+      timeout: {
+        enter: 500,
+        exit: 500,
+      },
     }
 
     const modalProps = {
@@ -64,7 +65,9 @@ class PopupWrapper extends PureComponent {
           className: style.hiddenRoot,
           overlayClassName: style.hiddenOverlay,
         }} >
-          <CSSTransitionGroup {...transitionProps} />
+          <CSSTransition {...transitionProps}>
+            <div />
+          </CSSTransition>
         </Modal>
       )
     }
@@ -83,11 +86,11 @@ class PopupWrapper extends PureComponent {
         },
         overlayClassName: style.overlay,
       }} >
-        <CSSTransitionGroup {...transitionProps}>
+        <CSSTransition {...transitionProps}>
           <div>
             {children}
           </div>
-        </CSSTransitionGroup>
+        </CSSTransition>
       </Modal>
     )
   }
