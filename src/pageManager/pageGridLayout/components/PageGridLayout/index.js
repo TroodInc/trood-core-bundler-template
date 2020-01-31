@@ -185,6 +185,7 @@ const PageGridLayout = ({
 
           compToRender = (
             <CurrentComponent {...{
+              ...comp.props,
               ...currentComponentProps,
             }} />
           )
