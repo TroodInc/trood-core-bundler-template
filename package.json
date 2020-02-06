@@ -100,7 +100,8 @@
     "stylelint": "stylelint \"src/**/*.css\"",
     "po": "rip po2json \"./translate/po/*.po\" -c \"id\" -m \"./translate/messages/**/*.json\" -o \"./public/locale-data\"",
     "styleguide": "styleguidist server",
-    "storybook": "start-storybook"
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "pre-commit": [
     "lint"
@@ -140,12 +141,16 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.3.12",
     "@storybook/addon-docs": "^5.3.12",
     "@storybook/addon-knobs": "^5.3.12",
+    "@storybook/addon-links": "^5.3.12",
+    "@storybook/addons": "^5.3.12",
     "@storybook/react": "^5.3.12",
     "@typescript-eslint/eslint-plugin": "^2.9.0",
     "@typescript-eslint/parser": "^2.9.0",
     "babel-eslint": "^10.0.3",
+    "babel-plugin-react-docgen": "^4.1.0",
     "eslint": "^6.7.1",
     "eslint-config-react-app": "^5.0.2",
     "eslint-plugin-flowtype": "^4.5.2",
