@@ -3,7 +3,8 @@ const paths = require('./config/paths');
 
 module.exports = {
   pagePerSection: true,
-  defaultExample: true,
+  usageMode: 'expand',
+  styleguideDir: 'docs/styleguide',
   webpackConfig: {
     resolve: {
       alias: {

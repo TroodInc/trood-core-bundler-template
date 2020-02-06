@@ -1,5 +1,5 @@
 import React from 'react'
-import TButton from './index'
+import TButton, { BUTTON_COLORS } from './index'
 
 
 export default {
@@ -8,3 +8,5 @@ export default {
 }
 
 export const base = () => <TButton label="TButton" />
+
+export const redButton = () => <TButton label="TButton" color={BUTTON_COLORS.red} />

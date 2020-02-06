@@ -100,8 +100,9 @@
     "stylelint": "stylelint \"src/**/*.css\"",
     "po": "rip po2json \"./translate/po/*.po\" -c \"id\" -m \"./translate/messages/**/*.json\" -o \"./public/locale-data\"",
     "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook:build": "build-storybook -o docs/storybook"
   },
   "pre-commit": [
     "lint"
