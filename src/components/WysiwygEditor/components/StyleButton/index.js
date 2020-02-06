@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import TIcon from '../../../TIcon'
+import TIcon, { ICONS_TYPES } from '../../../TIcon'
 
 import styles from './index.css'
 
@@ -12,7 +12,7 @@ class StyleButton extends PureComponent {
     editorState: PropTypes.object,
     color: PropTypes.string,
     label: PropTypes.node,
-    icon: PropTypes.oneOf(Object.keys(TIcon.ICONS_TYPES)),
+    icon: PropTypes.oneOf(Object.keys(ICONS_TYPES)),
     style: PropTypes.object,
     onToggle: PropTypes.func,
   }
