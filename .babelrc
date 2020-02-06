@@ -12,6 +12,7 @@
     "@babel/preset-react"
   ],
   "plugins": [
+    "react-docgen",
     [
       "react-intl",
       {
