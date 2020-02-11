@@ -9,3 +9,7 @@
 .root.selected {
   color: var(--trood-black);
 }
+
+.root.disabled {
+  color: var(--trood-gray-text);
+}

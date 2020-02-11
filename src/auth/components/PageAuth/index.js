@@ -52,7 +52,10 @@ class PageAuth extends PureComponent {
             {intlObject.intl.formatMessage(pageType.title)}
             <Logo size={80} />
           </div>
-          <LocaleSwitch className={style.locale} />
+          <LocaleSwitch {...{
+            className: style.locale,
+            onChange: locale => formActions.changeField('language', locale.code),
+          }} />
           {
             (!isRecovery || !token) &&
             <TInput {...{

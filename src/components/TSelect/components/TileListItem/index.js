@@ -13,7 +13,7 @@ const TileListItem = ({
 }) => {
   return (
     <div {...{
-      className: classNames(style.root, className, value && style.selected),
+      className: classNames(style.root, className, value && style.selected, disabled && style.disabled),
       onClick: disabled ? undefined : () => onChange(),
     }}>
       {label}

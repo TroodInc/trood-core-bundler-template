@@ -24,14 +24,14 @@ export const getProfileId = state => {
 }
 
 export const getProfile = state => {
-  const { profile } = mainConfig.services.auth
+  const { profile } = (mainConfig.services || {}).auth || {}
   if (!profile) return {}
   const profileId = getProfileId(state)
   return api.selectors.entityManager[profile].getEntities(state).getById(profileId)
 }
 
 export const getProfileIsLoading = state => {
-  const { profile } = mainConfig.services.auth
+  const { profile } = (mainConfig.services || {}).auth || {}
   if (!profile) return false
   const profileId = getProfileId(state)
   return api.selectors.entityManager[profile].getEntities(state).getIsLoadingById(profileId)

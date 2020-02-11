@@ -451,7 +451,7 @@ class Input extends PureComponent {
         case INPUT_TYPES.multi:
           return (
             <textarea {...{
-              className: style.textarea,
+              className: classNames(style.textarea, disabled && style.disabled),
               style: {
                 lineHeight: `${ROW_HEIGHT}px`,
                 height,
@@ -463,7 +463,7 @@ class Input extends PureComponent {
           return (
             <input {...{
               type: INNER_INPUT_TYPES[type],
-              className: style.input,
+              className: classNames(style.input, disabled && style.disabled),
               ...inputProps,
             }} />
           )

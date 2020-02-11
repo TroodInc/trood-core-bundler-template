@@ -28,7 +28,7 @@ import modals from '$trood/modals'
 import systemConfig from '$trood/config'
 
 
-const layoutConfig = systemConfig.layouts
+const layoutConfig = systemConfig.layouts || {}
 const layoutConfigFormKey = 'layoutConfigForm'
 const layoutConfigFormActionsKey = 'layoutConfigFormActions'
 const layoutPropsKey = [layoutConfigFormKey, layoutConfigFormActionsKey]

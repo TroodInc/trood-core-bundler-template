@@ -30,8 +30,8 @@
   cursor: pointer;
 }
 
-.disabled .label {
-  color: var(--trood-gray-super-dark);
+.root .disabled .label {
+  color: var(--trood-gray-text);
   cursor: default;
 }
 

@@ -158,6 +158,7 @@ module.exports = {
                     }),
                     require('postcss-flexbugs-fixes'),
                     require('postcss-preset-env')({
+                      preserve: false,
                       features: {
                         'custom-media-queries': true,
                         'color-mod-function': true,

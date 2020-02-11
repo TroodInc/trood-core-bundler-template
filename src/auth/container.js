@@ -19,6 +19,7 @@ const stateToProps = (state, props) => {
     form: forms.selectors[pageType.formName].getForm(state),
     formErrors: forms.selectors[pageType.formName].getErrors(state),
     formIsValid: forms.selectors[pageType.formName].getIsValid(state),
+    localeServiceForm: forms.selectors.localeServiceForm.getForm(state),
   }
 }
 

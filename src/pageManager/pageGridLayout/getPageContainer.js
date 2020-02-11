@@ -6,6 +6,8 @@ import { forms, api, RESTIFY_CONFIG } from 'redux-restify'
 
 import PageGridLayout from './components/PageGridLayout'
 
+import auth from '$trood/auth'
+
 import modals from '$trood/modals'
 
 import entityManager, {
@@ -132,8 +134,10 @@ const getPageContainer = (pageConfig, entityPageModelName, entityPageModelIdSele
     const currentFormsActions = Object.keys(formsToGet).reduce((memo, key) => ({
       ...memo,
       [getFormActionsName(key)]: bindActionCreators(forms.getFormActions(key), dispatch),
+    }), {
+      authActions: bindActionCreators(auth.actions, dispatch),
       modalsActions: bindActionCreators(modals.actions, dispatch),
-    }), {})
+    })
     return {
       ...currentFormsActions,
       dispatch,

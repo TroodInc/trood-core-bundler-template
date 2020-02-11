@@ -67,6 +67,10 @@
   composes: input;
 }
 
+.root .disabled {
+  color: var(--trood-gray-text);
+}
+
 .shadow {
   composes: input;
   height: 0;

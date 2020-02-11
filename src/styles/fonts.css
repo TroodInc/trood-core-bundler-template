@@ -72,13 +72,12 @@
 }
 
 @font-face {
-  font-family: "Rub";
-  src: url('/static/fonts/rouble.eot');
+  font-family: "Currency";
+  src: url('/static/fonts/ArialRegular.eot');
   src:
-    url('/static/fonts/rouble.eot#iefix') format('embedded-opentype'),
-    url('/static/fonts/rouble.woff2') format('woff2'),
-    url('/static/fonts/rouble.woff') format('woff'),
-    url('/static/fonts/rouble.ttf') format('truetype');
+    url('/static/fonts/ArialRegular.eot#iefix') format('embedded-opentype'),
+    url('/static/fonts/ArialRegular.woff') format('woff'),
+    url('/static/fonts/ArialRegular.ttf') format('truetype');
   font-style: normal;
   font-weight: normal;
 }

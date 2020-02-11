@@ -10,5 +10,6 @@ export default {
   defaults: {
     login: '',
     password: '',
+    language: undefined,
   },
 }

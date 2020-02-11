@@ -54,8 +54,8 @@
   flex: 1 0;
 }
 
-.disabled .value {
-  color: var(--trood-gray-extra-dark);
+.root.disabled .value {
+  color: var(--trood-gray-text);
 }
 
 .content .search {

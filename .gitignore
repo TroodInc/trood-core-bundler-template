@@ -30,3 +30,6 @@ src/businessObjects/manifest.js
 src/layouts/manifest.js
 gulpfile.js
 *.js.map
+
+# documentation
+docs/build

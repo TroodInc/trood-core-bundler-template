@@ -50,10 +50,10 @@ export const updateProfile = (modelName, model) => dispatch => {
 }
 
 const setAuthData = (data) => (dispatch) => {
-  const { profile } = mainConfig.services.auth
+  const { profile } = (mainConfig.services || {}).auth || {}
   const formattedResponse = Object.keys(data).reduce((memo, key) => {
     if (key === 'profile') {
-      const profileId = dispatch(updateProfile(profile, data[key]))
+      const profileId = profile ? dispatch(updateProfile(profile, data[key])) : null
       return {
         ...memo,
         [key]: profileId,
@@ -71,6 +71,9 @@ const setAuthData = (data) => (dispatch) => {
     }
   }, {})
   dispatch(forms.actions.authDataForm.changeSomeFields(formattedResponse))
+  if (data.language) {
+    dispatch(forms.actions.localeServiceForm.changeField('selectedLocale', data.language))
+  }
 }
 
 export const login = (nextUrl = '/') => dispatch => {
@@ -117,16 +120,17 @@ export const recovery = (token) => (dispatch, getState) => {
     })
 }
 
-export const logoutFront = () => (dispatch) => {
+export const logoutFront = () => (dispatch, getState) => {
   clearStorage()
   clearToken()
+  const selectedLocale = forms.selectors.localeServiceForm.getField('selectedLocale')(getState())
   dispatch({
     type: STATE_REPLACE_ACTION,
     state: {},
   })
+  dispatch(forms.actions.localeServiceForm.changeField('selectedLocale', selectedLocale))
   dispatch(push(LOGIN_PAGE_URL))
 }
-
 
 export const logout = () => async (dispatch) => {
   await dispatch(forms.actions.sendQuickForm({
@@ -161,6 +165,17 @@ export const registerUser = ({
     values: {
       login: loginValue,
       password,
+    },
+  }))
+}
+
+export const changeLanguage = (language) => (dispatch, getState) => {
+  const id = forms.selectors.authDataForm.getField('id')(getState())
+  return dispatch(forms.actions.sendQuickForm({
+    model: 'account',
+    values: {
+      id,
+      language,
     },
   }))
 }

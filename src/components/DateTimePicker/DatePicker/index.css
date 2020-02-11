@@ -31,9 +31,9 @@
   cursor: pointer;
 }
 
-.disabled .header {
+.root .disabled .header {
   cursor: default;
-  color: var(--trood-gray-extra-dark);
+  color: var(--trood-gray-text);
 }
 
 .value {

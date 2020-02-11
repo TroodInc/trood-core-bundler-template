@@ -18,10 +18,12 @@ import systemConfig from '$trood/config'
 class LocaleSwitch extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
+    onChange: PropTypes.func,
   }
 
   static defaultProps = {
     className: '',
+    onChange: () => {},
   }
 
   constructor(props) {
@@ -43,6 +45,7 @@ class LocaleSwitch extends PureComponent {
     const {
       className,
 
+      onChange,
       localeServiceForm,
       localeServiceFormActions,
     } = this.props
@@ -89,6 +92,7 @@ class LocaleSwitch extends PureComponent {
                   onClick: () => {
                     this.toggleOpen(false)
                     localeServiceFormActions.changeField('selectedLocale', locale.code)
+                    onChange(locale)
                   },
                 }}>
                   <div className={style.localeName}>

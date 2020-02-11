@@ -81,7 +81,7 @@
 }
 
 .disabled .icon {
-  color: var(--trood-gray-super-dark) !important;
+  color: var(--trood-gray-text) !important;
 }
 
 .iconRoot.checked.blue .icon {
