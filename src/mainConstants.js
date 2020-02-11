@@ -124,4 +124,8 @@ export const messages = defineMessages({
     id: '$trood.accessDenied',
     defaultMessage: 'Access denied',
   },
+  deletionQuestion: {
+    id: '$trood.deletionQuestion',
+    defaultMessage: 'Delete it?',
+  },
 })
