@@ -4,7 +4,7 @@ const paths = require('./config/paths');
 module.exports = {
   pagePerSection: true,
   usageMode: 'expand',
-  styleguideDir: 'docs/styleguide',
+  styleguideDir: 'docs/components',
   webpackConfig: {
     resolve: {
       alias: {
