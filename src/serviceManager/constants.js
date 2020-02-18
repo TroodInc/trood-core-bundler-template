@@ -58,7 +58,9 @@ export const SERVICES_PROPS = {
     },
   },
   [TROOD_SERVICES.webSocketService]: {
-    stateProps: {},
+    stateProps: {
+      webSocketConstants: () => webSocket.constants,
+    },
     dispatchProps: {
       webSocketActions: (dispatch) => bindActionCreators(webSocket.actions, dispatch),
     },

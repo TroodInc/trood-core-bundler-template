@@ -14,10 +14,14 @@ export const WS_MESSAGE_TYPES = {
   [snakeToCamel(WS_MESSAGE_TYPE_UI)]: WS_MESSAGE_TYPE_UI,
 }
 
-export const WS_URL = 'ws://legal.dev.trood.ru/events/ws/'
+export const WS_URL =
+  process.env.WEBSOCKET_API_HOST ||
+  (typeof window !== 'undefined' ? `${window.location.protocol.replace('http', 'ws')}//${window.location.host}` : '')
 export const WS_PROTOCOL = 'WS'
 export const WS_PING_MESSAGE_TEXT = 'ping'
-export const WS_PING_MESSAGE_INTERVAL = 25000
+export const WS_PING_MESSAGE_INTERVAL = 29000
+
+export const WS_DEBOUNCE_INTERVAL = 10000
 
 export const WS_DOMAIN_CUSTODIAN = 'CUSTODIAN'
 
@@ -26,12 +30,19 @@ export const WS_DOMAINS = {
 }
 
 export const WS_ACTION_SUBSCRIBE = 'SUBSCRIBE'
+export const WS_ACTION_UNSUBSCRIBE = 'UNSUBSCRIBE'
 
 export const WS_ACTIONS = {
   [snakeToCamel(WS_ACTION_SUBSCRIBE)]: WS_ACTION_SUBSCRIBE,
+  [snakeToCamel(WS_ACTION_UNSUBSCRIBE)]: WS_ACTION_UNSUBSCRIBE,
 }
 
-export const WS_CLOSE_OK_CODE = 1000
-export const WS_CLOSE_OK_TEXT = 'WS usage has been canceled by client side'
+export const WS_CLOSE_ARGS = [1000, 'WS usage has been canceled by client side']
 // https://developer.mozilla.org/ru/docs/Web/API/WebSocket#Ready_state_constants
-export const WS_OPEN_STATE = 1
+
+export const WS_STATES = {
+  connecting:	0,
+  open: 1,
+  closing: 2,
+  closed:	3,
+}
