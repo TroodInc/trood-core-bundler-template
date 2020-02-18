@@ -4,6 +4,8 @@ import { api, forms } from 'redux-restify'
 
 import modals, { MODAL_SIZES } from '$trood/modals'
 
+import webSocket from '$trood/webSocket'
+
 import mainConfig from '$trood/config'
 
 import { STATE_REPLACE_ACTION } from '$trood/mainConstants'
@@ -124,6 +126,7 @@ export const logoutFront = () => (dispatch, getState) => {
   clearStorage()
   clearToken()
   const selectedLocale = forms.selectors.localeServiceForm.getField('selectedLocale')(getState())
+  dispatch(webSocket.actions.close())
   dispatch({
     type: STATE_REPLACE_ACTION,
     state: {},
