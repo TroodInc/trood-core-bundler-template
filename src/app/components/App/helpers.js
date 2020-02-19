@@ -33,14 +33,17 @@ const getProfileNeededFields = (permissions = {}) => {
   return fields.map(field => field.split('.').slice(1))
 }
 
-const getRenderers = (sbj, permissions = {}) => {
+const getRenderers = (sbj, ctx, permissions = {}) => {
   return getPagesRouteShemaRenderers(
     systemConfig.pages,
     {
       extraPages: systemConfig.entityPages,
     },
     {
-      sbj,
+      data: {
+        sbj,
+        ctx,
+      },
       rules: permissions,
     },
   )
@@ -53,8 +56,9 @@ const getPageManagerContext = registeredRoutesPaths => ({
 
 const memoizedGetProfileNeededFields = memoizeOne(getProfileNeededFields)
 export const memoizedGetRenderers = memoizeOne(getRenderers, (a, b) => {
-  if (a[1] !== b[1]) return false
-  const neededField = memoizedGetProfileNeededFields(a[1])
+  if (a[2] !== b[2]) return false
+  const neededField = memoizedGetProfileNeededFields(a[2])
+  if (!deepEqual(a[1], b[1])) return false
   return neededField.reduce((memo, field) => {
     return memo && deepEqual(objectGet(a[0], field), objectGet(b[0], field))
   }, true)
