@@ -94,7 +94,7 @@
   background-color: var(--trood-black-hover-light);
 }
 
-@media (--trood-lg-and-tablet-and-phone) {
+@media (--trood-media-portable) {
   .autoResize .vertical {
     width: var(--trood-menu-width-small);
   }

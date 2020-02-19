@@ -178,7 +178,7 @@
   margin-left: auto;
 }
 
-@media (--trood-phone) {
+@media (--trood-media-portable) {
   .overlay {
     min-height: 100%;
   }

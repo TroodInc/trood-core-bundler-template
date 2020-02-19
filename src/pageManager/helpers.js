@@ -32,11 +32,11 @@ const getIsAllowPage = (
   pageId,
   {
     rules = {},
-    obj = {},
-    sbj = {},
-    ctx = {
-      data: {},
-    },
+    data: {
+      obj = {},
+      sbj = {},
+      ctx = {},
+    } = {},
   } = {},
 ) => {
   const { access } = ruleChecker({
@@ -65,7 +65,7 @@ export const getPagesRouteShemaRenderers = (
     pages: pages.map(p => p.title),
     entityPageModelName,
     parentPath,
-    sbj: (permission || {}).sbj,
+    data: (permission || {}).data,
   })
   if (memoizeRenderers[hash]) return memoizeRenderers[hash]
 

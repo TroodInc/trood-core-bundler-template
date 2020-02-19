@@ -27,7 +27,7 @@
   min-height: 40px;
 }
 
-@media (--trood-phone-horizontal) {
+@media (--trood-media-portable) {
   .root {
     justify-content: flex-start;
   }

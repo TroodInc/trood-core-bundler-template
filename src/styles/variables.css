@@ -50,9 +50,6 @@
   --trood-green-dark: #0e964c;
   --trood-green-blue: #48c3cc;
 
-  --trood-phone: 800px;
-  --trood-tablet: 1000px;
-  --trood-lg: 1400px;
   --trood-sides: 100px;
   --trood-sides-small: 50px;
   --trood-menu-width: 220px;
@@ -61,7 +58,18 @@
   --trood-page-padding: 60px;
   --trood-header-height: 60px;
   --trood-border-radius: 2px;
+
+  --trood-phone: 800px;
+  --trood-tablet: 1280px;
+  --trood-desktop: 1400px;
 }
+
+@custom-media --trood-media-desktop-large only screen and (width > 1400px);
+@custom-media --trood-media-desktop-small only screen and (width >= 1280px) and (width <= 1400px);
+@custom-media --trood-media-desktop only screen and (width >= 1280px);
+@custom-media --trood-media-tablet only screen and (width > 800px) and (width < 1280px);
+@custom-media --trood-media-phone only screen and (width <= 800px);
+@custom-media --trood-media-portable only screen and (width < 1280px);
 
 :export {
   troodBlack: var(--trood-black);
@@ -115,9 +123,6 @@
   troodGreenDark: var(--trood-green-dark);
   troodGreenBlue: var(--trood-green-blue);
 
-  troodPhone: var(--trood-phone);
-  troodTablet: var(--trood-tablet);
-  troodLg: var(--trood-lg);
   troodSides: var(--trood-sides);
   troodSidesSmall: var(--trood-sides-small);
   troodMenuWidth: var(--trood-menu-width);
@@ -126,15 +131,8 @@
   troodPagePadding: var(--trood-page-padding);
   troodHeaderHeight: var(--trood-header-height);
   troodBorderRadius: var(--trood-border-radius);
-}
 
-@custom-media --trood-less-1500 only screen and (width <= 1500px);
-@custom-media --trood-lg-and-tablet-and-phone only screen and (width <= 1400px);
-@custom-media --trood-tablet-and-phone only screen and (width <= 1100px);
-@custom-media --trood-phone only screen and (width <= 800px);
-@custom-media --trood-phone-horizontal only screen and (width <= 800px) and (orientation: landscape);
-@custom-media --trood-lg-and-tablet only screen and (width > 800px) and (width <= 1400px);
-@custom-media --trood-lg only screen and (width > 1000px) and (width <= 1400px);
-@custom-media --trood-tablet only screen and (width > 800px) and (width <= 1000px);
-@custom-media --trood-big-tablet only screen and (width > 800px) and (width <= 1100px);
-@custom-media --trood-very-big-tablet only screen and (width > 1100px) and (width <= 1500px);
+  troodPhone: var(--trood-phone);
+  troodTablet: var(--trood-tablet);
+  troodDesktop: var(--trood-desktop);
+}

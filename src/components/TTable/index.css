@@ -71,9 +71,3 @@
   color: var(--trood-blue);
   margin-left: 10px;
 }
-
-@media (--trood-tablet) {
-}
-
-@media (--trood-phone) {
-}
