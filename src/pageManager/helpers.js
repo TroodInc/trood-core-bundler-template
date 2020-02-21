@@ -167,3 +167,5 @@ export const getIsAllowPath = (path, registeredRoutesPaths = []) => {
     exact: true,
   }))
 }
+
+export { getBasePageTitleArgs } from './pageLayouts'

@@ -11,13 +11,30 @@ export const WHOLE_STRING_UUID_REGEXP = new RegExp(`^${UUID_REGEXP.source}$`)
 export const DEFAULT_PHONE_LENGTH = 10
 
 export const KEY_CODES = {
-  backspace: 8,
-  enter: 13,
-  esc: 27,
-  arrowLeft: 37,
-  arrowRight: 39,
-  delete: 46,
+  backspace: 'Backspace',
+  delete: 'Delete',
+  enter: 'Enter',
+  esc: 'Escape',
+  arrowLeft: 'ArrowLeft',
+  arrowRight: 'ArrowRight',
+  arrowDown: 'ArrowDown',
+  arrowUp: 'ArrowUp',
+  end: 'End',
+  home: 'Home',
+  pageDown: 'PageDown',
+  pageUp: 'PageUp',
 }
+
+export const NAVIGATION_KEYS = [
+  KEY_CODES.arrowDown,
+  KEY_CODES.arrowLeft,
+  KEY_CODES.arrowRight,
+  KEY_CODES.arrowUp,
+  KEY_CODES.end,
+  KEY_CODES.home,
+  KEY_CODES.pageDown,
+  KEY_CODES.pageUp,
+]
 
 export const SEARCH_DEBOUNCE = 500
 export const DISPATCH_DEBOUNCE = 50

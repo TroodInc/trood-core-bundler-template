@@ -25,6 +25,7 @@ import {
 import {
   getPagesHeaderRenderers,
   getPagesRouteShemaRenderers,
+  getBasePageTitleArgs,
 } from '../../../helpers'
 
 import {
@@ -63,25 +64,28 @@ const getEntityManagerContext = (modelName, entityId) => {
 }
 const memoizedGetEntityManagerContext = memoizeOne(getEntityManagerContext)
 
-const PageGridLayout = ({
-  history,
-  page: {
-    components = [],
-    pages,
-    url,
-    columns,
-  },
-  parentPath,
-  nestLevel = 0,
-  isFirstColumn = true,
-  isLastColumn = true,
-  modelId,
-  entityPageModelName,
-  entityPageModelIdSelector,
-  authActions,
-  layoutProps,
-  ...other
-}) => {
+const PageGridLayout = (props) => {
+  const {
+    history,
+    page: {
+      components = [],
+      pages,
+      url,
+      columns,
+    },
+    parentPath,
+    nestLevel = 0,
+    isFirstColumn = true,
+    isLastColumn = true,
+    modelId,
+    entityPageModelName,
+    entityPageModelIdSelector,
+    authActions,
+    layoutProps,
+    ...other
+  } = props
+
+  const basePageTitleArgs = props.basePageTitleArgs || getBasePageTitleArgs(props.page, entityPageModelName)
   if (entityPageModelName && !modelId) return null
   let prevColumn = 0
   const currentGridColumns = columns || GRID_COLUMNS
@@ -103,6 +107,7 @@ const PageGridLayout = ({
               className: style.secondaryMenu,
             }}>
               {React.createElement(currentLayout.nestedPageMenuComponent, {
+                basePageTitleArgs,
                 menuRenderers: getPagesHeaderRenderers([], entityPageModelName),
                 basePath,
                 authActions,
@@ -124,6 +129,7 @@ const PageGridLayout = ({
         if (comp.type === GRID_COMPONENT_TYPE) {
           compToRender = (
             <PageGridLayout {...{
+              basePageTitleArgs,
               history,
               page: {
                 components: comp.components,
@@ -244,6 +250,7 @@ const PageGridLayout = ({
                 className: style.secondaryMenu,
               }}>
                 {React.createElement(currentLayout.nestedPageMenuComponent, {
+                  basePageTitleArgs,
                   menuRenderers: getPagesHeaderRenderers(pages, entityPageModelName),
                   basePath,
                   authActions,

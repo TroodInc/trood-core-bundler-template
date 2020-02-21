@@ -32,3 +32,8 @@ export const getPageLayoutProps = (page, entityPageName, prevPageId) => {
     modelIdSelector: currentPageService.getModelIdSelector(...propsArgs),
   }
 }
+
+export const getBasePageTitleArgs = (page, entityPageName) => {
+  const currentPageService = pageTypesLayoutsDict[page.type]
+  return currentPageService.getPageHeaderRendererConfig(page, entityPageName)
+}
