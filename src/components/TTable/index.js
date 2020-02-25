@@ -70,14 +70,12 @@ class TTable extends PureComponent {
         }
         return false
       }),
-      listItemExpanded: null,
     }
     this.getCheckedCount = this.getCheckedCount.bind(this)
     this.getChecked = this.getChecked.bind(this)
     this.checkItem = this.checkItem.bind(this)
     this.checkAll = this.checkAll.bind(this)
     this.getRowKey = this.getRowKey.bind(this)
-    this.toggleExpand = this.toggleExpand.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -128,29 +126,9 @@ class TTable extends PureComponent {
     )
   }
 
-  toggleExpand(rowIndex) {
-    const { listItemExpanded } = this.state
-
-    this.setState({ listItemExpanded: listItemExpanded === rowIndex ? null : rowIndex })
-  }
-
   render() {
-    const {
-      modelMetaData,
-      listHeaderModel,
-      listTitle,
-      header,
-      body,
-      checking,
-      className,
-      headerClassName,
-      rowClassName,
-      onRowClick,
-      sortingColumn,
-      sortingOrder,
-      onSort,
-    } = this.props
-    const { check, listItemExpanded } = this.state
+    const { header } = this.props
+    const { check } = this.state
     const headerFiltered = header.filter(item => item.show !== false)
 
     return (
@@ -159,55 +137,32 @@ class TTable extends PureComponent {
           if (media.portable) {
             return (
               <ListView {...{
-                className,
+                ...this.props,
 
-                listTitle,
-                listHeaderModel,
-
-                checking,
                 check,
                 checkAll: this.checkAll,
                 checkItem: this.checkItem,
                 getCheckedCount: this.getCheckedCount,
 
-                body,
                 header: headerFiltered,
 
-                onSort,
-                sortingOrder,
-                sortingColumn,
-
-                modelMetaData,
-                listItemExpanded,
-                toggleExpand: this.toggleExpand,
                 getRowKey: this.getRowKey,
-                rowClassName,
               }} />
             )
           }
 
           return (
             <TableView {...{
-              className,
-              headerClassName,
+              ...this.props,
 
-              checking,
               check,
               getCheckedCount: this.getCheckedCount,
               checkAll: this.checkAll,
               checkItem: this.checkItem,
 
               header: headerFiltered,
-              body,
 
-              onSort,
-              sortingOrder,
-              sortingColumn,
-
-              modelMetaData,
-              onRowClick,
               getRowKey: this.getRowKey,
-              rowClassName,
             }} />
           )
         }}
