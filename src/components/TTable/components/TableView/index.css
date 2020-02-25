@@ -71,3 +71,9 @@
   color: var(--trood-blue);
   margin-left: 10px;
 }
+
+@media (--trood-media-portable) {
+  .sortIcon {
+    margin: 0;
+  }
+}

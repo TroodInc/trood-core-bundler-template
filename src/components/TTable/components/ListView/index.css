@@ -1,0 +1,141 @@
+.sortIcon {
+  color: var(--trood-blue);
+  margin-left: 10px;
+}
+
+.tableList {
+  display: flex;
+  flex-direction: column;
+}
+
+.tableListHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 23px 15px;
+}
+
+.tableListTitleContainer {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.tableListTitle {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--trood-gray-extra-dark);
+  text-transform: uppercase;
+}
+
+.tableListItemContainer {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--trood-gray-hover);
+}
+
+.tableListItemContainer.expanded {
+  border-top: 1px solid var(--trood-blue);
+}
+
+.tableListItemHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 23px 15px;
+  cursor: pointer;
+}
+
+.tableListItemHeader.expanded {
+  background-color: var(--trood-background);
+}
+
+.tableListItemTitle {
+  display: flex;
+  align-items: center;
+}
+
+.listCheckbox {
+  margin-right: 18px;
+}
+
+.tableListItemTitleText {
+  font-size: 24px;
+  color: var(--trood-blue);
+}
+
+.tableListItemTitleText.expanded {
+  font-weight: 600;
+}
+
+.expandIcon {
+  color: var(--trood-blue);
+}
+
+.tableListItemBody {
+  display: flex;
+  flex-direction: column;
+  padding: 17px 15px;
+}
+
+.tableListItemBodyChecking {
+  padding: 17px 53px;
+}
+
+.listItemBodyRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tableListItemLabel {
+  font-size: 24px;
+  line-height: 1.43;
+  font-weight: 600;
+  color: var(--trood-gray-extra-dark);
+  margin-right: 20px;
+}
+
+.tableListItemValue {
+  font-size: 24px;
+  line-height: 1.43;
+  font-weight: normal;
+  color: var(--trood-gray-extra-dark);
+  text-align: right;
+}
+
+.listSortControls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.listSortControlsLabel {
+  font-size: 24px;
+  line-height: 1.43;
+  font-weight: 500;
+  color: var(--trood-gray-extra-dark);
+  margin-right: 15px;
+}
+
+.listSortItem {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: normal;
+  color: var(--trood-blue);
+  margin: 5px;
+  cursor: pointer;
+}
+
+.listSortItem:last-child {
+  margin-right: 0;
+}
+
+@media (--trood-media-portable) {
+  .sortIcon {
+    margin: 0;
+  }
+}
