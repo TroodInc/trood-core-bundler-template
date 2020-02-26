@@ -331,7 +331,8 @@ class Input extends PureComponent {
   }
 
   handleInput(e) {
-    if (e.inputType === 'insertText') {
+    if (((e.inputType === 'insertLineBreak' || e.key === KEY_CODES.enter) && this.props.type === INPUT_TYPES.multi)
+      || e.data) {
       const char = e.data || '\r'
       const {
         type,
@@ -365,7 +366,7 @@ class Input extends PureComponent {
       } else {
         this.changeSelection(0, char)
       }
-    } else if (e.inputType === 'deleteContentBackward') {
+    } else if (e.inputType === 'deleteContentBackward' || e.key === KEY_CODES.backspace) {
       const delta = +(this.selectionStart === this.selectionEnd)
       this.changeSelection(delta)
     }
