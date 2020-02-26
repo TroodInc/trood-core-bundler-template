@@ -1,11 +1,11 @@
 QueryRedirect base example:
 
-```js
+```md
 import QueryRedirect from '$trood/components/QueryRedirect';
 
-  <QueryRedirect {...{
+<QueryRedirect {...{
     to: {
       pathname: '/',
     },
-  }} />
+}} />
 ```

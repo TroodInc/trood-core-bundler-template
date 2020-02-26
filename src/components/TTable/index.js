@@ -9,41 +9,65 @@ import { isDefAndNotNull } from '$trood/helpers/def'
 import TableView from './components/TableView'
 import ListView from './components/ListView'
 
-
 const equal = (newItem, oldArray) => {
   if (isDefAndNotNull(newItem.id)) return oldArray.findIndex(item => item.id === newItem.id)
   return oldArray.findIndex(item => deepEqual(newItem, item))
 }
 
+/**
+ * Component for output table.
+ */
+
 class TTable extends PureComponent {
   static propTypes = {
+    /** function for set modelMetaData */
     modelMetaData: PropTypes.func,
+    /** header settings */
     header: PropTypes.arrayOf(PropTypes.shape({
+      /** header title */
       title: PropTypes.node,
+      /** class name for header */
       className: PropTypes.string,
+      /** show header or not */
       show: PropTypes.bool,
+      /** item model */
       model: PropTypes.func.isRequired,
       // Used for sorting
+      /** column name, used for sorting*/
       name: PropTypes.string,
+      /** sortable column or not */
       sortable: PropTypes.bool,
     })),
+    /** list title text */
     listHeaderModel: PropTypes.func,
+    /** list title text */
     listTitle: PropTypes.string,
+    /** array selected items */
     selectedItems: PropTypes.arrayOf(PropTypes.any),
+    /** array with data */
     body: PropTypes.arrayOf(PropTypes.object),
+    /** show checking or not */
     checking: PropTypes.bool,
+    /** onCheckedChange function */
     onCheckedChange: PropTypes.func,
+    /** class name for component */
     className: PropTypes.string,
+    /** class name for header */
     headerClassName: PropTypes.string,
+    /** class name for row */
     rowClassName: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.string,
     ]),
+    /** set row key */
     rowKey: PropTypes.func,
+    /** onClick function */
     onRowClick: PropTypes.func,
-
+    /** sorting column name */
     sortingColumn: PropTypes.string,
+    /** sorting order */
     sortingOrder: PropTypes.oneOf([-1, 1]),
+    /** onSort function */
     onSort: PropTypes.func,
   }
 
@@ -133,7 +157,7 @@ class TTable extends PureComponent {
 
     return (
       <AppContext.Consumer>
-        {({ media }) => {
+        {({ media = {} }) => {
           if (media.portable) {
             return (
               <ListView {...{
