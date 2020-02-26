@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 23px 15px;
+  padding: 12px 15px;
 }
 
 .tableListTitleContainer {
@@ -23,7 +23,7 @@
 }
 
 .tableListTitle {
-  font-size: 24px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--trood-gray-extra-dark);
   text-transform: uppercase;
@@ -43,7 +43,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 23px 15px;
+  padding: 12px 15px;
   cursor: pointer;
 }
 
@@ -61,7 +61,7 @@
 }
 
 .tableListItemTitleText {
-  font-size: 24px;
+  font-size: 12px;
   color: var(--trood-blue);
 }
 
@@ -91,7 +91,7 @@
 }
 
 .tableListItemLabel {
-  font-size: 24px;
+  font-size: 12px;
   line-height: 1.43;
   font-weight: 600;
   color: var(--trood-gray-extra-dark);
@@ -99,7 +99,7 @@
 }
 
 .tableListItemValue {
-  font-size: 24px;
+  font-size: 12px;
   line-height: 1.43;
   font-weight: normal;
   color: var(--trood-gray-extra-dark);
@@ -113,7 +113,7 @@
 }
 
 .listSortControlsLabel {
-  font-size: 24px;
+  font-size: 12px;
   line-height: 1.43;
   font-weight: 500;
   color: var(--trood-gray-extra-dark);
@@ -123,7 +123,7 @@
 .listSortItem {
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: normal;
   color: var(--trood-blue);
   margin: 5px;
