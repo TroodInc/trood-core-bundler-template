@@ -1,7 +1,11 @@
+const path = require('path');
 const paths = require('./config/paths');
 
 
 module.exports = {
+  styleguideComponents: {
+    Wrapper: path.join(__dirname, 'src/styleguideRoot.js')
+  },
   pagePerSection: true,
   usageMode: 'expand',
   styleguideDir: 'docs/components',
