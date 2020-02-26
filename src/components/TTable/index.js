@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import deepEqual from 'deep-equal'
 
-import { AppContext } from '$trood/app'
+import { AppContext } from '$trood/app/constants' // import from $trood/app causes an error in styleguidist
 
 import { isDefAndNotNull } from '$trood/helpers/def'
 
