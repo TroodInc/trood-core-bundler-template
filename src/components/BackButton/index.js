@@ -1,17 +1,15 @@
-import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
-import classNames from 'classnames'
+import PropTypes from 'prop-types'
 import { Route } from 'react-router-dom'
+import classNames from 'classnames'
 import { defineMessages } from 'react-intl'
-
-import { intlObject } from '$trood/localeService'
 
 import style from './index.css'
 
-import TIcon, { ICONS_TYPES, ROTATE_TYPES } from '$trood/components/TIcon'
+import { intlObject } from '$trood/localeService'
+import TIcon, { ICONS_TYPES, ROTATE_TYPES, LABEL_POSITION_TYPES } from '$trood/components/TIcon'
 
 import { BACK_BUTTON_TYPES } from './constants'
-
 
 const messages = defineMessages({
   back: {
@@ -20,11 +18,19 @@ const messages = defineMessages({
   },
 })
 
+/**
+ * The component for displaying the button back, by clicking on it you will return to the previous page.
+ */
+
 class BackButton extends PureComponent {
   static propTypes = {
+    /** class name for styling component */
     className: PropTypes.string,
+    /** type Button "button" or "floating". Default value "button" */
     type: PropTypes.oneOf(Object.values(BACK_BUTTON_TYPES)),
+    /** onClick function for Button */
     onClick: PropTypes.func,
+    /** show label or not */
     withLabel: PropTypes.bool,
   }
 

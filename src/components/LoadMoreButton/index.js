@@ -1,16 +1,14 @@
-import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
+
+import style from './index.css'
 
 import { defineMessages } from 'react-intl'
 import { intlObject } from '$trood/localeService'
 
-import TButton from '$trood/components/TButton'
+import TButton, { BUTTON_COLORS, BUTTON_TYPES } from '$trood/components/TButton'
 import LoadingIndicator from '$trood/components/LoadingIndicator'
-import { BUTTON_COLORS, BUTTON_TYPES } from '$trood/components/TButton/constants'
-
-import style from './index.css'
-
 
 export const messages = defineMessages({
   loadMore: {
@@ -19,11 +17,19 @@ export const messages = defineMessages({
   },
 })
 
+/**
+ * Component for output Load More Button.
+ */
+
 class LoadMoreButton extends PureComponent {
   static propTypes = {
+    /** class name for styling component */
     className: PropTypes.string,
+    /** loading finish or not */
     isLoading: PropTypes.bool,
+    /** button label text */
     label: PropTypes.node,
+    /** onClick function, for Button */
     onClick: PropTypes.func,
   }
 

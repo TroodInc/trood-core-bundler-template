@@ -1,25 +1,47 @@
-import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { toNumber } from '$trood/helpers/format'
 
 import style from './index.css'
 
+import TIcon, { ICONS_TYPES, LABEL_POSITION_TYPES, ROTATE_TYPES } from '$trood/components/TIcon'
+
 import { LOADING_INDICATOR_TYPES } from './constants'
-
-import TIcon from '$trood/components/TIcon'
-import { ICONS_TYPES } from '$trood/components/TIcon/constants'
-
-import { toNumber } from '$trood/helpers/format'
-
 
 const circleRadius = 40
 const circleViewBox = 100
 
+/**
+ * Component for output loading indicator.
+ */
+
 class LoadingIndicator extends PureComponent {
   static propTypes = {
+    /** class name for styling component */
     className: PropTypes.string,
+    /** set loading indicator type, all types you can see in component TIcon, in components */
     type: PropTypes.oneOf(Object.values(LOADING_INDICATOR_TYPES)),
+    /** progress loading */
     progress: PropTypes.number,
+
+    /** width and height size icon in px */
+    size: PropTypes.number,
+    /** default type for rotate you can see in constants, or send number in deg, for icon */
+    rotate: PropTypes.oneOfType([
+      PropTypes.oneOf(Object.values(ROTATE_TYPES)),
+      PropTypes.number,
+    ]),
+    /** label icon */
+    label: PropTypes.node,
+    /** all label position you can see in constants, in TIcon component */
+    labelPosition: PropTypes.oneOf(Object.keys(LABEL_POSITION_TYPES)),
+    /** color, for Icon */
+    color: PropTypes.string,
+    /** disabled or not, for Icon */
+    disabled: PropTypes.bool,
+    /** onClick function, for Icon */
+    onClick: PropTypes.func,
   }
 
   static defaultProps = {
@@ -86,5 +108,7 @@ class LoadingIndicator extends PureComponent {
     )
   }
 }
+
+export { LOADING_INDICATOR_TYPES } from './constants'
 
 export default LoadingIndicator

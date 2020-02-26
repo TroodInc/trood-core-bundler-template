@@ -8,11 +8,13 @@ import style from './index.css'
 import { intlObject } from '$trood/localeService'
 import { messages } from '$trood/mainConstants'
 
+import { ICONS_TYPES } from '$trood/components/TIcon'
+
 import TLabel from '$trood/components/TLabel'
 
 import { SELECT_TYPES } from './constants'
 
-import List, { LIST_TYPES } from './components/List'
+import List, {LIST_ORIENTATION, LIST_TYPES} from './components/List'
 import DropDown from './components/DropDown'
 import Tile from './components/Tile'
 import Rating from './components/Rating'
@@ -24,28 +26,114 @@ const valueTypes = PropTypes.oneOfType([
   PropTypes.bool,
 ])
 
+/**
+ * Component for select some value.
+ */
+
 class TSelect extends PureComponent {
   static propTypes = {
+    /** class name for styling component */
     className: PropTypes.string,
+    /** class name for styling label */
     labelClassName: PropTypes.string,
-
+    /** all type you can see in constants */
     type: PropTypes.oneOf(Object.values(SELECT_TYPES)),
+    /** all list type you can see in interior component List, in constants */
     listType: PropTypes.oneOf(Object.values(LIST_TYPES)),
+    /** multi select or not */
     multi: PropTypes.bool,
+    /** label text */
     label: PropTypes.node,
+    /** select values */
     values: PropTypes.arrayOf(valueTypes),
+    /** clearable or not */
     clearable: PropTypes.bool,
-
+    /** disabled or not */
     disabled: PropTypes.bool,
+    /** list errors */
     errors: PropTypes.arrayOf(PropTypes.string),
+    /** validate settings */
     validate: PropTypes.shape({
+      /** check on blur or not */
       checkOnBlur: PropTypes.bool,
+      /** required or not */
       required: PropTypes.bool,
     }),
+    /** show text errors or not */
     showTextErrors: PropTypes.bool,
-
+    /** onValid function */
     onValid: PropTypes.func,
+    /** onInvalid function */
     onInvalid: PropTypes.func,
+
+    /** class name for control. For select with type "DropDown" */
+    controlClassName: PropTypes.string,
+    /** class name for value. For select with type "DropDown" */
+    valueClassName: PropTypes.string,
+    /** style for main select container. For select with type "DropDown" */
+    mainSelectContainerStyle: PropTypes.object,
+    /** items data. For select with type "DropDown" and "List" or "Tile" */
+    items: PropTypes.arrayOf(PropTypes.shape({
+      /** item value */
+      value: valueTypes,
+      /** item label */
+      label: PropTypes.node,
+    })),
+    /** control. For select with type "DropDown" */
+    iconProps: PropTypes.object,
+    /** placeholder text. For select with type "DropDown" or "Tile" */
+    placeHolder: PropTypes.node,
+    /** show search control. For select with type "DropDown" */
+    showSearch: PropTypes.bool,
+    /** set when loading finish. For select with type "DropDown" and "List" */
+    isLoading: PropTypes.bool,
+    /** default open selector or not. For select with type "DropDown" and "List" or "Tile" */
+    defaultOpen: PropTypes.bool,
+    /** maximum number of rows. For select with type "DropDown" and "List" */
+    maxRows: PropTypes.number,
+    /** autoScroll or not. For select with type "DropDown" and "List" */
+    autoScroll: PropTypes.bool,
+    /** onChange function. For select with type "DropDown" and "List" or "Tile" or "Rating" */
+    onChange: PropTypes.func,
+    /** onBlur function. For select with type "DropDown" and "List" or "Tile" or "Rating" */
+    onBlur: PropTypes.func,
+    /** onFocus function. For select with type "DropDown" or "Rating" */
+    onFocus: PropTypes.func,
+    /** onSearch function. For select with type "DropDown" */
+    onSearch: PropTypes.func,
+    /** onAdd function. For select with type "DropDown" */
+    onAdd: PropTypes.func,
+    /** missing value resolver. For select with type "DropDown" or "Tile" */
+    missingValueResolver: PropTypes.func,
+    /** children node. For select with type "DropDown" */
+    children: PropTypes.node,
+
+    /** class name for item. For select with type "List" */
+    itemClassName: PropTypes.string,
+    /** orientation "vertical" or "horizontal". For select with type "List" or "Tile" */
+    orientation: PropTypes.oneOf(Object.values(LIST_ORIENTATION)),
+    /** children node. For select with type "List" */
+    emptyItemsLabel: PropTypes.node,
+    /** children node. For select with type "List" */
+    onScrollToEnd: PropTypes.func,
+
+    /** rating value. For select with type "Rating" */
+    value: PropTypes.number,
+    /** max rating value. For select with type "Rating" */
+    maxRating: PropTypes.number,
+    /** icon settings. For select with type "Rating" */
+    icon: PropTypes.shape({
+      /** all types you can see in component TIcon, in components */
+      type: PropTypes.oneOf(Object.values(ICONS_TYPES)),
+      /** width and height size icon in px */
+      size: PropTypes.number,
+      /** class name for styling component */
+      className: PropTypes.string,
+      /** class name for active icon */
+      activeIconClassName: PropTypes.string,
+      /** class name for in active icon */
+      inActiveIconClassName: PropTypes.string,
+    }),
   }
 
   static defaultProps = {

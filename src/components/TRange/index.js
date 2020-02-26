@@ -4,8 +4,26 @@ import React, { PureComponent } from 'react'
 import { DEFAULT_MIN, DEFAULT_MAX, DEFAULT_STEP, DEFAULT_VALUE } from './constants'
 import style from './index.css'
 
+/**
+ * Component for output TRange.
+ */
 
 class TRange extends PureComponent {
+  static propTypes = {
+    /** class name for styling component */
+    className: PropTypes.string,
+    /** minimum range value */
+    min: PropTypes.number,
+    /** maximum range value */
+    max: PropTypes.number,
+    /** value change step */
+    step: PropTypes.number,
+    /** default value */
+    defaultValue: PropTypes.number,
+    /** onChange function */
+    onChange: PropTypes.func,
+  }
+
   static defaultProps = {
     onChange: () => {},
     min: DEFAULT_MIN,
@@ -13,15 +31,6 @@ class TRange extends PureComponent {
     step: DEFAULT_STEP,
     defaultValue: DEFAULT_VALUE,
     className: '',
-  }
-
-  static propTypes = {
-    onChange: PropTypes.func,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    step: PropTypes.number,
-    defaultValue: PropTypes.number,
-    className: PropTypes.string,
   }
 
   render() {

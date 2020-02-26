@@ -1,18 +1,17 @@
-import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
-import classNames from 'classnames'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import classNames from 'classnames'
 
 import style from './index.css'
+
+import TIcon, { ICONS_TYPES } from '$trood/components/TIcon'
+
 import {
   BUTTON_TYPES,
   BUTTON_COLORS,
   BUTTON_SPECIAL_TYPES,
 } from './constants'
-
-import TIcon from '$trood/components/TIcon'
-import { ICONS_TYPES } from '$trood/components/TIcon/constants'
-
 
 const BUTTON_SPECIAL_ICONS = {
   [BUTTON_SPECIAL_TYPES.add]: (
@@ -64,18 +63,33 @@ const BUTTON_SPECIAL_ICONS = {
   ),
 }
 
+/**
+ * Component for output Button.
+ */
+
 class TButton extends PureComponent {
   static propTypes = {
+    /** all types you can see in components */
     type: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
+    /** all special type you can see in components */
     specialType: PropTypes.oneOf(Object.values(BUTTON_SPECIAL_TYPES)),
+    /** all color you can see in components */
     color: PropTypes.oneOf(Object.values(BUTTON_COLORS)),
+    /** tab index number*/
     tabIndex: PropTypes.number,
+    /** link */
     link: PropTypes.string,
+    /** label text */
     label: PropTypes.node,
+    /** set tooltip */
     tooltip: PropTypes.string,
+    /** thin or not */
     thin: PropTypes.bool,
+    /** disabled or not */
     disabled: PropTypes.bool,
+    /** onClick function */
     onClick: PropTypes.func,
+    /** class name for styling component */
     className: PropTypes.string,
   }
 

@@ -2,16 +2,60 @@ import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 
-import EnchancedSwitch from '../internal/EnchancedSwitch'
+import EnchancedSwitch, {INNER_INPUT_TYPES, LABEL_POSITION_TYPES} from '../internal/EnchancedSwitch'
 
 import style from './index.css'
 
+/**
+ * Component for output Toggle.
+ */
 
 class TToggle extends PureComponent {
   static propTypes = {
+    /** disabled or not */
     disabled: PropTypes.bool,
+    /** value true or false */
     value: PropTypes.bool,
+    /** is switch or not */
     isSwitch: PropTypes.bool,
+
+    /** class name for styling component */
+    className: PropTypes.string,
+    /** class name for styling label */
+    labelClassName: PropTypes.string,
+    /** class name for styling disabled label */
+    disabledLabelClassName: PropTypes.string,
+    /** all type you can see in constants */
+    type: PropTypes.oneOf(Object.values(INNER_INPUT_TYPES)),
+    /** stop propagation or not */
+    stopPropagation: PropTypes.bool,
+    /** view un switched component */
+    unSwitchedComponent: PropTypes.node,
+    /** label text */
+    label: PropTypes.node,
+    /** all label position you can see in constants */
+    labelPosition: PropTypes.oneOf(Object.values(LABEL_POSITION_TYPES)),
+    /** second label text */
+    secondLabel: PropTypes.node,
+    /** all label position you can see in constants */
+    secondLabelPosition: PropTypes.oneOf(Object.values(LABEL_POSITION_TYPES)),
+    /** errors text */
+    errors: PropTypes.arrayOf(PropTypes.node),
+    /** show text errors or not */
+    showTextErrors: PropTypes.bool,
+    /** validate settings */
+    validate: PropTypes.shape({
+      /** check on blur or not */
+      checkOnBlur: PropTypes.bool,
+      /** required or not */
+      required: PropTypes.bool,
+    }),
+    /** onChange function */
+    onChange: PropTypes.func,
+    /** onValid function */
+    onValid: PropTypes.func,
+    /** onInvalid function */
+    onInvalid: PropTypes.func,
   }
 
   static defaultProps = {

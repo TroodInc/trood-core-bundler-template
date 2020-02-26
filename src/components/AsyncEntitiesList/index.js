@@ -10,28 +10,43 @@ import LoadingIndicator from '$trood/components/LoadingIndicator'
 import { LIST_TYPES } from './constants'
 import { DEFAULT_SCROLLING_CONTAINER_ID } from '$trood/mainConstants'
 
-
 const INFINITE_SCROLL_LOAD_HEIGHT_DELTA = 100
+
+/**
+ * Component for asynchronous data loading into a list.
+ */
 
 class AsyncEntitiesList extends PureComponent {
   static propTypes = {
-    id: PropTypes.string,
+    /** children node */
+    children: PropTypes.node,
+    /** class name for styling component */
     className: PropTypes.string,
+    /** class name for styling content */
     contentClassName: PropTypes.string,
-
-    nextPage: PropTypes.number,
+    /** component id */
+    id: PropTypes.string,
+    /** loading finish or not */
     isLoading: PropTypes.bool,
+    /** number next page */
+    nextPage: PropTypes.number,
+    /** action for next page */
     nextPageAction: PropTypes.func,
+    /** reverses an array in place or not */
     reverse: PropTypes.bool,
-
+    /** settings for scroll Container, Css selector and DOM node */
     scrollContainer: PropTypes.oneOfType([
       PropTypes.string, // Css selector
       PropTypes.object, // DOM node
     ]),
-
+    /** type loading "infinite Scroll" or "load More Button". Default value "infinite Scroll" */
     type: PropTypes.oneOf(Object.values(LIST_TYPES)),
 
-    children: PropTypes.node,
+    /** onClick function, for Load More Button */
+    onClick: PropTypes.func,
+
+    /** progress number, for Loading Indicator */
+    progress: PropTypes.number,
   }
 
   static defaultProps = {

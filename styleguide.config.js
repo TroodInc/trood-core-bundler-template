@@ -5,6 +5,7 @@ module.exports = {
   pagePerSection: true,
   usageMode: 'expand',
   styleguideDir: 'docs/components',
+  assetsDir: 'public',
   webpackConfig: {
     resolve: {
       alias: {

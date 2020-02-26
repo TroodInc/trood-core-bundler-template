@@ -7,12 +7,17 @@ import { findDOMNode } from 'react-dom'
 
 import { bind, unbind } from '$trood/helpers/events'
 
-
 const clickEvents = ['click', 'touchend']
+
+/**
+ * Component wrapper, gives onClick event.
+ */
 
 class TClickOutside extends PureComponent {
   static propTypes = {
+    /** onClick function */
     onClick: PropTypes.func,
+    /** children node */
     children: PropTypes.node,
   }
 

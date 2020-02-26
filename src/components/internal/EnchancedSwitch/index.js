@@ -12,31 +12,48 @@ import { intlObject } from '$trood/localeService'
 
 class EnchancedSwitch extends PureComponent {
   static propTypes = {
+    /** class name for styling component */
     className: PropTypes.string,
+    /** class name for styling label */
     labelClassName: PropTypes.string,
+    /** class name for styling disabled label */
     disabledLabelClassName: PropTypes.string,
-
+    /** all type you can see in constants */
     type: PropTypes.oneOf(Object.values(INNER_INPUT_TYPES)),
+    /** disabled or not */
     disabled: PropTypes.bool,
+    /** stop propagation or not */
     stopPropagation: PropTypes.bool,
-
+    /** switched or not */
     switched: PropTypes.bool.isRequired,
+    /** view switched component */
     switchedComponent: PropTypes.node.isRequired,
+    /** view un switched component */
     unSwitchedComponent: PropTypes.node,
+    /** label text */
     label: PropTypes.node,
+    /** all label position you can see in constants */
     labelPosition: PropTypes.oneOf(Object.values(LABEL_POSITION_TYPES)),
+    /** second label text */
     secondLabel: PropTypes.node,
+    /** all label position you can see in constants */
     secondLabelPosition: PropTypes.oneOf(Object.values(LABEL_POSITION_TYPES)),
-
+    /** errors text */
     errors: PropTypes.arrayOf(PropTypes.node),
+    /** show text errors or not */
     showTextErrors: PropTypes.bool,
+    /** validate settings */
     validate: PropTypes.shape({
+      /** check on blur or not */
       checkOnBlur: PropTypes.bool,
+      /** required or not */
       required: PropTypes.bool,
     }),
-
+    /** onChange function */
     onChange: PropTypes.func,
+    /** onValid function */
     onValid: PropTypes.func,
+    /** onInvalid function */
     onInvalid: PropTypes.func,
   }
 
@@ -184,5 +201,7 @@ class EnchancedSwitch extends PureComponent {
     )
   }
 }
+
+export { INNER_INPUT_TYPES, LABEL_POSITION_TYPES } from './constants'
 
 export default EnchancedSwitch

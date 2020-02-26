@@ -12,20 +12,32 @@ import {
 
 import style from './index.css'
 
+/**
+ * Component for output icon.
+ */
 
 class TIcon extends PureComponent {
   static propTypes = {
+    /** class name for styling component */
+    className: PropTypes.string,
+    /** width and height size icon in px */
     size: PropTypes.number,
+    /** all types you can see in components */
     type: PropTypes.oneOf(Object.keys(ICONS_TYPES)),
+    /** default type for rotate you can see in constants, or send number in deg */
     rotate: PropTypes.oneOfType([
       PropTypes.oneOf(Object.values(ROTATE_TYPES)),
       PropTypes.number,
     ]),
+    /** label icon */
     label: PropTypes.node,
+    /** all label position you can see in constants */
     labelPosition: PropTypes.oneOf(Object.keys(LABEL_POSITION_TYPES)),
-    className: PropTypes.string,
+    /** color icon */
     color: PropTypes.string,
+    /** disabled or not */
     disabled: PropTypes.bool,
+    /** onClick function */
     onClick: PropTypes.func,
   }
 
@@ -55,6 +67,7 @@ class TIcon extends PureComponent {
       width: size,
       height: size,
     }
+
     return (
       <div {...{
         className: classNames(style.root, className),

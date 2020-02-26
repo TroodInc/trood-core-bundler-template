@@ -8,10 +8,15 @@ import basePageLayout from '$trood/styles/basePageLayout.css'
 import { messages } from '$trood/mainConstants'
 import { intlObject } from '$trood/localeService'
 
+/**
+ * Error output component.
+ */
 
 class ErrorBoundary extends PureComponent {
   static propTypes = {
+    /** class name for styling component */
     errorClassName: PropTypes.string,
+    /** children node */
     children: PropTypes.node,
   }
 

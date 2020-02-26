@@ -10,10 +10,15 @@ import { CURRENCIES, CURRENCY_CODES, CURRENCY_SIGN_TYPE, localization } from './
 
 import { toNumber, toMoney } from '$trood/helpers/format'
 
+/**
+ * Component for formatting currency.
+ */
 
 class TCurrency extends PureComponent {
   static propTypes = {
+    /** class name for styling component */
     className: PropTypes.string,
+    /** money value */
     value: (props, propName, componentName) => {
       const currentProp = props[propName]
       if (Number.isNaN(+currentProp)) {
@@ -21,12 +26,19 @@ class TCurrency extends PureComponent {
       }
       return undefined
     },
+    /** all currency code you can see in constants */
     currency: PropTypes.oneOf(Object.values(CURRENCY_CODES)),
+    /** all currency sign type you can see in constants */
     currencySignType: PropTypes.oneOf(Object.values(CURRENCY_SIGN_TYPE)),
+    /** short or not */
     short: PropTypes.bool,
+    /** set sign */
     sign: PropTypes.node,
+    /** show sign or not */
     showSign: PropTypes.bool,
+    /** sign class name, for styling sign */
     signClassName: PropTypes.string,
+    /** number of decimal places */
     trimCount: PropTypes.number,
   }
 

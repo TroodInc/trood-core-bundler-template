@@ -32,26 +32,48 @@ const propsForCheckUpdate = props => ({
   },
 })
 
+/**
+ * Component for set date and time.
+ */
+
 class DateTimePicker extends PureComponent {
   static propTypes = {
+    /** class name for styling component */
     className: PropTypes.string,
+    /** all label position you can see in constants */
     type: PropTypes.oneOf(Object.values(PICKER_TYPES)),
+    /** all label position you can see in constants */
     calendarPosition: PropTypes.oneOf(Object.values(CALENDAR_POSITIONS)),
+    /** stop propagation or not */
     zeroTimeIsValue: PropTypes.bool,
+    /** date and time value */
     value: allMomentPropTypes,
+    /** label text */
     label: PropTypes.node,
+    /** label text */
     timeLabel: PropTypes.node,
+    /** validate settings */
     validate: PropTypes.shape({
+      /** check on blur or not */
       checkOnBlur: PropTypes.bool,
+      /** date is required or not, only for DatePicker */
       dateRequired: PropTypes.bool,
+      /** time is required or not, only for TimePicker */
       timeRequired: PropTypes.bool,
+      /** minimum date, only for DatePicker */
       minDate: allMomentPropTypes,
+      /** maximum allowable date, only for DatePicker */
       maxDate: allMomentPropTypes,
     }),
+    /** show text errors or not */
     showTextErrors: PropTypes.bool,
+    /** onChange function */
     onChange: PropTypes.func,
+    /** onValid function */
     onValid: PropTypes.func,
+    /** onInvalid function */
     onInvalid: PropTypes.func,
+    /** placeholder text */
     placeholder: PropTypes.node,
   }
 

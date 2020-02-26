@@ -17,13 +17,21 @@ import {
 
 import style from './index.css'
 
+/**
+ * Component for output Wysiwyg Editor.
+ */
 
 class WysiwygEditor extends PureComponent {
   static propTypes = {
+    /** class name for styling component */
     className: PropTypes.string,
+    /** text value */
     value: PropTypes.string,
+    /** all styles you can see in constants */
     usedStyles: PropTypes.arrayOf(PropTypes.string),
+    /** all colors you can see in constants */
     usedColors: PropTypes.arrayOf(PropTypes.string),
+    /** onChange function */
     onChange: PropTypes.func,
   }
 
@@ -107,5 +115,13 @@ class WysiwygEditor extends PureComponent {
     )
   }
 }
+
+export {
+  DEFAULT_STYLES,
+  DEFAULT_COLORS,
+  DEFAULT_STYLES_SCHEMA,
+  getColorStylesSchema,
+  getColorStylesMap,
+} from './constants'
 
 export default WysiwygEditor
