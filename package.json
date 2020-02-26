@@ -104,8 +104,7 @@
     "styleguide:build": "styleguidist build"
   },
   "pre-commit": [
-    "lint",
-    "styleguide:build"
+    "lint"
   ],
   "jest": {
     "collectCoverageFrom": [
