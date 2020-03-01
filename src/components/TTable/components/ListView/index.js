@@ -5,8 +5,9 @@ import { intlObject } from '$trood/localeService'
 
 import { isReactComponent } from '$trood/helpers/react'
 
+import TClickOutside from '$trood/components/TClickOutside'
 import TCheckbox, { CHECK_COLORS } from '$trood/components/TCheckbox'
-import TIcon, { ICONS_TYPES, ROTATE_TYPES } from '$trood/components/TIcon'
+import TIcon, { ICONS_TYPES, ROTATE_TYPES, LABEL_POSITION_TYPES } from '$trood/components/TIcon'
 
 import { messages } from '../../constants'
 import style from './index.css'
@@ -18,15 +19,21 @@ class ListView extends PureComponent {
 
     this.state = {
       listItemExpanded: null,
+      sortListExpanded: false,
     }
 
     this.toggleExpand = this.toggleExpand.bind(this)
+    this.toggleSortListExpand = this.toggleSortListExpand.bind(this)
   }
 
   toggleExpand(rowIndex) {
     const { listItemExpanded } = this.state
 
     this.setState({ listItemExpanded: listItemExpanded === rowIndex ? null : rowIndex })
+  }
+
+  toggleSortListExpand(expand) {
+    this.setState({ sortListExpanded: expand })
   }
 
   render() {
@@ -53,7 +60,7 @@ class ListView extends PureComponent {
       getRowKey,
       rowClassName,
     } = this.props
-    const { listItemExpanded } = this.state
+    const { listItemExpanded, sortListExpanded } = this.state
     const headerItemsSortable = header.filter(item => item.sortable)
 
     return (
@@ -78,25 +85,42 @@ class ListView extends PureComponent {
           {body.length > 0 && headerItemsSortable.length > 0 && (
             <div className={style.listSortControls}>
               <span className={style.listSortControlsLabel}>
-                {intlObject.intl.formatMessage(messages.sortBy)}
+                {intlObject.intl.formatMessage(messages.sortBy)}:
               </span>
-              {headerItemsSortable.map((item, index) => (
-                <div {...{
-                  key: index,
-                  onClick: () => onSort(item.name, sortingOrder === -1 ? 1 : -1),
-                  className: style.listSortItem,
-                }}>
-                  {item.title}
-                  {sortingColumn === item.name &&
-                    <TIcon {...{
-                      type: ICONS_TYPES.arrow,
-                      rotate: sortingOrder === -1 ? ROTATE_TYPES.up : ROTATE_TYPES.down,
-                      className: style.sortIcon,
-                      size: 16,
-                    }} />
-                  }
+              <TIcon {...{
+                className: style.sortOrderIcon,
+                type: ICONS_TYPES.arrowWithTail,
+                rotate: sortingOrder === -1 ? ROTATE_TYPES.right : ROTATE_TYPES.left,
+                onClick: () => onSort(sortingColumn, sortingOrder === -1 ? 1: -1),
+                size: 16,
+              }} />
+              <TClickOutside onClick={() => this.toggleSortListExpand(false)}>
+                <div className={style.sortFields}>
+                  <TIcon {...{
+                    className: style.sortValueIcon,
+                    type: ICONS_TYPES.arrow,
+                    rotate: sortListExpanded ? ROTATE_TYPES.down : ROTATE_TYPES.up,
+                    label: headerItemsSortable.find(item => item.name === sortingColumn).title,
+                    labelPosition: LABEL_POSITION_TYPES.left,
+                    onClick: () => this.toggleSortListExpand(!sortListExpanded),
+                    size: 16,
+                  }} />
+                  <div className={classNames(style.sortFieldsContainer, sortListExpanded && style.expanded)}>
+                    {headerItemsSortable.map((item, index) => (
+                      <span {...{
+                        key: index,
+                        onClick: () => {
+                          onSort(item.name, sortingOrder)
+                          this.toggleSortListExpand(false)
+                        },
+                        className: style.listSortItem,
+                      }}>
+                        {item.title}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              ))}
+              </TClickOutside>
             </div>
           )}
         </div>
@@ -156,10 +180,10 @@ class ListView extends PureComponent {
                   {header.map((item, i) => (
                     <div {...{
                       key: i,
-                      className: classNames(item.className, style.listItemBodyRow),
+                      className: style.listItemBodyRow,
                     }}>
-                      {item.title && <span className={style.tableListItemLabel}>{item.title}:</span>}
-                      <div className={style.tableListItemValue}>
+                      <span className={style.tableListItemLabel}>{item.title ? `${item.title}:` : ''}</span>
+                      <div className={classNames(item.className, style.tableListItemValue)}>
                         {item.model(row, r, body, currentMetaData)}
                       </div>
                     </div>

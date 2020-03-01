@@ -26,7 +26,6 @@
   font-size: 12px;
   font-weight: 500;
   color: var(--trood-gray-extra-dark);
-  text-transform: uppercase;
 }
 
 .tableListItemContainer {
@@ -57,7 +56,7 @@
 }
 
 .listCheckbox {
-  margin-right: 18px;
+  margin-right: 12px;
 }
 
 .tableListItemTitleText {
@@ -80,14 +79,15 @@
 }
 
 .tableListItemBodyChecking {
-  padding: 17px 53px;
+  padding: 17px 15px 17px 53px;
 }
 
-.listItemBodyRow {
+.tableList .listItemBodyRow {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .tableListItemLabel {
@@ -104,6 +104,10 @@
   font-weight: normal;
   color: var(--trood-gray-extra-dark);
   text-align: right;
+}
+
+.tableListItemValue > div {
+  justify-content: flex-end;
 }
 
 .listSortControls {
@@ -126,16 +130,42 @@
   font-size: 12px;
   font-weight: normal;
   color: var(--trood-blue);
-  margin: 5px;
+  padding: 7px;
   cursor: pointer;
+  width: 100%;
 }
 
-.listSortItem:last-child {
-  margin-right: 0;
+.listSortItem:hover {
+  background-color: var(--trood-gray-hover);
 }
 
-@media (--trood-media-portable) {
-  .sortIcon {
-    margin: 0;
-  }
+.sortFields {
+  position: relative;
+}
+
+.sortFieldsContainer {
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  z-index: 9;
+  width: 200px;
+  background-color: white;
+  border: 1px solid var(--trood-gray-border);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.sortFieldsContainer.expanded {
+  display: flex;
+}
+
+.sortOrderIcon {
+  color: var(--trood-blue);
+  margin-right: 10px;
+}
+
+.sortValueIcon {
+  color: var(--trood-blue);
 }
