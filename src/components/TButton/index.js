@@ -69,11 +69,11 @@ const BUTTON_SPECIAL_ICONS = {
 
 class TButton extends PureComponent {
   static propTypes = {
-    /** all types you can see in components */
+    /** types: 'text', 'border', 'fill' */
     type: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
-    /** all special type you can see in components */
+    /** special types: 'add', 'minus', 'delete', 'text', 'icon', 'arrowLeft', 'arrowRight', 'attach' */
     specialType: PropTypes.oneOf(Object.values(BUTTON_SPECIAL_TYPES)),
-    /** all color you can see in components */
+    /** colors: 'red', 'blue', 'white', 'gray', 'orange', 'green' */
     color: PropTypes.oneOf(Object.values(BUTTON_COLORS)),
     /** tab index number*/
     tabIndex: PropTypes.number,

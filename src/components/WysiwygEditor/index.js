@@ -27,9 +27,9 @@ class WysiwygEditor extends PureComponent {
     className: PropTypes.string,
     /** text value */
     value: PropTypes.string,
-    /** all styles you can see in constants */
+    /** you can specify an array of siliconizing tools. You can find more information at https://draftjs.org/ */
     usedStyles: PropTypes.arrayOf(PropTypes.string),
-    /** all colors you can see in constants */
+    /** you can specify an array of colors to style the text */
     usedColors: PropTypes.arrayOf(PropTypes.string),
     /** onChange function */
     onChange: PropTypes.func,

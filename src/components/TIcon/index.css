@@ -5,6 +5,13 @@
   flex-flow: row nowrap;
 }
 
+.root-column {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-flow: column nowrap;
+}
+
 .svgWrapper {
   order: 2;
   display: flex;
@@ -32,6 +39,18 @@
   display: inline-block;
   order: 3;
   margin-left: 10px;
+}
+
+.up {
+  display: inline-block;
+  order: 1;
+  margin-bottom: 10px;
+}
+
+.down {
+  display: inline-block;
+  order: 3;
+  margin-top: 10px;
 }
 
 .tooltip {

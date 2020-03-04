@@ -18,7 +18,7 @@ class EnchancedSwitch extends PureComponent {
     labelClassName: PropTypes.string,
     /** class name for styling disabled label */
     disabledLabelClassName: PropTypes.string,
-    /** all type you can see in constants */
+    /** type: 'checkbox' or 'radio' */
     type: PropTypes.oneOf(Object.values(INNER_INPUT_TYPES)),
     /** disabled or not */
     disabled: PropTypes.bool,
@@ -32,11 +32,11 @@ class EnchancedSwitch extends PureComponent {
     unSwitchedComponent: PropTypes.node,
     /** label text */
     label: PropTypes.node,
-    /** all label position you can see in constants */
+    /** label position: 'right' or 'left' */
     labelPosition: PropTypes.oneOf(Object.values(LABEL_POSITION_TYPES)),
     /** second label text */
     secondLabel: PropTypes.node,
-    /** all label position you can see in constants */
+    /** second label position: 'right' or 'left'*/
     secondLabelPosition: PropTypes.oneOf(Object.values(LABEL_POSITION_TYPES)),
     /** errors text */
     errors: PropTypes.arrayOf(PropTypes.node),

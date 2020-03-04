@@ -20,6 +20,8 @@ export const LABEL_POSITION_TYPES = {
   [TOOLTIP]: TOOLTIP,
   [RIGHT]: RIGHT,
   [LEFT]: LEFT,
+  [UP]: UP,
+  [DOWN]: DOWN,
 }
 
 export const ROTATE_TYPES = {

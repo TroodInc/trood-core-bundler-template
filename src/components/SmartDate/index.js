@@ -27,6 +27,9 @@ const allMomentPropTypes = PropTypes.oneOfType([
 
 /**
  * Component for outputting the date in a given format.
+ *
+ * Formats: fullWithTime', 'onlyTime', 'full', 'short', 'shortWithTime', 'noSameYearFull', 'noSameYearShort',
+ * 'relativeFull', 'relativeFullWithTime', 'relativeShort', 'relativeShortWithTime', 'withoutDay'
  */
 
 class SmartDate extends PureComponent {
@@ -35,7 +38,7 @@ class SmartDate extends PureComponent {
     className: PropTypes.string,
     /** date */
     date: allMomentPropTypes,
-    /** all format you can see in constants */
+    /** all format you can see in description */
     format: PropTypes.string,
     /** custom format function */
     customFormat: PropTypes.func,

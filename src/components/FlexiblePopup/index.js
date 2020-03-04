@@ -10,6 +10,9 @@ import { POPUP_ARROW_POSITION } from './constants'
 
 /**
  * Component for view flexible popup.
+ *
+ * Position for component:  'topLeft', 'topMiddle', 'topRight', 'leftTop', 'leftMiddle', 'leftBottom', 'rightTop',
+ * 'rightMiddle', 'rightBottom', 'bottomLeft', 'bottomMiddle', 'bottomRight'
  */
 
 class FlexiblePopup extends PureComponent {
@@ -18,7 +21,7 @@ class FlexiblePopup extends PureComponent {
     className: PropTypes.string,
     /** title for component */
     title: PropTypes.node,
-    /** position for component, all position you can see in constants */
+    /** position for component, all position you can see in description */
     position: PropTypes.oneOf(Object.values(POPUP_ARROW_POSITION)),
     /** close or not */
     close: PropTypes.bool,

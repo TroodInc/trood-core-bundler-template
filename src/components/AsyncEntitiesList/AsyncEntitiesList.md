@@ -11,6 +11,7 @@ import AsyncEntitiesList from '$trood/components/AsyncEntitiesList';
   isLoading: this.entitiesIsLoading,
   nextPage: this.entitiesNextPage,
   nextPageAction: this.entitiesNextPageAction,
+  onClick: () => console.log('onClick'),
 }}>
   Code which outputs a paginated list (massive)
 </AsyncEntitiesList>

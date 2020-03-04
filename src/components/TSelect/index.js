@@ -36,9 +36,9 @@ class TSelect extends PureComponent {
     className: PropTypes.string,
     /** class name for styling label */
     labelClassName: PropTypes.string,
-    /** all type you can see in constants */
+    /** one type of: "dropdown", "filterDropdown", "tile", "list", "rating" */
     type: PropTypes.oneOf(Object.values(SELECT_TYPES)),
-    /** all list type you can see in interior component List, in constants */
+    /** one list type of: "text", "filterDropdown", "radio", "checkbox", "toggle", "tile" */
     listType: PropTypes.oneOf(Object.values(LIST_TYPES)),
     /** multi select or not */
     multi: PropTypes.bool,
@@ -123,7 +123,7 @@ class TSelect extends PureComponent {
     maxRating: PropTypes.number,
     /** icon settings. For select with type "Rating" */
     icon: PropTypes.shape({
-      /** all types you can see in component TIcon, in components */
+      /** all types you can see in component TIcon */
       type: PropTypes.oneOf(Object.values(ICONS_TYPES)),
       /** width and height size icon in px */
       size: PropTypes.number,

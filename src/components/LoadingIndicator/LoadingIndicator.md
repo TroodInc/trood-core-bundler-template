@@ -7,5 +7,6 @@ const isLoading = true;
 
 <LoadingIndicator {...{
   animationStop: !isLoading,
+  onClick: () => console.log('onClick'),
 }} />
 ```

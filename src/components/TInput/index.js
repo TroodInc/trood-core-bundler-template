@@ -21,7 +21,8 @@ import {
 
 class TInput extends PureComponent {
   static propTypes = {
-    /** all types you can see in components */
+    /** types: 'text', 'int', 'float', 'number', 'multi', 'wysiwyg', 'password', 'phone', 'phoneWithExt', 'money',
+     * 'moneyNumber', 'email', 'url', 'color', 'search', 'time' */
     type: PropTypes.oneOf(Object.values(INPUT_TYPES)),
     /** input value */
     value: PropTypes.oneOfType([

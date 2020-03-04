@@ -40,9 +40,9 @@ class DateTimePicker extends PureComponent {
   static propTypes = {
     /** class name for styling component */
     className: PropTypes.string,
-    /** all label position you can see in constants */
+    /** one type of: 'time', 'date', 'dateTime' */
     type: PropTypes.oneOf(Object.values(PICKER_TYPES)),
-    /** all label position you can see in constants */
+    /** one calendar position of: 'left', 'right' */
     calendarPosition: PropTypes.oneOf(Object.values(CALENDAR_POSITIONS)),
     /** stop propagation or not */
     zeroTimeIsValue: PropTypes.bool,

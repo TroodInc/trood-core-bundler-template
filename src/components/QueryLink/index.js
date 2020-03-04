@@ -14,8 +14,20 @@ class QueryLink extends PureComponent {
     activeClassName: PropTypes.string,
     /** active style NavLink or Link */
     activeStyle: PropTypes.bool,
-    /** pathname */
-    to: PropTypes.string,
+    /** redirect settings*/
+    to: PropTypes.oneOfType([
+      /** a string representing the path to link to */
+      PropTypes.string,
+      /** object with settings */
+      PropTypes.shape({
+        /** a string representing the path to link to */
+        pathname: PropTypes.string,
+        /** a string representation of query parameters */
+        search: PropTypes.string,
+        /** state to persist to the location */
+        state: PropTypes.object,
+      }),
+    ]),
   }
 
 
