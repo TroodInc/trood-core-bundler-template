@@ -6,9 +6,9 @@ import TToggle from '$trood/components/TToggle';
 <TToggle {...{
   value: true,
   label: 'Toggle checked',
-  onChange: () => console.log('onChange'),
-  onInvalid: () => console.log('onInvalid'),
-  onValid: () => console.log('onValid'),
+  onChange: (...args) => console.log('onChange', ...args),
+  onInvalid: (...args) => console.log('onInvalid', ...args),
+  onValid: (...args) => console.log('onValid', ...args),
 }} />
 ```
 TToggle base example:
@@ -19,8 +19,8 @@ import TToggle from '$trood/components/TToggle';
 <TToggle {...{
   value: false,
   label: 'Toggle unchecked',
-  onChange: () => console.log('onChange'),
-  onInvalid: () => console.log('onInvalid'),
-  onValid: () => console.log('onValid'),
+  onChange: (...args) => console.log('onChange', ...args),
+  onInvalid: (...args) => console.log('onInvalid', ...args),
+  onValid: (...args) => console.log('onValid', ...args),
 }} />
 ```

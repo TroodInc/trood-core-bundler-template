@@ -21,8 +21,10 @@ import {
 
 class TInput extends PureComponent {
   static propTypes = {
-    /** types: 'text', 'int', 'float', 'number', 'multi', 'wysiwyg', 'password', 'phone', 'phoneWithExt', 'money',
-     * 'moneyNumber', 'email', 'url', 'color', 'search', 'time' */
+    /** type is one of "INPUT_TYPES.text", "INPUT_TYPES.int", "INPUT_TYPES.float", "INPUT_TYPES.number",
+     * "INPUT_TYPES.multi", "INPUT_TYPES.wysiwyg", "INPUT_TYPES.password", "INPUT_TYPES.phone",
+     * "INPUT_TYPES.phoneWithExt", "INPUT_TYPES.money", "INPUT_TYPES.moneyNumber", "INPUT_TYPES.email",
+     * "INPUT_TYPES.url", "INPUT_TYPES.color", "INPUT_TYPES.search", "INPUT_TYPES.time" */
     type: PropTypes.oneOf(Object.values(INPUT_TYPES)),
     /** input value */
     value: PropTypes.oneOfType([

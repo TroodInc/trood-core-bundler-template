@@ -7,6 +7,6 @@ const isLoading = true;
 
 <LoadMoreButton {...{
   isLoading,
-  onClick: () => console.log('onClick'),
+  onClick: (...args) => console.log('onClick', ...args),
 }} />
 ```

@@ -12,7 +12,7 @@ const wrapItemStyle = {
     "alignItems": "center",
 };
 const itemStyle = {
-    "width": "155px",
+    "width": "270px",
     "margin": "5px",
     "padding": "5px",
     "border": "1px solid #000",
@@ -24,7 +24,7 @@ const itemStyle = {
         <div style={itemStyle} key={item}>
             <TIcon {...{
               size: 25,
-              label: item,
+              label: `ICONS_TYPES.${item}`,
               labelPosition: LABEL_POSITION_TYPES.down,
               type: ICONS_TYPES[item],
             }} />
@@ -43,6 +43,6 @@ import TIcon, { ICONS_TYPES } from '$trood/components/TIcon';
 <TIcon {...{
   size: 18,
   type: ICONS_TYPES.edit,
-  onClick: () => console.log('onClick'),
+  onClick: (...args) => console.log('onClick', ...args),
 }} />
 ```

@@ -25,7 +25,7 @@ toggleOpen(open) {
 
 <FlexiblePopup {...{
   //position: arrow && position,
-  onClose: () => console.log('onClose'),
+  onClose: (...args) => console.log('onClose', ...args),
 }}>
   some code to output children
 </FlexiblePopup>

@@ -21,13 +21,13 @@ const selectItems = [
 <TSelect {...{
     label: 'Select label',
     items: selectItems.map(item => ({ value: item.value, label: item.label })),
-    onChange: () => console.log('onChange'),
-    onAdd: () => console.log('onAdd'),
-    onScrollToEnd: () => console.log('onScrollToEnd'),
-    onSearch: () => console.log('onSearch'),
-    onInvalid: () => console.log('onInvalid'),
-    onValid: () => console.log('onValid'),
-    onFocus: () => console.log('onFocus'),
-    onBlur: () => console.log('onBlur'),
+    onChange: (...args) => console.log('onChange', ...args),
+    onAdd: (...args) => console.log('onAdd', ...args),
+    onScrollToEnd: (...args) => console.log('onScrollToEnd', ...args),
+    onSearch: (...args) => console.log('onSearch', ...args),
+    onInvalid: (...args) => console.log('onInvalid', ...args),
+    onValid: (...args) => console.log('onValid', ...args),
+    onFocus: (...args) => console.log('onFocus', ...args),
+    onBlur: (...args) => console.log('onBlur', ...args),
 }} />
 ```

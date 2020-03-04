@@ -44,8 +44,8 @@ const data = [
       model: item => item.width,
     },
   ],
-  onSort: () => console.log('onSort'),
-  onRowClick: () => console.log('onRowClick'),
-  onCheckedChange: () => console.log('onCheckedChange'),
+  onSort: (...args) => console.log('onSort', ...args),
+  onRowClick: (...args) => console.log('onRowClick', ...args),
+  onCheckedChange: (...args) => console.log('onCheckedChange', ...args),
 }} />
 ```

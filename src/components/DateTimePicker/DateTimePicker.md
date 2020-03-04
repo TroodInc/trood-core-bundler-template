@@ -1,4 +1,4 @@
-DatePicker base example:
+DateTimePicker only date example:
 
 ```js
 import DateTimePicker, { PICKER_TYPES } from '$trood/components/DateTimePicker';
@@ -7,12 +7,12 @@ import DateTimePicker, { PICKER_TYPES } from '$trood/components/DateTimePicker';
     label: 'Date',
     placeholder: 'value',
     type: PICKER_TYPES.date,
-    onChange: () => console.log('onChange'),
-    onInvalid: () => console.log('onInvalid'),
-    onValid: () => console.log('onValid'),
+    onChange: (...args) => console.log('onChange', ...args),
+    onInvalid: (...args) => console.log('onInvalid', ...args),
+    onValid: (...args) => console.log('onValid', ...args),
 }} />
 ```
-TimePicker base example:
+DateTimePicker only time example:
    
 ```js
 import DateTimePicker, { PICKER_TYPES } from '$trood/components/DateTimePicker';
@@ -21,8 +21,8 @@ import DateTimePicker, { PICKER_TYPES } from '$trood/components/DateTimePicker';
     label: 'Time',
     placeholder: 'value',
     type: PICKER_TYPES.time,
-    onChange: () => console.log('onChange'),
-    onInvalid: () => console.log('onInvalid'),
-    onValid: () => console.log('onValid'),
+    onChange: (...args) => console.log('onChange', ...args),
+    onInvalid: (...args) => console.log('onInvalid', ...args),
+    onValid: (...args) => console.log('onValid', ...args),
 }} />
 ```

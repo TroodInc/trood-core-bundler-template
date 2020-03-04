@@ -6,9 +6,9 @@ import TCheckbox from '$trood/components/TCheckbox';
 <TCheckbox {...{
   label: 'TCheckbox checked',
   value: true,
-  onChange: () => console.log('onChange'),
-  onInvalid: () => console.log('onInvalid'),
-  onValid: () => console.log('onValid'),
+  onChange: (...args) => console.log('onChange', ...args),
+  onInvalid: (...args) => console.log('onInvalid', ...args),
+  onValid: (...args) => console.log('onValid', ...args),
 }} />
 ```
 TCheckbox unchecked example:
@@ -19,8 +19,8 @@ import TCheckbox from '$trood/components/TCheckbox';
 <TCheckbox {...{
   label: 'TCheckbox unchecked',
   value: false,
-  onChange: () => console.log('onChange'),
-  onInvalid: () => console.log('onInvalid'),
-  onValid: () => console.log('onValid'),
+  onChange: (...args) => console.log('onChange', ...args),
+  onInvalid: (...args) => console.log('onInvalid', ...args),
+  onValid: (...args) => console.log('onValid', ...args),
 }} />
 ```

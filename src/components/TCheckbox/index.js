@@ -22,9 +22,9 @@ class TCheckbox extends PureComponent {
     value: PropTypes.bool,
     /** set icon type, default 'confirm', all iconType you can see in component TIcon */
     iconType: PropTypes.oneOf(Object.values(ICONS_TYPES)),
-    /** view types: 'checkbox' or 'toggler' */
+    /** view type is one of "CHECK_VIEW_TYPES.checkbox", "CHECK_VIEW_TYPES.toggler" */
     viewType: PropTypes.oneOf(Object.values(CHECK_VIEW_TYPES)),
-    /** set label color, 'blue' or 'black' */
+    /** set label color is one of "CHECK_COLORS.blue", "CHECK_COLORS.black" */
     color: PropTypes.oneOf(Object.values(CHECK_COLORS)),
     /** set label class name' */
     labelClassName: PropTypes.string,
@@ -33,7 +33,7 @@ class TCheckbox extends PureComponent {
     className: PropTypes.string,
     /** class name for styling disabled label */
     disabledLabelClassName: PropTypes.string,
-    /** types: 'checkbox' or 'radio' */
+    /** type is one of "INNER_INPUT_TYPES.checkbox", "INNER_INPUT_TYPES.radio" */
     type: PropTypes.oneOf(Object.values(INNER_INPUT_TYPES)),
     /** stop propagation or not */
     stopPropagation: PropTypes.bool,
@@ -41,11 +41,11 @@ class TCheckbox extends PureComponent {
     unSwitchedComponent: PropTypes.node,
     /** label text */
     label: PropTypes.node,
-    /** label positions: 'right', 'left' */
+    /** label position is one of "LABEL_POSITION_TYPES.right", "LABEL_POSITION_TYPES.left" */
     labelPosition: PropTypes.oneOf(Object.values(LABEL_POSITION_TYPES)),
     /** second label text */
     secondLabel: PropTypes.node,
-    /** second label positions: 'right', 'left' */
+    /** second label position is one of "LABEL_POSITION_TYPES.right", "LABEL_POSITION_TYPES.left" */
     secondLabelPosition: PropTypes.oneOf(Object.values(LABEL_POSITION_TYPES)),
     /** errors text */
     errors: PropTypes.arrayOf(PropTypes.node),
@@ -96,7 +96,7 @@ class TCheckbox extends PureComponent {
           value && style.checked,
           disabled && style.disabled,
         ),
-        'data-cy': value ? 'checked' : 'unchecked',
+        'data-cy':  value ? 'checkbox_checked' : 'checkbox_unchecked',
       }}
         >
         <TIcon {...{

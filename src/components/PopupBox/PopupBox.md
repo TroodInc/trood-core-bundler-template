@@ -12,7 +12,7 @@ import PopupBox from '$trood/components/PopupBox';
         type: ICONS_TYPES.dotMenu,
     }} />
   ),
-  onOpen: () => console.log('onOpen'),
-  onClose: () => console.log('onClose'),
+  onOpen: (...args) => console.log('onOpen', ...args),
+  onClose: (...args) => console.log('onClose', ...args),
 }} />
 ```

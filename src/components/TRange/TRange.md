@@ -8,6 +8,6 @@ import TRange from '$trood/components/TRange';
     max: 10,
     step: 1,
     defaultValue: 3,
-    onChange: () => console.log('onChange'),
+    onChange: (...args) => console.log('onChange', ...args),
 }} />
 ```

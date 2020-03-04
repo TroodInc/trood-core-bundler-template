@@ -19,7 +19,7 @@ class TRadioButton extends PureComponent {
     disabled: PropTypes.bool,
     /** value true or false */
     value: PropTypes.bool,
-    /** types: 'blue', 'orange', 'thin', 'large' */
+    /** type is one of "RADIO_TYPES.blue", "RADIO_TYPES.orange", "RADIO_TYPES.thin", "RADIO_TYPES.large" */
     type: PropTypes.oneOf(Object.values(RADIO_TYPES)),
 
     /** class name for styling component */
@@ -34,11 +34,11 @@ class TRadioButton extends PureComponent {
     unSwitchedComponent: PropTypes.node,
     /** label text */
     label: PropTypes.node,
-    /** label position: 'right' or 'left'*/
+    /** label position is one of "LABEL_POSITION_TYPES.right", "LABEL_POSITION_TYPES.left" */
     labelPosition: PropTypes.oneOf(Object.values(LABEL_POSITION_TYPES)),
     /** second label text */
     secondLabel: PropTypes.node,
-    /** second label position: 'right' or 'left'*/
+    /** second label position is one of "LABEL_POSITION_TYPES.right", "LABEL_POSITION_TYPES.left" */
     secondLabelPosition: PropTypes.oneOf(Object.values(LABEL_POSITION_TYPES)),
     /** errors text */
     errors: PropTypes.arrayOf(PropTypes.node),

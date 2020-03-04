@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 <Router>
   <BackButton {...{
   withLabel: false,
-  onClick: () => console.log('onClick'),
+  onClick: (...args) => console.log('onClick', ...args),
 }} />
 </Router>
 ```

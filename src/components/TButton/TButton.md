@@ -4,7 +4,7 @@ TButton base example:
 import TButton from '$trood/components/TButton';
 <TButton {...{
   label: 'TButton',
-  onClick: () => console.log('onClick'),
+  onClick: (...args) => console.log('onClick', ...args),
 }} />
 ```
 
@@ -15,6 +15,6 @@ import TButton, { BUTTON_COLORS } from '$trood/components/TButton';
 <TButton {...{
   label: 'TButton',
   color: BUTTON_COLORS.red,
-  onClick: () => console.log('onClick'),
+  onClick: (...args) => console.log('onClick', ...args),
 }} />
 ```

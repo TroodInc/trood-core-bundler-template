@@ -20,7 +20,8 @@ class LoadingIndicator extends PureComponent {
   static propTypes = {
     /** class name for styling component */
     className: PropTypes.string,
-    /** set loading indicator type: 'text' or 'spinner' or 'circle' */
+    /** set loading indicator type is one of "LOADING_INDICATOR_TYPES.text", "LOADING_INDICATOR_TYPES.spinner",
+     * "LOADING_INDICATOR_TYPES.circle" */
     type: PropTypes.oneOf(Object.values(LOADING_INDICATOR_TYPES)),
     /** progress loading */
     progress: PropTypes.number,
@@ -34,7 +35,8 @@ class LoadingIndicator extends PureComponent {
     ]),
     /** label icon */
     label: PropTypes.node,
-    /** label position: 'up', 'right', 'down', 'left', 'tooltip' */
+    /** label position is one of "LABEL_POSITION_TYPES.up", "LABEL_POSITION_TYPES.right", "LABEL_POSITION_TYPES.down",
+     * "LABEL_POSITION_TYPES.left", "LABEL_POSITION_TYPES.tooltip" */
     labelPosition: PropTypes.oneOf(Object.keys(LABEL_POSITION_TYPES)),
     /** color, for Icon */
     color: PropTypes.string,

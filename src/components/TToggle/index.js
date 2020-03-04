@@ -25,7 +25,7 @@ class TToggle extends PureComponent {
     labelClassName: PropTypes.string,
     /** class name for styling disabled label */
     disabledLabelClassName: PropTypes.string,
-    /** types: 'checkbox' or 'radio' */
+    /** type is one of "INNER_INPUT_TYPES.checkbox", "INNER_INPUT_TYPES.radio" */
     type: PropTypes.oneOf(Object.values(INNER_INPUT_TYPES)),
     /** stop propagation or not */
     stopPropagation: PropTypes.bool,
@@ -33,11 +33,11 @@ class TToggle extends PureComponent {
     unSwitchedComponent: PropTypes.node,
     /** label text */
     label: PropTypes.node,
-    /** label positions: 'right', 'left' */
+    /** label position is one of "LABEL_POSITION_TYPES.right", "LABEL_POSITION_TYPES.left" */
     labelPosition: PropTypes.oneOf(Object.values(LABEL_POSITION_TYPES)),
     /** second label text */
     secondLabel: PropTypes.node,
-    /** second label positions: 'right', 'left' */
+    /** second label position is one of "LABEL_POSITION_TYPES.right", "LABEL_POSITION_TYPES.left" */
     secondLabelPosition: PropTypes.oneOf(Object.values(LABEL_POSITION_TYPES)),
     /** errors text */
     errors: PropTypes.arrayOf(PropTypes.node),

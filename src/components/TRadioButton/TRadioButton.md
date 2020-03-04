@@ -5,9 +5,9 @@ import TRadioButton from '$trood/components/TRadioButton';
 
 <TRadioButton {...{
     label: 'Radio unchecked',
-    onChange: () => console.log('onChange'),
-    onInvalid: () => console.log('onInvalid'),
-    onValid: () => console.log('onValid'),
+    onChange: (...args) => console.log('onChange', ...args),
+    onInvalid: (...args) => console.log('onInvalid', ...args),
+    onValid: (...args) => console.log('onValid', ...args),
 }} />
 ```
 TRadioButton base example:
@@ -18,8 +18,8 @@ import TRadioButton from '$trood/components/TRadioButton';
 <TRadioButton {...{
     label: 'Radio checked',
     value: true,
-    onChange: () => console.log('onChange'),
-    onInvalid: () => console.log('onInvalid'),
-    onValid: () => console.log('onValid'),
+    onChange: (...args) => console.log('onChange', ...args),
+    onInvalid: (...args) => console.log('onInvalid', ...args),
+    onValid: (...args) => console.log('onValid', ...args),
 }} />
 ```

@@ -36,9 +36,11 @@ class TSelect extends PureComponent {
     className: PropTypes.string,
     /** class name for styling label */
     labelClassName: PropTypes.string,
-    /** one type of: "dropdown", "filterDropdown", "tile", "list", "rating" */
+    /** type is one of "SELECT_TYPES.dropdown", "SELECT_TYPES.filterDropdown", "SELECT_TYPES.tile",
+     * "SELECT_TYPES.list", "SELECT_TYPES.rating" */
     type: PropTypes.oneOf(Object.values(SELECT_TYPES)),
-    /** one list type of: "text", "filterDropdown", "radio", "checkbox", "toggle", "tile" */
+    /** list type is one of "LIST_TYPES.text", "LIST_TYPES.filterDropdown", "LIST_TYPES.radio", "LIST_TYPES.checkbox",
+     * "LIST_TYPES.toggle", "LIST_TYPES.tile" */
     listType: PropTypes.oneOf(Object.values(LIST_TYPES)),
     /** multi select or not */
     multi: PropTypes.bool,
@@ -110,7 +112,8 @@ class TSelect extends PureComponent {
 
     /** class name for item. For select with type "List" */
     itemClassName: PropTypes.string,
-    /** orientation "vertical" or "horizontal". For select with type "List" or "Tile" */
+    /** orientation is one of "LIST_ORIENTATION.vertical", "LIST_ORIENTATION.horizontal".
+     * For select with type "List" or "Tile" */
     orientation: PropTypes.oneOf(Object.values(LIST_ORIENTATION)),
     /** children node. For select with type "List" */
     emptyItemsLabel: PropTypes.node,
