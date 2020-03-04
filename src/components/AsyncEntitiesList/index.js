@@ -39,7 +39,7 @@ class AsyncEntitiesList extends PureComponent {
       PropTypes.string, // Css selector
       PropTypes.object, // DOM node
     ]),
-    /** type is one of "LIST_TYPES.loadMoreButton", "LIST_TYPES.infiniteScroll" */
+    /** type is one of LIST_TYPES.loadMoreButton, LIST_TYPES.infiniteScroll */
     type: PropTypes.oneOf(Object.values(LIST_TYPES)),
 
     /** onClick function, for Load More Button */

@@ -31,8 +31,8 @@ class TIcon extends PureComponent {
     ]),
     /** label icon */
     label: PropTypes.node,
-    /** label position is one of "LABEL_POSITION_TYPES.up", "LABEL_POSITION_TYPES.right", "LABEL_POSITION_TYPES.down",
-     * "LABEL_POSITION_TYPES.left", "LABEL_POSITION_TYPES.tooltip" */
+    /** label position is one of LABEL_POSITION_TYPES.up, LABEL_POSITION_TYPES.right, LABEL_POSITION_TYPES.down,
+     * LABEL_POSITION_TYPES.left, LABEL_POSITION_TYPES.tooltip */
     labelPosition: PropTypes.oneOf(Object.keys(LABEL_POSITION_TYPES)),
     /** color icon */
     color: PropTypes.string,

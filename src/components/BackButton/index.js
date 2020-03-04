@@ -26,7 +26,7 @@ class BackButton extends PureComponent {
   static propTypes = {
     /** class name for styling component */
     className: PropTypes.string,
-    /**  type is one of "BACK_BUTTON_TYPES.button", "BACK_BUTTON_TYPES.floating" */
+    /**  type is one of BACK_BUTTON_TYPES.button, BACK_BUTTON_TYPES.floating */
     type: PropTypes.oneOf(Object.values(BACK_BUTTON_TYPES)),
     /** onClick function for Button */
     onClick: PropTypes.func,

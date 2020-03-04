@@ -69,13 +69,13 @@ const BUTTON_SPECIAL_ICONS = {
 
 class TButton extends PureComponent {
   static propTypes = {
-    /** type is one of "BUTTON_TYPES.text", "BUTTON_TYPES.border", "BUTTON_TYPES.fill" */
+    /** type is one of BUTTON_TYPES.text, BUTTON_TYPES.border, BUTTON_TYPES.fill */
     type: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
-    /** special type is one of "BUTTON_TYPES.add", "BUTTON_TYPES.minus", "BUTTON_TYPES.delete", "BUTTON_TYPES.text",
-     * "BUTTON_TYPES.icon", "BUTTON_TYPES.arrowLeft", "BUTTON_TYPES.arrowRight", "BUTTON_TYPES.attach" */
+    /** special type is one of BUTTON_TYPES.add, BUTTON_TYPES.minus, BUTTON_TYPES.delete, BUTTON_TYPES.text,
+     * BUTTON_TYPES.icon, BUTTON_TYPES.arrowLeft, BUTTON_TYPES.arrowRight, BUTTON_TYPES.attach */
     specialType: PropTypes.oneOf(Object.values(BUTTON_SPECIAL_TYPES)),
-    /** color is one of "BUTTON_COLORS.red", "BUTTON_COLORS.blue", "BUTTON_COLORS.white", "BUTTON_COLORS.gray",
-     * "BUTTON_COLORS.orange", "BUTTON_COLORS.green" */
+    /** color is one of BUTTON_COLORS.red, BUTTON_COLORS.blue, BUTTON_COLORS.white, BUTTON_COLORS.gray,
+     * BUTTON_COLORS.orange, BUTTON_COLORS.green */
     color: PropTypes.oneOf(Object.values(BUTTON_COLORS)),
     /** tab index number*/
     tabIndex: PropTypes.number,

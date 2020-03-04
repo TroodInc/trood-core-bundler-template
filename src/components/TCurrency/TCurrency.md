@@ -8,7 +8,7 @@ import TCurrency from '$trood/components/TCurrency';
 TCurrency base usd:
                                    
 ```js
-import TCurrency from '$trood/components/TCurrency';
+import TCurrency, { CURRENCY_CODES } from '$trood/components/TCurrency';
 
-<TCurrency value={ 2000 } currency={"USD"} />
+<TCurrency value={ 2000 } currency={ CURRENCY_CODES.usd } />
 ```

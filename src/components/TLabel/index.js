@@ -12,7 +12,7 @@ class TLabel extends PureComponent {
   static propTypes = {
     /** class name for styling component */
     className: PropTypes.string,
-    /** show star "*" or not */
+    /** show star * or not */
     required: PropTypes.bool,
     /** label text */
     label: PropTypes.node,
