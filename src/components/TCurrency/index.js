@@ -54,7 +54,7 @@ class TCurrency extends PureComponent {
     showSign: true,
     trimCount: 2,
     zeroIsValue: true,
-    defaultEmptyMessage: '',
+    defaultEmptyMessage: '-',
   }
 
   constructor(props) {
@@ -107,7 +107,7 @@ class TCurrency extends PureComponent {
     }
 
     if ((isNaN(value) || !isNotNull(value)) || (value === 0 && !zeroIsValue)) {
-      return !defaultEmptyMessage ? '-' :  defaultEmptyMessage
+      return defaultEmptyMessage
     }
 
     return (
