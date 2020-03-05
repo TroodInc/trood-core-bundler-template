@@ -9,6 +9,7 @@ import style from './index.css'
 import { CURRENCIES, CURRENCY_CODES, CURRENCY_SIGN_TYPE, localization } from './constants'
 
 import { toNumber, toMoney } from '$trood/helpers/format'
+import { isNotNull } from '$trood/helpers/def'
 
 /**
  * Component for formatting currency.
@@ -40,6 +41,10 @@ class TCurrency extends PureComponent {
     signClassName: PropTypes.string,
     /** number of decimal places */
     trimCount: PropTypes.number,
+    /** zero is value or not */
+    zeroIsValue: PropTypes.bool,
+    /** default empty message */
+    defaultEmptyMessage: PropTypes.string,
   }
 
   static defaultProps = {
@@ -48,6 +53,8 @@ class TCurrency extends PureComponent {
     short: false,
     showSign: true,
     trimCount: 2,
+    zeroIsValue: true,
+    defaultEmptyMessage: '',
   }
 
   constructor(props) {
@@ -86,6 +93,9 @@ class TCurrency extends PureComponent {
       currencySignType,
       showSign,
       signClassName,
+      value,
+      defaultEmptyMessage,
+      zeroIsValue,
     } = this.props
 
     let sign = this.props.sign
@@ -94,6 +104,10 @@ class TCurrency extends PureComponent {
     }
     if ((localization[currencySignType] || {})[currency]) {
       sign = intlObject.intl.formatMessage(localization[currencySignType][currency])
+    }
+
+    if ((isNaN(value) || !isNotNull(value)) || (value === 0 && !zeroIsValue)) {
+      return defaultEmptyMessage ? defaultEmptyMessage : '-'
     }
 
     return (
