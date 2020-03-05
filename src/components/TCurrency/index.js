@@ -107,7 +107,7 @@ class TCurrency extends PureComponent {
     }
 
     if ((isNaN(value) || !isNotNull(value)) || (value === 0 && !zeroIsValue)) {
-      return defaultEmptyMessage ? defaultEmptyMessage : '-'
+      return !defaultEmptyMessage ? '-' :  defaultEmptyMessage
     }
 
     return (
