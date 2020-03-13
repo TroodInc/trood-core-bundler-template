@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Trood Core - Fron-End docs'
-copyright = '2019, Trood Inc'
+copyright = '2020, Trood Inc'
 author = 'Trood Inc'
 
 # The full version, including alpha/beta/rc tags
@@ -46,8 +46,6 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
-
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
