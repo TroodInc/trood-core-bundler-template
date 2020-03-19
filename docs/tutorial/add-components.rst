@@ -2,6 +2,9 @@
 Add page component
 ================================
 .. _`redux-restify forms docs`: https://github.com/DeyLak/redux-restify/blob/master/docs/forms.md
+.. _`redux-restify api docs`: https://github.com/DeyLak/redux-restify/blob/master/docs/api.md
+.. _`redux-restify api selectors docs`: https://github.com/DeyLak/redux-restify/blob/master/docs/api.md#selectors
+.. _`redux-restify api actions docs`: https://github.com/DeyLak/redux-restify/blob/master/docs/api.md#actions
 
 ****************************************
 How and where to create a page component
@@ -54,10 +57,10 @@ For example, we describe the connection of the component "ClientsTableView":
         title: 'ClientsTableView',
         models: [
           {
-            name: 'client',
+            name: 'client', // name of business object in system
           },
           {
-            name: 'clientType',
+            name: 'clientType', // name of business object in system
           },
         ],
       },
@@ -84,7 +87,7 @@ To display the component on the page, we set the config for the page. For exampl
           type: 'grid', // required
           components: [ // array of page components
             {
-              id: 'clients-table', // id - unique, required Component id (For rendering optimisations, EM can figure it out automatically)
+              id: 'clients-table', // id - unique, required Component id
               type: 'TroodCoreBusinessComponents/ClientTableView', // type - required Component type from library
               span: 3, // Grid span for component (How many columns component gets)
               withMargin: true, // Enable/disable render marging (for creating card-like components on a page)
@@ -112,7 +115,7 @@ We can also add a component to entity pages. To do this, we set these settings i
           type: 'grid', // Page type (Can be: personalAccount, mail or grid)
             components: [
               {
-                id: 'clients-table', // id - unique, required Component id (For rendering optimisations, EM can figure it out automatically)
+                id: 'clients-table', // id - unique, required Component id
                 type: 'TroodCoreBusinessComponents/ClientTableView', // type - required Component type from library
                 span: 3, // Grid span for component (How many columns component gets)
                 withMargin: true, // Enable/disable render marging (for creating card-like components on a page)
@@ -120,34 +123,16 @@ We can also add a component to entity pages. To do this, we set these settings i
                   activeStatus: 'activeStatus', // Component model and corresponding business object
                   clients: 'clients', // Component model and corresponding business object
                 },
+                props: { // You can add custom props
+                  color: 'red',
+                  hideButton: true,
+                  pageSize: 30,
+                },
               },
             ],
         },
       ],
     }
-
-You can transfer your additional custom props:
-
-.. code-block:: javascript
-
-  components: [
-    {
-      id: 'clients-table', // id - unique, required Component id (For rendering optimisations, EM can figure it out automatically)
-      type: 'TroodCoreBusinessComponents/ClientTableView', // type - required Component type from library
-      span: 3, // Grid span for component (How many columns component gets)
-      withMargin: true, // Enable/disable render marging (for creating card-like components on a page)
-      models: { // Business objects mapping
-        activeStatus: 'activeStatus', // Component model and corresponding business object
-        clients: 'clients', // Component model and corresponding business object
-      },
-      props: { // custom props
-        color: 'red',
-        hideButton: true,
-        pageSize: 30,
-      },
-    },
-  ],
-
 
 --------
 
@@ -166,11 +151,10 @@ We have props that are implicitly passed to components, but you can interact wit
 
 When you transfer a Business object, you will get access to its props:
 
-* BOName
-* BONameEditorActions
-* BONameActions
-* BONameComponents
-* BONameConstants
-* BONameEntities
-* BONameApiActions
-* childBOName
+* BONameEditorActions - actions for edit business object
+* BONameActions - custom actions from business object (if has export default { actions } in <BOName>/index.js)
+* BONameComponents - constants from business object (if has exports in <BOName>/components/index.js)
+* BONameConstants - constants from business object (if has <BOName>/constants.js)
+* BONameEntities - restify api.selectors - `redux-restify api selectors docs`_
+* BONameApiActions - restify api.actions - `redux-restify api actions docs`_
+* childBOName - actions for working with child
