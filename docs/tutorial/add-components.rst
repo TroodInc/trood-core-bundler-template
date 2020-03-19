@@ -1,8 +1,6 @@
 ================================
-Add Component
+Add page component
 ================================
-You can easily and easily add your components.
-
 .. _`redux-restify forms docs`: https://github.com/DeyLak/redux-restify/blob/master/docs/forms.md
 
 ****************************************
@@ -13,33 +11,36 @@ To do this, add the libraries parameter and specify the name of the folder in th
 
 .. code-block:: javascript
 
-  libraries: [
-    {
-      name: 'TroodCoreComponents',
-    },
-  ],
+  export default {
+    ...
+    libraries: [
+      {
+        name: 'TroodCoreComponents',
+      },
+    ],
+    ...
+  }
 
 Next, in the component library folder, create our declared folder ``src/componentLibraries/TroodCoreComponents``
 
 And already in ``src/componentLibraries/TroodCoreComponents`` we can create our components, for example, a client table:
 ``src/componentLibraries/TroodCoreComponents/ClientsTableView``
 
-Expected component structure:
+Example component structure:
 
-* index.js
+* index.js  - required
 * index.css
-* form.js
+* form.js - for create page redux store
 * constants.js
 
 --------
 
-About change config in ``src/componentLibrary/<componentLibName>/<componentName>/form.js`` your can read in `redux-restify forms docs`_
+About configuration of ``src/componentLibrary/<componentLibName>/<componentName>/form.js`` your can read in `redux-restify forms docs`_
 
 --------
 
-***********************************************************
-How to add a component to "componentLibrary/../config.js"
-***********************************************************
+Add a component to "componentLibrary/../config.js"
+
 In order to transfer data from the back-end to the component, we need to connect them in the config, describing the component and the connected models
 
 For example, we describe the connection of the component "ClientsTableView":
@@ -64,33 +65,6 @@ For example, we describe the connection of the component "ClientsTableView":
   }
 
 ******************************************************
-Which gives a description of models, services
-******************************************************
-Describing the model, we customize the relationship between Back End Business Objects and our component
-
-We can also connect different services for working with them. For example, it could be ``fileService``, ``searchService``
-
-.. code-block:: javascript
-
-  export default {
-    title: 'TroodCoreComponents',
-    components: [
-      {
-        title: 'ClientsTableView',
-        services: ['fileService', 'searchService'],
-        models: [
-          {
-            name: 'client',
-          },
-          {
-            name: 'clientType',
-          },
-        ],
-      },
-    ],
-  }
-
-******************************************************
 How to add a component to a page
 ******************************************************
 Now, we should only edit your system configuration in ``src/config.js`` file
@@ -100,26 +74,29 @@ To display the component on the page, we set the config for the page. For exampl
 .. code-block:: javascript
 
     export default {
-      pages: [ // System pages register
+      ...
+      pages: [
         {
-          title: 'Clients', // Page title
-          icon: 'contactBook', // Page icon
-          url: 'clients', // Page url
-          type: 'grid', // Page type (Can be: personalAccount, mail or grid)
-            components: [
-              {
-                id: 'clients-table', // Component id (For rendering optimisations, EM can figure it out automatically)
-                type: 'TroodCoreBusinessComponents/ClientTableView', // Component type from library
-                span: 3, // Grid span for component (How many columns component gets)
-                withMargin: true, // Enable/disable render marging (for creating card-like components on a page)
-                models: { // Business objects mapping
-                  activeStatus: 'activeStatus', // Component model and corresponding business object
-                  clients: 'clients', // Component model and corresponding business object
-                },
+          hideMenu: true, // hide link in the menu, only for routing
+          title: 'Page title, that will be shown as menu item',
+          icon: 'iconType constants that will be used as TIcon.ICONS_TYPES[iconType]',
+          url: 'url-of-the-page', // required
+          type: 'grid', // required
+          components: [ // array of page components
+            {
+              id: 'clients-table', // id - unique, required Component id (For rendering optimisations, EM can figure it out automatically)
+              type: 'TroodCoreBusinessComponents/ClientTableView', // type - required Component type from library
+              span: 3, // Grid span for component (How many columns component gets)
+              withMargin: true, // Enable/disable render marging (for creating card-like components on a page)
+              models: { // Business objects mapping
+                activeStatus: 'activeStatus', // Component model and corresponding business object
+                clients: 'clients', // Component model and corresponding business object
               },
-            ],
-        },
-      ],
+            },
+          ],
+        }
+      ]
+      ...
     }
 
 We can also add a component to entity pages. To do this, we set these settings in the config:
@@ -127,6 +104,7 @@ We can also add a component to entity pages. To do this, we set these settings i
 .. code-block:: javascript
 
     export default {
+      ...
       entityPages: [
         client: { // System pages register
           title: 'Clients', // Page title
@@ -134,8 +112,8 @@ We can also add a component to entity pages. To do this, we set these settings i
           type: 'grid', // Page type (Can be: personalAccount, mail or grid)
             components: [
               {
-                id: 'clients-table', // Component id (For rendering optimisations, EM can figure it out automatically)
-                type: 'TroodCoreBusinessComponents/ClientTableView', // Component type from library
+                id: 'clients-table', // id - unique, required Component id (For rendering optimisations, EM can figure it out automatically)
+                type: 'TroodCoreBusinessComponents/ClientTableView', // type - required Component type from library
                 span: 3, // Grid span for component (How many columns component gets)
                 withMargin: true, // Enable/disable render marging (for creating card-like components on a page)
                 models: { // Business objects mapping
@@ -148,17 +126,14 @@ We can also add a component to entity pages. To do this, we set these settings i
       ],
     }
 
-******************************************************
-Manual configuration
-******************************************************
 You can transfer your additional custom props:
 
 .. code-block:: javascript
 
   components: [
     {
-      id: 'clients-table', // Component id (For rendering optimisations, EM can figure it out automatically)
-      type: 'TroodCoreBusinessComponents/ClientTableView', // Component type from library
+      id: 'clients-table', // id - unique, required Component id (For rendering optimisations, EM can figure it out automatically)
+      type: 'TroodCoreBusinessComponents/ClientTableView', // type - required Component type from library
       span: 3, // Grid span for component (How many columns component gets)
       withMargin: true, // Enable/disable render marging (for creating card-like components on a page)
       models: { // Business objects mapping
@@ -178,13 +153,14 @@ You can transfer your additional custom props:
 
 We have props that are implicitly passed to components, but you can interact with them:
 
-* history
-* model
-* modalsActions
-* form
-* formActions
-* pageParams
-* PageChildContainer
+.. _qhistory: https://www.npmjs.com/package/qhistory
+
+* history - object of qhistory_
+* model - entity model, only if the component is added on entityPage
+* modelActions  - actions for model, only if the component is added on entityPage
+* modalsActions - actions for calling modal windows
+* form - only if the component has form.js, contains data from redux storage
+* formActions - only if the component has form.js, redux-restify actions for form.js, `redux-restify forms docs`_
 
 --------
 
@@ -198,5 +174,3 @@ When you transfer a Business object, you will get access to its props:
 * BONameEntities
 * BONameApiActions
 * childBOName
-
---------
