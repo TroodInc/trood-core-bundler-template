@@ -48,24 +48,17 @@ Each business object has actions for editing, you can call it out with the help 
 
 With this call, a modal window opens with the component described in the file ``/src/businessObjects/<BOLibName>/<BOName>/editComponent.js``
 
-In editEntity you can pass a value or set default values
+<BOName>EditorActions.editEntity(model, formConfig)
 
-.. code-block:: javascript
+.. attribute:: model
 
-  <BOName>EditorActions.editEntity(undefined, {
-    defaults: {
-      author: 'Trood',
-      name: 'BO Client',
-    },
-    value: {
-      max: 10,
-      main: 5,
-    },
-  })
+  BO entity - it is specified for editing. For created - pass *undefined*.
 
-The first argument to the function is a BO instance; it is specified for editing only. When created, undefined is passed.
+.. attribute:: formConfig
 
-The third argument is an optional form restify configuration that can override the appropriate form.js parameters for <BOName> `redux-restify forms docs`_
+  additional form restify configuration that can override the standard form.js parameters for <BOName>
+
+  More about form config: `redux-restify forms docs`_
 
 ****************************************************
 How to call and add to the inlineEditComponent page
@@ -73,7 +66,7 @@ How to call and add to the inlineEditComponent page
 
 You can change data not through a modal window, but in line in the component itself
 
-For inline output edit we need to import ``import { InlineEntityEditor } from '$trood/entityManager'``
+For inline render editComponent we need ``import { InlineEntityEditor } from '$trood/entityManager'``
 
 And when listing, pass the elements to the InlineEntityEditor
 
@@ -91,7 +84,7 @@ And when listing, pass the elements to the InlineEntityEditor
 
 To call the inline editing form, we need to call the action ``<BOName>EitorActions.editInlineEntity()``
 
-In editInlineChildEntity you can pass a value or set default values, arguments are the same as editEntity
+editInlineEntity has same arguments ``model``, ``formConfig``
 
 --------
 
