@@ -48,7 +48,6 @@ class TCurrency extends PureComponent {
   }
 
   static defaultProps = {
-    value: 0,
     currencySignType: CURRENCY_SIGN_TYPE.symbol,
     short: false,
     showSign: true,
