@@ -51,7 +51,6 @@ We have props that are implicitly passed to components, but you can interact wit
 
 * history - object of qhistory_
 * model - entity model, only if the component is added on entityPage
-* modelActions  - actions for model, only if the component is added on entityPage
 * modalsActions - actions for calling modal windows
 * form - only if the component has form.js, contains data from redux storage
 * formActions - only if the component has form.js, redux-restify actions for form.js, `redux-restify forms docs`_
