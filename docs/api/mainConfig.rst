@@ -66,7 +66,19 @@ In which we indicate the following attributes:
 
 .. attribute:: models
 
-    settings for models, here we indicate an object with the name of a business object. In this object we specify endpoint and we can indicate that we do not have pagination in endpoint
+    settings for business object models
+
+    .. attribute:: models.BOName
+
+        here we indicate an object with the name of a business object. In this object we specify endpoint and we can indicate that we do not have pagination in endpoint
+
+        .. attribute:: BOName.endpoint
+
+            **required** endpoint for a business object
+
+        .. attribute:: BOName.pagination
+
+            whether pagination is enabled or not, by default **true**
 
 **businessObjects example:**
 
@@ -155,6 +167,14 @@ layouts configuration
 **********************
 
 Here we indicate which layout to use and if necessary, transfer the BO in the models
+
+.. attribute:: defaultLayout
+
+    default layout name
+
+.. attribute:: models
+
+    an object to which we transfer the business objects we need
 
 **layouts example:**
 
@@ -251,31 +271,10 @@ entityPages configuration
 
 entityPages is an object that contains a description of entity objects
 
-Each entity pages has the following attributes:
+.. attribute:: BOName
 
-.. attribute:: url
-
-    **required** attribute, the final url will be .../<url>/<PK>
-
-.. attribute:: type
-
-    **required** attribute, page layout type
-
-.. attribute:: pages
-
-    pages to render next level pages
-
-.. attribute:: components
-
-    array of page components, more `components configuration`_
-
-.. attribute:: title
-
-    page title
-
-.. attribute:: columns
-
-    the grid layout columns
+    | the object key corresponds to the name of the Business object.
+    | And each object contains the following attributes: url, type, pages, components, title, columns - is same as `pages configuration`_
 
 **entityPages example:**
 
@@ -331,20 +330,18 @@ pages components configuration
 
 .. code-block:: javascript
 
-    export default {
-      ...
-        components: [
-          {
-            id: 'clients-table',
-            type: 'CoreComponents/ClientsTableView',
-            span: 12,
-            withMargin: true,
-            models: {
-              client: 'client',
-              clientType: 'clientType',
-              employee: 'employee',
-            },
+    ...
+      components: [
+        {
+          id: 'clients-table',
+          type: 'CoreComponents/ClientsTableView',
+          span: 12,
+          withMargin: true,
+          models: {
+            client: 'client',
+            clientType: 'clientType',
+            employee: 'employee',
           },
-        ],
-      ...
-    }
+        },
+      ],
+    ...
