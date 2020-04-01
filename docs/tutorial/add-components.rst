@@ -80,7 +80,7 @@ To display the component on the page, we set the config for the page. For exampl
       ...
       pages: [
         {
-          hideMenu: true, // hide link in the menu, only for routing
+          hideMenu: true, // hide link in the menu, page remains in routing
           title: 'Page title, that will be shown as menu item',
           icon: 'iconType constants that will be used as TIcon.ICONS_TYPES[iconType]',
           url: 'url-of-the-page', // required

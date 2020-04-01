@@ -12,27 +12,27 @@ In this file you can specify the following attributes:
 
 .. attribute:: businessObjects
 
-    endpoints for business objects in custodian are installed
+    array of business object libraries. More: `businessObjects configuration`_
 
 .. attribute:: libraries
 
-    component library directory name
+    array of component libraries. More: `libraries configuration`_
 
 .. attribute:: services
 
-    settings for additional services
+    dictionary of services configuration. More: `services configuration`_
 
 .. attribute:: layouts
 
-    default layout settings
+    layout settings. More: `layouts configuration`_
 
 .. attribute:: pages
 
-    page settings and connection of components displayed on them
+    page settings and connection of components displayed on them. More: `pages configuration`_
 
 .. attribute:: entityPages
 
-    settings for entity pages and components displayed on them
+    settings for entity pages and components displayed on them. More: `entityPages configuration`_
 
 **Structure example:**
 
@@ -51,14 +51,14 @@ In this file you can specify the following attributes:
 ******************************
 businessObjects configuration
 ******************************
+
 In business objects, we pass an array of objects with settings.
 
 In which we indicate the following attributes:
 
-
 .. attribute:: name
 
-    the name of the directory with files for working with business objects.
+    the name of the library for working with a business object.
 
 .. attribute:: type
 
@@ -96,7 +96,7 @@ In which we indicate the following attributes:
 libraries configuration
 ************************
 
-Here we indicate the name of the folder with the components in the component library
+Here we specify an array of libraries, and pass there an object with the name of the library in which our components will be.
 
 **libraries example:**
 
@@ -115,9 +115,13 @@ Here we indicate the name of the folder with the components in the component lib
 ***********************
 services configuration
 ***********************
+
 Here we set the settings for additional services.
 
-For example, locale settings:
+**We have the following services for configuration:**
+
+* **auth** - authorization service
+* **locale** - localization service
 
 **services example:**
 
@@ -126,6 +130,9 @@ For example, locale settings:
   export default {
     ...
     services: {
+      auth: {
+        profile: 'employee',
+      },
       locale: {
         availableLocales: [
           {
@@ -167,6 +174,7 @@ Here we indicate which layout to use and if necessary, transfer the BO in the mo
 ********************
 pages configuration
 ********************
+
 Pages is an array of objects describing page settings.
 
 Each page has the following attributes:
@@ -189,15 +197,15 @@ Each page has the following attributes:
 
 .. attribute:: components
 
-    array of page components
+    array of page components, more `components configuration`_
 
 .. attribute:: pages
 
-    pages.pages to render next level pages
+    pages to render next level pages
 
 .. attribute:: hideMenu
 
-    hide link in the menu, only for routing
+    hide link in the menu, page remains in routing
 
 **pages example:**
 
@@ -207,17 +215,16 @@ Each page has the following attributes:
       ...
       pages: [
         {
-          hideMenu: true, // hide link in the menu, only for routing
-          title: 'Page title', // Page title, that will be shown as menu item
-          icon: 'people', // iconType constants that will be used as TIcon.ICONS_TYPES[iconType]
-          url: 'url-of-the-page', // required
-          type: 'grid', // required
-          components: [], // array of page components
-          //  pages.pages to render next level pages
+          hideMenu: true,
+          title: 'Page title',
+          icon: 'people',
+          url: 'url-of-the-page',
+          type: 'grid',
+          components: [],
           pages: [
             {
               title: 'Next page title',
-              url: 'next-level-page', // so the full url will be .../url-of-the-page/next-level-page
+              url: 'next-level-page',
               type: 'grid',
               components: [
                 {
@@ -256,11 +263,11 @@ Each entity pages has the following attributes:
 
 .. attribute:: pages
 
-    pages.pages to render next level pages
+    pages to render next level pages
 
 .. attribute:: components
 
-    array of page components
+    array of page components, more `components configuration`_
 
 .. attribute:: title
 
@@ -277,23 +284,24 @@ Each entity pages has the following attributes:
     export default {
       ...
       entityPages: {
-        // entityName as BO name
         client: {
-          url: 'url-of-the-page', // required, the final url will be .../url-of-the-page/<PK>
-          type: 'grid', // required
+          url: 'url-of-the-page',
+          type: 'grid',
           pages: [
             {
-              title: 'General', // page title
-              url: 'general', // the final url will be  .../url-of-the-page/<PK>/general
+              title: 'General',
+              url: 'general',
               type: 'grid',
-              columns: 12, // the grid layout columns
-              components: [], // array of page components
+              columns: 12,
+              components: [],
             }
           ]
         }
       }
       ...
     }
+
+.. _`components configuration`: `pages components configuration`_
 
 ********************************
 pages components configuration
@@ -305,7 +313,7 @@ pages components configuration
 
 .. attribute:: type
 
-    the folder with the component in the component library
+    type of the component in the component library
 
 .. attribute:: span
 
