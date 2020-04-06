@@ -59,6 +59,7 @@
 .tableListItemTitle {
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 
 .listCheckbox {
@@ -69,6 +70,8 @@
   font-size: 12px;
   color: var(--trood-blue);
   pointer-events: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tableListItemTitleText.expanded {
