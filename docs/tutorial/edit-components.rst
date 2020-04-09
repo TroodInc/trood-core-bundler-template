@@ -93,3 +93,4 @@ editInlineEntity has same arguments ``model``, ``formConfig``
 Moreover, this form will be associated with the instance of the BO for which ``entityPage`` or ``editComponent`` is generated.
 
 And also at the time of submission, the BO field that is the link will be automatically set to this instance, if the field value is still undefined
+
