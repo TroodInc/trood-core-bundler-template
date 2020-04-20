@@ -16,7 +16,7 @@ Business objects are located in libraries along the way: src/businessObjects/<BO
 * viewComponent.js - More: `Business object edit & view components`_
 * viewComponent.css
 
-in the AAA file, we import all the files or folders that are in the Business object.
+in the "src/businessObjects/<BOLibName>/<BOName>/index.js" file, we import all the files or folders that are in the Business object.
 
 And then we do the default export. Model export required
 
@@ -223,7 +223,7 @@ For custom modals, a component is created along the "/src/businessObjects/<BOLib
 --------
 
 | To invoke a modal window, an action is created in which createForm is called from forms.actions to create the form
-| In createForm we pass: the name of the form, we can pass the default props and we can specify the allowRecreate flag
+| In createForm we pass: the name of the form, we can pass the default props and we can specify the allowRecreate flag. allowRecreate flag is used to show, if we allow to rewrite already existing config.
 
 And then, to output the modal from modals.actions, showModal is called and pass there: whether to display the modal or not, the name of the modal and startProps
 
