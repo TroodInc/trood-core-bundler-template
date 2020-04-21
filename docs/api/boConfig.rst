@@ -236,7 +236,7 @@ And then, to output the modal from modals.actions, showModal is called and pass 
     ATTACH_CONTACT_PERSON_MODAL,
   } from './constants'
 
-  export const attachContactPersonToEntity = (queryConfig, onSuccess = () => {}) => async (dispatch) => {
+  export const attachContactPersonToEntity = (queryConfig, onSuccess = () => {}) => (dispatch) => {
     const newForm = forms.createFormConfig({
       defaults: {
         contactPersons: [],
