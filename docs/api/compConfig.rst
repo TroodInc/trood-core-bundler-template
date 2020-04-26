@@ -65,7 +65,10 @@ When you transfer a Business object, you will get access to its props:
 * BONameConstants - constants from business object (if has <BOName>/constants.js)
 * BONameEntities - restify api.selectors - `redux-restify api selectors docs`_
 * BONameApiActions - restify api.actions - `redux-restify api actions docs`_
-* childBOName - actions for working with child
+* childBOName - actions for working with children.
+    - We can use **getChildArray()** to get an array of children associated with the current entity.
+    - We can use **getChildArrayCount()** to get the number of children in the array associated with the current entity.
+    - We can use **getIsLoadingChildArray()** to check if the array of children associated with the current entity is loaded.
 
 *******************************
 Page components library config
