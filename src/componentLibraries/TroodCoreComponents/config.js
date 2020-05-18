@@ -7,7 +7,13 @@ export default {
     },
     {
       title: 'InfoBlock',
-      models: [],
+      models: [
+        {
+          name: 'model',
+          required: true,
+        },
+      ],
+      canUseOn: ['entityPage'],
     },
   ],
 }
