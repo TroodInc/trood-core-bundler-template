@@ -5,5 +5,9 @@ export default {
       title: 'TableView',
       models: [],
     },
+    {
+      title: 'InfoBlock',
+      models: [],
+    },
   ],
 }
