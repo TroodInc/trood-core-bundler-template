@@ -33,71 +33,66 @@ const InfoBlock = ({
       if (include.length === 0) return true
       return include.includes(fieldName)
     })
-    .map(fieldName => {
-      const field = config.meta[fieldName]
+    .forEach(fieldName => {
+      if (isDefAndNotNull(model[fieldName])) {
+        const field = config.meta[fieldName]
 
-      if (field.linkType === 'outer') return null
+        if (field.linkType && (field.linkType !== 'outer')) {
+          if (field.type === 'objects') {
+            if (model[fieldName].length) {
+              model[fieldName].forEach(item => {
+                const { name, idField, views } = RESTIFY_CONFIG.registeredModels[item.$modelType]
+                const template = views.tableCell || views.default || `${name}/{${item[idField]}}`
 
-      if (field.linkType) {
-        if (!model[fieldName]) return null
-
-        if (field.type === 'objects') {
-          if (!model[fieldName].length) return null
-
-          model[fieldName].map(item => {
-            const { name, idField, views } = RESTIFY_CONFIG.registeredModels[item.$modelType]
-            const template = views.name || views.default || `${name}/{${item[idField]}}`
+                dataArray.push({
+                  label: fieldName,
+                  value:
+                    <EntityPageLink key={item[idField]} model={item}>
+                      {templateApplyValues(template, item)}
+                    </EntityPageLink>,
+                })
+              })
+            }
+          } else {
+            const { name, idField, views } = RESTIFY_CONFIG.registeredModels[model[fieldName].$modelType]
+            const template = views.tableCell || views.default || `${name}/{${model[idField]}}`
 
             dataArray.push({
               label: fieldName,
               value:
-                <EntityPageLink key={item[idField]} model={item}>
-                  {templateApplyValues(template, item)}
+                <EntityPageLink model={model[fieldName]}>
+                  {templateApplyValues(template, model[fieldName])}
                 </EntityPageLink>,
             })
-          })
-
-          return undefined
+          }
         }
 
-        const { name, idField, views } = RESTIFY_CONFIG.registeredModels[model[fieldName].$modelType]
-        const template = views.name || views.default || `${name}/{${model[idField]}}`
+        if (field.type === 'string' || field.type === 'number') {
+          dataArray.push({
+            label: fieldName,
+            value: model[fieldName],
+          })
+        }
 
-        dataArray.push({
-          label: fieldName,
-          value:
-            <EntityPageLink model={model[fieldName]}>
-              {templateApplyValues(template, model[fieldName])}
-            </EntityPageLink>,
-        })
-      }
+        if (field.type === 'bool') {
+          dataArray.push({
+            label: fieldName,
+            value: model[fieldName] ? 'true' : 'false',
+          })
+        }
 
-      if ((isDefAndNotNull(model[fieldName]) && field.type === 'string') ||
-        (isDefAndNotNull(model[fieldName]) && field.type === 'number')) {
-        dataArray.push({
-          label: fieldName,
-          value: model[fieldName],
-        })
-      }
-
-      if (model[fieldName] && field.type === 'bool') {
-        dataArray.push({
-          label: fieldName,
-          value: model[fieldName] ? 'true' : 'false',
-        })
-      }
-
-      if (model[fieldName] && field.type === 'datetime') {
-        dataArray.push({
-          label: fieldName,
-          value :
-            <SmartDate
-              {...{
-                date: model[fieldName],
-                format: SMART_DATE_FORMATS.shortWithTime,
-              }}
-            />,
-        })
+        if (field.type === 'datetime') {
+          dataArray.push({
+            label: fieldName,
+            value :
+              <SmartDate
+                {...{
+                  date: model[fieldName],
+                  format: SMART_DATE_FORMATS.shortWithTime,
+                }}
+              />,
+          })
+        }
       }
     })
 
@@ -113,20 +108,22 @@ const InfoBlock = ({
           !title && style.noneTitle,
         )
       }>
-        {title &&
-        <div className={basePageLayout.blockTitle}>
-          {title}
-        </div>
+        {
+          title &&
+          <div className={basePageLayout.blockTitle}>
+            {title}
+          </div>
         }
-        {editable &&
-        <div className={basePageLayout.blockHeaderButtons}>
-          <TIcon {...{
-            className: style.edit,
-            type: ICONS_TYPES.edit,
-            size: 16,
-            onClick: () => modelEditorActions.editEntity(model),
-          }} />
-        </div>
+        {
+          editable &&
+          <div className={basePageLayout.blockHeaderButtons}>
+            <TIcon {...{
+              className: style.edit,
+              type: ICONS_TYPES.edit,
+              size: 16,
+              onClick: () => modelEditorActions.editEntity(model),
+            }} />
+          </div>
         }
       </div>
       <div className={classNames(basePageLayout.blockContentThin, style.infoRowWrap)}>
