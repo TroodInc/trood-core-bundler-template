@@ -8,9 +8,9 @@ import TIcon, { ICONS_TYPES } from '$trood/components/TIcon'
 import SmartDate, { SMART_DATE_FORMATS } from '$trood/components/SmartDate'
 import LoadingBlockContainer from '$trood/components/LoadingBlockContainer'
 import { templateApplyValues } from '$trood/helpers/templates'
+import { isDefAndNotNull } from '$trood/helpers/def'
 
 import { EntityPageLink } from '$trood/pageManager'
-import { camelToLowerSnake } from '$trood/helpers/namingNotation'
 import { RESTIFY_CONFIG } from 'redux-restify'
 
 
@@ -19,24 +19,21 @@ const InfoBlock = ({
   title = '',
   model = {},
   modelEditorActions = {},
-  isLoading = false,
+  modelIsLoading = false,
   editable = false,
   include = [],
   exclude = [],
 }) => {
   const config = RESTIFY_CONFIG.registeredModels[model.$modelType]
-  let subDataArray = []
+  let dataArray = []
 
-  const dataArray = Object.keys(config.meta)
+  Object.keys(config.meta)
     .filter(fieldName => {
       if (exclude.includes(fieldName)) return false
       if (include.length === 0) return true
       return include.includes(fieldName)
     })
     .map(fieldName => {
-      const fieldNameSnake = camelToLowerSnake(fieldName)
-      const itemName = fieldName.replace( /([A-Z])/g, ' $1' ).toLowerCase()
-      const label = itemName.charAt(0) + itemName.slice(1)
       const field = config.meta[fieldName]
 
       if (field.linkType === 'outer') return null
@@ -47,17 +44,17 @@ const InfoBlock = ({
         if (field.type === 'objects') {
           if (!model[fieldName].length) return null
 
-          subDataArray = model[fieldName].map(item => {
+          model[fieldName].map(item => {
             const { name, idField, views } = RESTIFY_CONFIG.registeredModels[item.$modelType]
             const template = views.name || views.default || `${name}/{${item[idField]}}`
 
-            return {
-              label,
+            dataArray.push({
+              label: fieldName,
               value:
                 <EntityPageLink key={item[idField]} model={item}>
                   {templateApplyValues(template, item)}
                 </EntityPageLink>,
-            }
+            })
           })
 
           return undefined
@@ -66,32 +63,33 @@ const InfoBlock = ({
         const { name, idField, views } = RESTIFY_CONFIG.registeredModels[model[fieldName].$modelType]
         const template = views.name || views.default || `${name}/{${model[idField]}}`
 
-        return {
-          label,
+        dataArray.push({
+          label: fieldName,
           value:
             <EntityPageLink model={model[fieldName]}>
               {templateApplyValues(template, model[fieldName])}
             </EntityPageLink>,
-        }
+        })
       }
 
-      if ((model[fieldName] && field.type === 'string') || (model[fieldName] && field.type === 'number')) {
-        return {
-          label,
+      if ((isDefAndNotNull(model[fieldName]) && field.type === 'string') ||
+        (isDefAndNotNull(model[fieldName]) && field.type === 'number')) {
+        dataArray.push({
+          label: fieldName,
           value: model[fieldName],
-        }
+        })
       }
 
       if (model[fieldName] && field.type === 'bool') {
-        return {
-          label,
+        dataArray.push({
+          label: fieldName,
           value: model[fieldName] ? 'true' : 'false',
-        }
+        })
       }
 
       if (model[fieldName] && field.type === 'datetime') {
-        return {
-          label,
+        dataArray.push({
+          label: fieldName,
           value :
             <SmartDate
               {...{
@@ -99,24 +97,14 @@ const InfoBlock = ({
                 format: SMART_DATE_FORMATS.shortWithTime,
               }}
             />,
-        }
+        })
       }
-
-      if (config.idField === fieldNameSnake) {
-        return {
-          label,
-          value: <EntityPageLink model={model[fieldName]}>{model[fieldName]}</EntityPageLink>,
-        }
-      }
-
-      return undefined
-    }).concat(subDataArray)
-    .filter((v) => v)
+    })
 
   return (
     <LoadingBlockContainer {...{
       className: classNames(basePageLayout.block, style.root, className),
-      isBlocked: isLoading,
+      isBlocked: modelIsLoading,
     }}>
       <div className={
         classNames(
@@ -126,19 +114,19 @@ const InfoBlock = ({
         )
       }>
         {title &&
-          <div className={basePageLayout.blockTitle}>
-            {title}
-          </div>
+        <div className={basePageLayout.blockTitle}>
+          {title}
+        </div>
         }
         {editable &&
-          <div className={basePageLayout.blockHeaderButtons}>
-            <TIcon {...{
-              className: style.edit,
-              type: ICONS_TYPES.edit,
-              size: 16,
-              onClick: () => modelEditorActions.editEntity(model),
-            }} />
-          </div>
+        <div className={basePageLayout.blockHeaderButtons}>
+          <TIcon {...{
+            className: style.edit,
+            type: ICONS_TYPES.edit,
+            size: 16,
+            onClick: () => modelEditorActions.editEntity(model),
+          }} />
+        </div>
         }
       </div>
       <div className={classNames(basePageLayout.blockContentThin, style.infoRowWrap)}>
