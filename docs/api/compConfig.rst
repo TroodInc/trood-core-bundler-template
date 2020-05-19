@@ -119,7 +119,9 @@ For example, we describe the connection of the component ``ClientsTableView``:
 TroodCoreComponents 
 *******************************
 
-``TroodCoreComponents/TableView``
+++++++++++
+TableView
+++++++++++
 
 Represents preconfigured table view for business entity passed to ``table`` model.
 
@@ -161,6 +163,62 @@ Simple usage in ``./src/config.js``
           props: {
             editable: true,
             checking: true,
+            exclude: ['id'],
+          },
+        },
+      ],
+    },
+  ],
+
+++++++++++
+InfoBlock
+++++++++++
+
+Component for outputting data from a Business object to its page.
+
+props:
+
+.. attribute:: title
+
+Title for component
+
+.. attribute:: editable
+
+Boolean. If true adds column with edit icon which allow edit entity. Default is ``false``
+
+.. attribute:: include
+
+Array of strings. List of field names to include in component output.
+
+.. attribute:: exclude
+
+Array of strings. List of field names to exclude in component output.
+
+If you want to edit the data, you need to specify the model object in the component configuration and transfer the
+business object to the model.
+
+``models: {model: <BOName>}``
+
+Simple usage in ``./src/config.js``
+
+.. code-block:: javascript
+
+  entityPages: [
+    {
+      title: 'Clients',
+      url: 'clients',
+      type: 'grid',
+      components: [
+        {
+          type: 'TroodCoreComponents/InfoBlock',
+          span: 12,
+          withMargin: true,
+          models: {
+            model: 'client', // name of business object in system
+          },
+          props: {
+            title: 'Client info',
+            editable: true,
             exclude: ['id'],
           },
         },
