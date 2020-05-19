@@ -38,33 +38,20 @@ const InfoBlock = ({
         const field = config.meta[fieldName]
 
         if (field.linkType && (field.linkType !== 'outer')) {
-          if (field.type === 'objects') {
-            if (model[fieldName].length) {
-              model[fieldName].forEach(item => {
-                const { name, idField, views } = RESTIFY_CONFIG.registeredModels[item.$modelType]
-                const template = views.tableCell || views.default || `${name}/{${item[idField]}}`
-
-                dataArray.push({
-                  label: fieldName,
-                  value:
-                    <EntityPageLink key={item[idField]} model={item}>
-                      {templateApplyValues(template, item)}
-                    </EntityPageLink>,
-                })
-              })
-            }
-          } else {
-            const { name, idField, views } = RESTIFY_CONFIG.registeredModels[model[fieldName].$modelType]
-            const template = views.tableCell || views.default || `${name}/{${model[idField]}}`
+          const valuesArray = (field.type === 'objects' ? model[fieldName] : [model[fieldName]]).filter(v => v)
+          valuesArray.forEach(item => {
+            const { name, idField, views } = RESTIFY_CONFIG.registeredModels[item.$modelType]
+            const template = views.tableCell || views.default || `${name}/{${item[idField]}}`
 
             dataArray.push({
               label: fieldName,
-              value:
-                <EntityPageLink model={model[fieldName]}>
-                  {templateApplyValues(template, model[fieldName])}
-                </EntityPageLink>,
+              value: (
+                <EntityPageLink key={item[idField]} model={item}>
+                  {templateApplyValues(template, item)}
+                </EntityPageLink>
+              ),
             })
-          }
+          })
         }
 
         if (field.type === 'string' || field.type === 'number') {
