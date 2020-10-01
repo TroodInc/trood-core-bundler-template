@@ -14,7 +14,7 @@
     "@babel/preset-react": "^7.8.3",
     "@formatjs/intl-pluralrules": "^1.5.9",
     "@formatjs/intl-relativetimeformat": "^4.5.16",
-    "@loadable/component": "^5.12.0",
+    "@loadable/component": "5.12.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-react-intl": "^7.5.8",
     "browser-env": "^3.3.0",
