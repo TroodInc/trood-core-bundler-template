@@ -12,7 +12,7 @@ export const intlRenderCallback = intl => {
 
 export const translateDictionary = (dict = {}) => (item = {}) => {
   if (!item) return undefined
-  const message = dict[snakeToCamel((item.code || item.id).toString())]
+  const message = dict[snakeToCamel((item.code || item.id || '').toString())]
   if (!intlObject.intl || !message) return item.name || item.code || item.id
   return intlObject.intl.formatMessage(message)
 }
