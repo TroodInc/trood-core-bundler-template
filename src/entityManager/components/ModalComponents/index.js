@@ -38,7 +38,10 @@ const ModalComponentWrapper = type => props => {
   const onValid = () => resetFieldError(fieldName)
   const value = getNestedObjectField(model, fieldName)
   const errors = getNestedObjectField(modelErrors, fieldName)
-  const label = props.label || intlObject.intl.formatMessage(localeService.entityMessages[modelName][fieldName])
+  let { label } = props
+  if (!label && localeService.entityMessages[modelName][fieldName]) {
+    label = intlObject.intl.formatMessage(localeService.entityMessages[modelName][fieldName])
+  }
 
   const commonProps = {
     label,
@@ -58,6 +61,7 @@ const ModalComponentWrapper = type => props => {
           {...{
             ...commonProps,
             validate: validateInput,
+            placeholder: label,
             ...props,
           }}
         />
