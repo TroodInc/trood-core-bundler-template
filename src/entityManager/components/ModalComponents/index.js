@@ -71,7 +71,6 @@ const ModalComponentWrapper = type => props => {
         <TCheckbox
           {...{
             ...commonProps,
-            validate: validateInput,
             ...props,
           }}
         />
@@ -83,6 +82,7 @@ const ModalComponentWrapper = type => props => {
             ...commonProps,
             type: PICKER_TYPES.dateTime,
             validate: validateDateTime,
+            placeholder: label,
             ...props,
           }}
         />
@@ -98,8 +98,8 @@ const ModalComponentWrapper = type => props => {
             onChange: vals => onChange(props.multi ? vals : vals[0]),
             type: SELECT_TYPES.filterDropdown,
             multi: false,
-            clearable: true,
             placeHolder: intlObject.intl.formatMessage(localeService.generalMessages.notSet),
+            validate: validateInput,
             ...props,
           }}
         />
