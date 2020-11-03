@@ -56,26 +56,22 @@ class DatePicker extends PureComponent {
     let calendarArray = []
 
     if (type === CALENDAR_TYPES.day) {
-      const startOfMonth = moment(value).startOf('month')
-      const firstWeek = startOfMonth.week()
-      let lastWeek = moment(value).endOf('month').week()
-      if (lastWeek < firstWeek) {
-        let lastWeekOfYear = moment(value).endOf('year').week()
-        if (lastWeekOfYear === 1) {
-          lastWeekOfYear = moment(value).endOf('year').add({ week: -1 }).week()
-        }
-        lastWeek += lastWeekOfYear
-      }
-      const weekInMonth = lastWeek - firstWeek + 1
-      calendarArray = (new Array(weekInMonth)).fill((new Array(7)).fill(0))
+      const start = moment(value).startOf('month').startOf('week')
+      const end = moment(value).endOf('month').endOf('week')
 
-      const startOfFirstMonthWeek = startOfMonth.startOf('week')
+      let lastDate = start
+      let day = 0
 
-      let day = -1
-      return calendarArray.map(weekItem => weekItem.map(() => {
+      const mapWeek = () => {
+        const date = moment(start).add({ day })
         day += 1
-        return moment(startOfFirstMonthWeek).add({ day })
-      }))
+        return date
+      }
+
+      while (lastDate.isSameOrBefore(end)) {
+        calendarArray.push(Array(7).fill(0).map(mapWeek))
+        lastDate = moment(start).add({ day })
+      }
     }
 
     if (type === CALENDAR_TYPES.month) {
