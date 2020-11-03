@@ -3,6 +3,7 @@ require('regenerator-runtime/runtime')
 const gulp = require('gulp')
 const template = require('gulp-template')
 const rename = require('gulp-rename')
+const pluralize = require('pluralize')
 const { getPageConfig } = require('./src/pageManager')
 const {camelToUpperHuman} = require('./src/helpers/namingNotation')
 
@@ -237,7 +238,11 @@ gulp.task('make-bo-locale', () => {
         `  ${entityName}: defineMessages({
     _object: {
       id: 'entityMessages.${entityName}',
-      defaultMessage: '${camelToUpperHuman(entityName)}',
+      defaultMessage: '${pluralize.singular(camelToUpperHuman(entityName))}',
+    },
+    _objects: {
+      id: 'entityMessages.${entityName}._objects',
+      defaultMessage: '${pluralize.plural(camelToUpperHuman(entityName))}',
     },
     _objectView: {
       id: 'entityMessages.${entityName}._objectView',

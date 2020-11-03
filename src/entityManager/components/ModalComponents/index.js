@@ -38,7 +38,10 @@ const ModalComponentWrapper = type => props => {
   const onValid = () => resetFieldError(fieldName)
   const value = getNestedObjectField(model, fieldName)
   const errors = getNestedObjectField(modelErrors, fieldName)
-  const label = props.label || intlObject.intl.formatMessage(localeService.entityMessages[modelName][fieldName])
+  let { label } = props
+  if (!label && localeService.entityMessages[modelName][fieldName]) {
+    label = intlObject.intl.formatMessage(localeService.entityMessages[modelName][fieldName])
+  }
 
   const commonProps = {
     label,
@@ -58,6 +61,7 @@ const ModalComponentWrapper = type => props => {
           {...{
             ...commonProps,
             validate: validateInput,
+            placeholder: label,
             ...props,
           }}
         />
@@ -67,7 +71,6 @@ const ModalComponentWrapper = type => props => {
         <TCheckbox
           {...{
             ...commonProps,
-            validate: validateInput,
             ...props,
           }}
         />
@@ -79,6 +82,7 @@ const ModalComponentWrapper = type => props => {
             ...commonProps,
             type: PICKER_TYPES.dateTime,
             validate: validateDateTime,
+            placeholder: label,
             ...props,
           }}
         />
@@ -94,8 +98,8 @@ const ModalComponentWrapper = type => props => {
             onChange: vals => onChange(props.multi ? vals : vals[0]),
             type: SELECT_TYPES.filterDropdown,
             multi: false,
-            clearable: true,
             placeHolder: intlObject.intl.formatMessage(localeService.generalMessages.notSet),
+            validate: validateInput,
             ...props,
           }}
         />
