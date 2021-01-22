@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { useNode } from '@craftjs/core'
 import styles from './index.module.css'
 
-export const Block = props => {
+const Block = props => {
   const {
     connectors: { connect },
   } = useNode(node => ({
@@ -48,3 +48,5 @@ Block.craft = {
     canMoveIn: () => true,
   },
 }
+
+export default Block

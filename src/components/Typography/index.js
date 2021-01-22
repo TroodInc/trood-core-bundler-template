@@ -17,8 +17,9 @@ const knownTypes = {
 }
 
 const Typography = ({
+  innerRef,
   className,
-  type = 'h1',
+  type,
   value,
   bold,
   children,
@@ -27,9 +28,14 @@ const Typography = ({
   const component = knownTypes[type]
   return React.createElement(component, {
     ...other,
+    ref: innerRef,
     className: classNames(className, styles[type], bold && styles.bold),
     children: children || value,
   })
+}
+
+Typography.defaultProps = {
+  type: knownTypes.h1,
 }
 
 Typography.propTypes = {
@@ -39,5 +45,7 @@ Typography.propTypes = {
   children: PropTypes.node,
   bold: PropTypes.bool,
 }
+
+Typography.knownTypes = knownTypes
 
 export default Typography
