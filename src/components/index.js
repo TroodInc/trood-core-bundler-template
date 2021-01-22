@@ -1,3 +1,4 @@
+import { forwardRef } from 'react'
 import styled from 'styled-components'
 
 import Context from './Context'
@@ -63,7 +64,11 @@ const components = {
   Typography,
 }
 
-export default Object.keys(components).reduce((memo, key) => ({
-  ...memo,
-  [key]: styled(components[key])`${(props = {}) => props.style || ''}`,
-}), {})
+export default Object.keys(components).reduce((memo, key) => {
+  const Component = components[key]
+  const refComponent = forwardRef((props, ref) => <Component {...props} innerRef={ref} />)
+  return {
+    ...memo,
+    [key]: styled(refComponent)`${(props = {}) => props.style || ''}`,
+  }
+}, {})

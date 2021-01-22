@@ -1,8 +1,7 @@
-require('../styles/variables.css')
-const Block = require('./Block/craft').default
-const Typography = require('./Typography/craft').default
+import Block from './Block/craft'
+import Typography from './Typography/craft'
 
-module.exports = {
+export {
   Block,
   Typography,
 }
