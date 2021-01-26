@@ -4,6 +4,8 @@ import Typography from '../../index'
 import { useNode } from '@craftjs/core'
 import { TCheckbox, TSelect } from '$trood/components'
 
+import styles from './index.module.css'
+
 
 const Settings = ({
   DataSelector,
@@ -13,6 +15,7 @@ const Settings = ({
   return (
     <div>
       <TSelect.default {...{
+        className: styles.select,
         label: 'Type',
         items: Object.keys(Typography.knownTypes).map(value => ({ value })),
         values: props.type ? [props.type] : [],
