@@ -1,12 +1,33 @@
 import React from 'react'
-import Typography from '../index'
-import Settings from './Settings'
 import { useNode } from '@craftjs/core'
+import classNames from 'classnames'
+
+import Settings from './Settings'
+import Typography from '../index'
+import { knownTypes } from '../constants'
+
+import EditWrapper from '../../internal/EditWrapper'
+
+import styles from '../index.module.css'
 
 
-const CraftTypography = (props) => {
-  const { connectors: { connect, drag } } = useNode()
-  return <Typography {...props} innerRef={dom => connect(drag(dom))} />
+const CraftTypography = props => {
+  const {
+    connectors: { connect, drag },
+    actions: { setProp },
+  } = useNode((node) => ({ props: node.data.props }))
+
+  return (
+    <EditWrapper {...{
+      innerRef: ref => connect(drag(ref)),
+      onChange: e => setProp(props => props.value = e.target.value.replace(/<\/?[^>]+(>|$)/g, '')),
+      text: props.value,
+      tagName: knownTypes[props.type],
+      className: classNames(styles[props.type], props.bold && styles.bold),
+    }}>
+      <Typography {...props} />
+    </EditWrapper>
+  )
 }
 
 CraftTypography.craft = {
