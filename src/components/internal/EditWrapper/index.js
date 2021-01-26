@@ -14,22 +14,21 @@ const EditWrapper = ({
   const [isEditing, setIsEditing] = useState(false)
 
   return (
-    <div ref={innerRef}>
+    <div {...{
+      ref: innerRef,
+      onMouseLeave: () => setIsEditing(false),
+      onMouseEnter: () => setIsEditing(true),
+    }}>
       {isEditing
         ? (
           <ContentEditable
             html={text}
             onChange={onChange}
-            onMouseLeave={() => setIsEditing(false)}
             tagName={tagName}
             className={className}
           />
         )
-        : (
-          React.cloneElement(children, {
-            onMouseEnter: () => setIsEditing(true),
-          })
-        )}
+        : children}
     </div>
   )
 }

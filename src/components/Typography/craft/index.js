@@ -4,7 +4,6 @@ import classNames from 'classnames'
 
 import Settings from './Settings'
 import Typography from '../index'
-import { knownTypes } from '../constants'
 
 import EditWrapper from '../../internal/EditWrapper'
 
@@ -22,7 +21,7 @@ const CraftTypography = props => {
       innerRef: ref => connect(drag(ref)),
       onChange: e => setProp(props => props.value = e.target.value.replace(/<\/?[^>]+(>|$)/g, '')),
       text: props.value,
-      tagName: knownTypes[props.type],
+      tagName: Typography.knownTypes[props.type],
       className: classNames(styles[props.type], props.bold && styles.bold),
     }}>
       <Typography {...props} />
