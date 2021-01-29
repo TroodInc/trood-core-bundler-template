@@ -177,7 +177,7 @@ class Paginator extends PureComponent {
           controlClassName: styles.selectControl,
           labelClassName: styles.selectLabel,
           label: 'per page',
-          items: pageSizes.map(value => ({ value })),
+          items: pageSizes.map(value => ({ value, label: value })),
           values: [pageSize],
           openUp: bottom,
           onChange: values => this.goToPage(0, values[0]),
