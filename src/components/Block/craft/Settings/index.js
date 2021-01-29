@@ -6,9 +6,7 @@ import { TCheckbox } from '$trood/components'
 import styles from './index.module.css'
 
 
-const Settings = ({
-  DataSelector,
-}) => {
+const Settings = () => {
   const { actions: { setProp }, props } = useNode((node) => ({ props: node.data.props }))
 
   return (
@@ -32,9 +30,6 @@ const Settings = ({
           })
         },
       }} />
-      {/*
-      <DataSelector setProp={setProp} props={props} propName="value" $context={props.$context} />
-      */}
     </div>
   )
 }
