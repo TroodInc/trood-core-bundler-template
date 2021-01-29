@@ -28,6 +28,7 @@ module.exports = function ({
     },
     externals: {
       react: 'react',
+      'react-contenteditable': 'react-contenteditable',
       '@craftjs/core': '@craftjs/core',
       'prop-types': 'prop-types',
       classnames: 'classnames',
