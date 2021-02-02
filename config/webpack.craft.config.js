@@ -18,6 +18,7 @@ module.exports = function ({
 }) {
   return {
     mode: isProduction ? 'production' : isDevelopment && 'development',
+    watch: false,
     entry: paths.craftIndexJs,
     output: {
       path: isProduction ? paths.appBuild : undefined,
@@ -25,6 +26,7 @@ module.exports = function ({
         ? `static/${appPackageJson.version}/js/craft.index.js`
         : isDevelopment && 'static/js/craft.index.js',
       libraryTarget: 'commonjs2',
+      publicPath: paths.publicUrlOrPath,
     },
     externals: {
       react: 'react',

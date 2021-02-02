@@ -23,8 +23,7 @@ module.exports = function (webpackEnv) {
   }
 
   return [
+    webpackCraftConfig(webpackConfigOptions),
     webpackMainConfig(webpackConfigOptions),
-    // TODO build craft in dev mode. Now loop
-    isProduction && webpackCraftConfig(webpackConfigOptions),
   ].filter(Boolean)
 }

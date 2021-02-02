@@ -74,6 +74,7 @@ module.exports = function ({
 
   return {
     mode: isProduction ? 'production' : isDevelopment && 'development',
+    watch: false,
     bail: isProduction,
     devtool: isProduction ? sourceMap : isDevelopment && 'cheap-module-source-map',
     entry: [
