@@ -94,6 +94,7 @@ module.exports = function (proxy, allowedHost) {
     // https://github.com/facebook/create-react-app/issues/1065
     watchOptions: {
       ignored: ignoredFiles(paths.appSrc),
+      poll: 2000,
     },
     https: getHttpsConfig(),
     host,
