@@ -11,6 +11,10 @@ const {
   getStyleLoaders,
 } = require('./webpack.global')
 
+
+const externals = Object.keys(appPackageJson.dependencies)
+  .reduce((memo, key) => ({ ...memo, [key]: key }), {})
+
 module.exports = function ({
   isProduction = false,
   isDevelopment = false,
@@ -29,11 +33,11 @@ module.exports = function ({
       publicPath: paths.publicUrlOrPath,
     },
     externals: {
-      react: 'react',
+      ...externals,
+      'core/BaseComponent': 'core/BaseComponent',
+      'core/pageStore': 'core/pageStore',
       'react-contenteditable': 'react-contenteditable',
       '@craftjs/core': '@craftjs/core',
-      'prop-types': 'prop-types',
-      classnames: 'classnames',
       '$trood/components': '$trood/components',
     },
     resolve: {
