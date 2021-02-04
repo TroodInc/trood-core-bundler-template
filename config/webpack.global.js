@@ -2,7 +2,6 @@
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const paths = require('./paths')
-const postcssNormalize = require('postcss-normalize')
 const getClientEnvironment = require('./env')
 
 
@@ -63,33 +62,38 @@ const getStyleLoaders = ({
   preProcessor,
 }) => {
   return [
-    (isDevelopment || isCssInJs) && require.resolve('style-loader'),
-    (isProduction && !isCssInJs) && {
+    (isDevelopment || isCssInJs) ? require.resolve('style-loader') : {
       loader: MiniCssExtractPlugin.loader,
       options: paths.publicUrlOrPath.startsWith('.') ? { publicPath: '../../' } : {},
     },
     {
       loader: require.resolve('css-loader'),
-      options,
+      options: {
+        url: false,
+        ...options,
+      },
     },
     {
       loader: require.resolve('postcss-loader'),
       options: {
-        ident: 'postcss',
-        plugins: () => [
-          require('postcss-flexbugs-fixes'),
-          require('postcss-preset-env')({
-            stage: 3,
-            autoprefixer: {
+        postcssOptions: {
+          ident: 'postcss',
+          plugins: [
+            require('postcss-flexbugs-fixes'),
+            require('postcss-preset-env')({
+              preserve: false,
+              features: {
+                'custom-media-queries': true,
+                'color-mod-function': true,
+              },
+              importFrom: 'src/styles/variables.css',
               flexbox: 'no-2009',
-            },
-            flexbox: 'no-2009',
-            preserve: !isCssInJs,
-            importFrom: isCssInJs ? ['src/styles/variables.css'] : [],
-          }),
-          postcssNormalize(),
-        ],
-        sourceMap: isProduction ? shouldUseSourceMap : isDevelopment,
+            }),
+            require('postcss-normalize'),
+            require('postcss-calc'),
+          ],
+          sourceMap: isProduction ? shouldUseSourceMap : isDevelopment,
+        },
       },
     },
     preProcessor && {
