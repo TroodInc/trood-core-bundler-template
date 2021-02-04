@@ -20,7 +20,7 @@ const CraftButton = props => {
   )
 }
 
-ButtonTypography.craft = {
+CraftButton.craft = {
   displayName: 'Button',
   related: {
     settings: Settings,
