@@ -106,7 +106,7 @@ const getStyleLoaders = ({
     preProcessor && {
       loader: require.resolve(preProcessor),
       options: {
-        sourceMap: true,
+        sourceMap: isProduction ? shouldUseSourceMap : isDevelopment,
       },
     },
   ].filter(Boolean)
