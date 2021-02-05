@@ -25,10 +25,13 @@ const withTooltip = WrappedComponent => {
     tooltip,
     ...other
   }) => {
+    React.useEffect(() => ReactTooltip.rebuild())
+
     if (!tooltip) return <WrappedComponent {...other} />
 
     const Comp = groupDataAndAriaAttributes(WrappedComponent)
     const id = nanoid()
+
     return (
       <React.Fragment>
         <Comp {...other } data-tip data-for={id} />
