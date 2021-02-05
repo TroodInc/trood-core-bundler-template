@@ -20,32 +20,38 @@ const getTooltip = tooltip => {
   return tooltip
 }
 
-const withTooltip = WrappedComponent => ({
-  tooltip,
-  ...other
-}) => {
-  if (!tooltip) return <WrappedComponent {...other} />
+const withTooltip = WrappedComponent => {
+  const Component = ({
+    tooltip,
+    ...other
+  }) => {
+    if (!tooltip) return <WrappedComponent {...other} />
 
-  const Comp = groupDataAndAriaAttributes(WrappedComponent)
-  const id = nanoid()
-  return (
-    <React.Fragment>
-      <Comp {...other } data-tip data-for={id} />
-      <ReactTooltip
-        id={id}
-        className={styles.root}
-        delayShow={100}
-        delayUpdate={100}
-        delayHide={100}
-        border
-        borderColor="var(--trood-border)"
-        backgroundColor="var(--trood-background-light)"
-        textColor="var(--trood-text-gray)"
-      >
-        {getTooltip(tooltip)}
-      </ReactTooltip>
-    </React.Fragment>
-  )
+    const Comp = groupDataAndAriaAttributes(WrappedComponent)
+    const id = nanoid()
+    return (
+      <React.Fragment>
+        <Comp {...other } data-tip data-for={id} />
+        <ReactTooltip
+          id={id}
+          className={styles.root}
+          delayShow={100}
+          delayUpdate={100}
+          delayHide={100}
+          border
+          borderColor="var(--trood-border)"
+          backgroundColor="var(--trood-background-light)"
+          textColor="var(--trood-text-gray)"
+        >
+          {getTooltip(tooltip)}
+        </ReactTooltip>
+      </React.Fragment>
+    )
+  }
+
+  Component.defaultProps = WrappedComponent.defaultProps
+
+  return Component
 }
 
 export default withTooltip
