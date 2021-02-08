@@ -145,6 +145,14 @@ module.exports = function ({
       splitChunks: {
         chunks: 'all',
         name: false,
+        cacheGroups: {
+          styles: {
+            name: 'styles',
+            test: /\.css$/,
+            chunks: 'all',
+            enforce: true,
+          },
+        },
       },
       runtimeChunk: {
         name: entrypoint => `runtime-${entrypoint.name}`,
@@ -339,7 +347,6 @@ module.exports = function ({
       isProduction &&
       new MiniCssExtractPlugin({
         filename: `static/${appPackageJson.version}/css/[name].css`,
-        chunkFilename: `static/${appPackageJson.version}/css/[name].chunk.css`,
       }),
       new ManifestPlugin({
         fileName: 'asset-manifest.json',
