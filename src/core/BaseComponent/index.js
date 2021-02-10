@@ -2,6 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import StoreContext from 'core/StoreContext'
 import PageStoreContext from 'core/PageStoreContext'
+import AuthStoreContext from 'core/AuthStoreContext'
 import ContextContext from 'core/ContextContext'
 import { useObserver } from 'mobx-react-lite'
 import { useHistory, useLocation, useParams } from 'react-router-dom'
@@ -23,7 +24,10 @@ const getData = (path, $data) => {
     return JSON.stringify(Object.values(connectedParams))
   })
 
-  const paths = connectedPath.split('.')
+  const paths = connectedPath
+    .replace(/\[[^\]]*\]/g, match => match.replace(/\./g, '\u2063')) // replace for save dot in args
+    .split('.')
+    .map(item => item.replace(/\u2063/g, '.')) // restore dot in args
 
   return paths.reduce((memo, key) => {
     if (memo === undefined) return memo
@@ -81,6 +85,9 @@ const connectProps = (props, $data, childBaseComponent) => {
           const connectedActions = sequense.map((actionItem) => {
             return {
               action: getConnectedFunction(actionItem.path, actionItem.args),
+              then: actionItem.then
+                ? getConnectedFunction(actionItem.then.path, actionItem.then.args)
+                : null,
               catch: actionItem.catch
                 ? getConnectedFunction(actionItem.catch.path, actionItem.catch.args)
                 : null,
@@ -92,8 +99,12 @@ const connectProps = (props, $data, childBaseComponent) => {
           try {
             for (const currentAction of connectedActions) {
               // execute action, try and catch of action
+              let result
               try {
-                await currentAction.action($event)
+                result = await currentAction.action($event)
+                if (typeof currentAction.then === 'function') {
+                  currentAction.then(result)
+                }
               } catch (error) {
                 if (typeof currentAction.catch === 'function') {
                   currentAction.catch(error)
@@ -102,7 +113,7 @@ const connectProps = (props, $data, childBaseComponent) => {
                 }
               } finally {
                 if (typeof currentAction.finally === 'function') {
-                  currentAction.finally()
+                  currentAction.finally(result)
                 }
               }
             }
@@ -148,6 +159,7 @@ const Wrapper = WrappedComponent => props => (
 const BaseComponent = Wrapper(({ component, coreComponents }) => {
   const $store = React.useContext(StoreContext)
   const $page = React.useContext(PageStoreContext)
+  const $auth = React.useContext(AuthStoreContext)
   const $context = React.useContext(ContextContext)
 
   React.useEffect(() => {
@@ -163,6 +175,7 @@ const BaseComponent = Wrapper(({ component, coreComponents }) => {
     $route: { history, params, location, searchParams },
     $context,
     $page,
+    $auth,
     $global: {
       window,
       moment,

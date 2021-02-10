@@ -5,18 +5,20 @@ import './styles/global.css'
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
-import { getStore } from 'trood-restify'
+import { getStore } from 'tmp/index'
 import { BrowserRouter as Router } from 'react-router-dom'
 import StoreContext from 'core/StoreContext'
 import PageStoreContext from 'core/PageStoreContext'
 import { Page } from 'core/pageStore'
+import AuthStoreContext from 'core/AuthStoreContext'
+import { getAuthStore, getToken } from 'core/authStore'
 
 const pageStore = Page.create({})
 //TODO remove after debug
 window.pageStore = pageStore
 const meta = {
   custodian: {
-    apiHost: 'https://legal.dev.trood.ru/',
+    apiHost: 'http://legal.stage.trood.ru/',
     entityDataAddress: 'data',
     arrayDataAddress: 'data',
     arrayCountAddress: 'total_count',
@@ -80,16 +82,18 @@ const meta = {
     },
   },
 }
-const store = getStore(meta, () => 'Token 8db2ad1590c9424984b79653d662182e')
-//TODO remove after debug
-window.store = store
+const store = getStore(meta, getToken)
+const authStore = getAuthStore(store)
+
 ReactDOM.render(
   <React.StrictMode>
     <StoreContext.Provider value={store}>
       <PageStoreContext.Provider value={pageStore}>
-        <Router>
-          <App />
-        </Router>
+        <AuthStoreContext.Provider value={authStore}>
+          <Router>
+            <App />
+          </Router>
+        </AuthStoreContext.Provider>
       </PageStoreContext.Provider>
     </StoreContext.Provider>
   </React.StrictMode>,

@@ -19,6 +19,8 @@
 .modal {
   min-height: 100px;
   overflow: hidden;
+  background-color: var(--trood-white);
+  padding: 24px;
 }
 
 .modal.center {

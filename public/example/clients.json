@@ -442,6 +442,12 @@
                                                         {
                                                             "$type": "$action",
                                                             "path": "$context.form.submit",
+                                                            "then": {
+                                                                "path": "$page.closeModal",
+                                                                "args": [
+                                                                    "editClient"
+                                                                ]
+                                                            },
                                                             "finally": {
                                                                 "path": "$page.modifyContext",
                                                                 "args": [
@@ -450,13 +456,6 @@
                                                                     false
                                                                 ]
                                                             }
-                                                        },
-                                                        {
-                                                            "$type": "$action",
-                                                            "path": "$page.closeModal",
-                                                            "args": [
-                                                                "editClient"
-                                                            ]
                                                         }
                                                     ]
                                                 }

@@ -54,6 +54,7 @@ with paramas
 
 available $data storage
 * $store - restify
+* $auth - authorization methods
 * $route: { history, params, location, searchParams } - react router data
 * $context - any data passed to context. List item in list, for example
 * $page - page entites data such modals

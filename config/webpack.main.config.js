@@ -143,9 +143,12 @@ module.exports = function ({
         }),
       ],
       splitChunks: {
-        chunks: 'all',
-        name: false,
         cacheGroups: {
+          vendors: {
+            name: 'vendors',
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10,
+          },
           styles: {
             name: 'styles',
             test: /\.css$/,
