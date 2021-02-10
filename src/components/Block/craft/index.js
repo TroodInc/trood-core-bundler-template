@@ -21,6 +21,7 @@ const CraftBlock = props => {
 
 CraftBlock.craft = {
   displayName: 'Block',
+  props: Block.defaultProps,
   related: {
     settings: Settings,
   },

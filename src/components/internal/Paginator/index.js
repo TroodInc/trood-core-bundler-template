@@ -6,7 +6,7 @@ import debounce from 'lodash/debounce'
 
 import BaseComponent from 'core/BaseComponent'
 import { Component } from 'core/pageStore'
-import Context from 'components/Context'
+import Context from '../../Context'
 
 import Select from '../../Select'
 import LoadingIndicator from '../../LoadingIndicator'

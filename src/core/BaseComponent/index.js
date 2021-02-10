@@ -1,6 +1,5 @@
 import React from 'react'
 import moment from 'moment'
-import coreComponents from 'components'
 import StoreContext from 'core/StoreContext'
 import PageStoreContext from 'core/PageStoreContext'
 import ContextContext from 'core/ContextContext'
@@ -8,6 +7,11 @@ import { useObserver } from 'mobx-react-lite'
 import { useHistory, useLocation, useParams } from 'react-router-dom'
 import { Parser } from 'expr-eval'
 
+import LoadingIndicator from 'components/LoadingIndicator'
+
+import loadable from '@loadable/component'
+
+const ComponentsWrapper = loadable.lib(() => import('components'))
 
 const getData = (path, $data) => {
   const connectedPath = path.replace(/\[.*?\]/g, (replacement) => {
@@ -131,7 +135,17 @@ const connectProps = (props, $data, childBaseComponent) => {
   )
 }
 
-const BaseComponent = ({ component }) => {
+const Wrapper = WrappedComponent => props => (
+  <ComponentsWrapper
+    fallback={
+      <LoadingIndicator style={{ width: '100vw', height: '100vh' }} size={100} />
+    }
+  >
+    {({ default: components }) => (<WrappedComponent {...props} coreComponents={components} />)}
+  </ComponentsWrapper>
+)
+
+const BaseComponent = Wrapper(({ component, coreComponents }) => {
   const $store = React.useContext(StoreContext)
   const $page = React.useContext(PageStoreContext)
   const $context = React.useContext(ContextContext)
@@ -173,7 +187,7 @@ const BaseComponent = ({ component }) => {
       return <Component key={childComponent.id} {...connectedProps} />
     })
   })
-}
+})
 
 export default BaseComponent
 export { getData }

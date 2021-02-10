@@ -13,7 +13,7 @@ import { SELECT_TYPES } from './constants'
 
 import BaseComponent, { getData } from 'core/BaseComponent'
 import { Component } from 'core/pageStore'
-import Context from 'components/Context'
+import Context from '../Context'
 
 import withTooltip from '../internal/Tooltip'
 

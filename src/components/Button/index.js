@@ -7,13 +7,14 @@ import withTooltip from '../internal/Tooltip'
 
 import style from './index.module.css'
 
-import Icon, { ICONS_TYPES } from 'components/Icon'
+import Icon, { ICONS_TYPES } from '../Icon'
 
 import {
   BUTTON_TYPES,
   BUTTON_COLORS,
   BUTTON_SPECIAL_TYPES,
 } from './constants'
+
 
 const BUTTON_SPECIAL_ICONS = {
   [BUTTON_SPECIAL_TYPES.add]: (

@@ -9,14 +9,16 @@ const Block = (props) => {
   const {
     children,
     className,
-    rounded = true,
-    transparent = false,
+    rounded,
+    transparent,
+    innerRef,
     ...other
   } = props
 
   return (
     <div
       {...other}
+      ref={innerRef}
       className={classNames(styles.root, className, rounded && styles.rounded, transparent && styles.transparent)}
     >
       {props.children}
@@ -29,6 +31,11 @@ Block.propTypes = {
   className: PropTypes.string,
   rounded: PropTypes.bool,
   transparent: PropTypes.bool,
+}
+
+Block.defaultProps = {
+  rounded: false,
+  transparent: true,
 }
 
 export default Block

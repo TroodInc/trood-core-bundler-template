@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import BaseComponent from 'core/BaseComponent'
 import { Component } from 'core/pageStore'
-import Context from 'components/Context'
+import Context from '../Context'
 
 import Paginator from '../internal/Paginator'
 

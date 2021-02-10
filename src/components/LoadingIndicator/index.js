@@ -3,14 +3,13 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { toNumber } from 'helpers/format'
 
-import style from './index.module.css'
-
-import Icon, { ICONS_TYPES, LABEL_POSITION_TYPES, ROTATE_TYPES } from '../Icon'
+import styles from './index.module.css'
 
 import { LOADING_INDICATOR_TYPES } from './constants'
 
-const circleRadius = 40
-const circleViewBox = 100
+import Circle from './components/Circle'
+import Spinner from './components/Spinner'
+
 
 /**
  * Component for output loading indicator.
@@ -25,25 +24,8 @@ class LoadingIndicator extends PureComponent {
     type: PropTypes.oneOf(Object.values(LOADING_INDICATOR_TYPES)),
     /** progress loading */
     progress: PropTypes.number,
-
     /** width and height size icon in px */
     size: PropTypes.number,
-    /** default type for rotate you can see in constants, or send number in deg, for icon */
-    rotate: PropTypes.oneOfType([
-      PropTypes.oneOf(Object.values(ROTATE_TYPES)),
-      PropTypes.number,
-    ]),
-    /** label icon */
-    label: PropTypes.node,
-    /** label position is one of LABEL_POSITION_TYPES.up, LABEL_POSITION_TYPES.right, LABEL_POSITION_TYPES.down,
-     * LABEL_POSITION_TYPES.left, LABEL_POSITION_TYPES.tooltip */
-    labelPosition: PropTypes.oneOf(Object.keys(LABEL_POSITION_TYPES)),
-    /** color, for Icon */
-    color: PropTypes.string,
-    /** disabled or not, for Icon */
-    disabled: PropTypes.bool,
-    /** onClick function, for Icon */
-    onClick: PropTypes.func,
   }
 
   static defaultProps = {
@@ -54,21 +36,17 @@ class LoadingIndicator extends PureComponent {
   render() {
     const {
       className,
+      style,
       type,
       progress,
-      ...other
+      size,
+      animationStop,
     } = this.props
-
-    let circleDashOffset = 0
-    let circleLength
-    if (type === LOADING_INDICATOR_TYPES.circle) {
-      circleLength = Math.PI * circleRadius * 2
-      circleDashOffset = circleLength * (100 - progress) / 100
-    }
 
     return (
       <div {...{
-        className: classNames(style.root, className, style[type]),
+        style,
+        className: classNames(styles.root, className, styles[type]),
       }} >
         {type === LOADING_INDICATOR_TYPES.text &&
           <span>
@@ -78,33 +56,10 @@ class LoadingIndicator extends PureComponent {
           </span>
         }
         {type === LOADING_INDICATOR_TYPES.spinner &&
-          <Icon {...{
-            className: style.spinnerIcon,
-            type: ICONS_TYPES.spinner,
-            ...other,
-          }} />
+          <Spinner size={size} animationStop={animationStop} />
         }
         {type === LOADING_INDICATOR_TYPES.circle &&
-          <svg className={style.circle} viewBox={`0 0 ${circleViewBox} ${circleViewBox}`}>
-            <circle {...{
-              className: style.circleNotLoaded,
-              r: circleRadius,
-              cx: circleViewBox / 2,
-              cy: circleViewBox / 2,
-              fill: 'transparent',
-              strokeDasharray: circleLength,
-              strokeDashoffset: 0,
-            }} />
-            <circle {...{
-              className: style.circleLoaded,
-              r: circleRadius,
-              cx: circleViewBox / 2,
-              cy: circleViewBox / 2,
-              fill: 'transparent',
-              strokeDasharray: circleLength,
-              strokeDashoffset: Number.isNaN(circleDashOffset) ? `${circleLength}px` : `${circleDashOffset}px`,
-            }} />
-          </svg>
+          <Circle size={size} progress={progress} />
         }
       </div>
     )

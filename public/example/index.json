@@ -11,7 +11,7 @@
                     "props": {
                         "style": {
                             "height": "100vh",
-                            "backgroundColor": "var(--trood-background)"
+                            "backgroundColor": "#f0f0f5"
                         },
                         "noGutters": true
                     },
@@ -30,8 +30,8 @@
                                     "props": {
                                         "style": {
                                             "height": "100%",
-                                            "boxShadow": "0 0 15px 0 var(--trood-shadow)",
-                                            "backgroundColor": "var(--trood-white)"
+                                            "boxShadow": "0 0 15px #c0c0c040",
+                                            "backgroundColor": "#fff"
                                         }
                                     },
                                     "nodes": [
@@ -39,7 +39,7 @@
                                             "type": "Menu",
                                             "props": {
                                                 "itemActiveStyle": {
-                                                    "color": "var(--trood-green)"
+                                                    "color": "#00b807"
                                                 },
                                                 "items": [
                                                     {
@@ -105,7 +105,7 @@
                                     "type": "Row",
                                     "props": {
                                         "style": {
-                                            "backgroundColor": "var(--trood-white)"
+                                            "backgroundColor": "#fff"
                                         }
                                     },
                                     "nodes": [

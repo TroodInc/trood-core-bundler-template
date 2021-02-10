@@ -50,7 +50,7 @@
                                                                 "props": {
                                                                     "specialType": "arrowLeft",
                                                                     "type": "text",
-                                                                    "style": "& div:last-child{color:var(--trood-red);}",
+                                                                    "style": "& div:last-child{color:#e95c5c;}",
                                                                     "onClick": {
                                                                         "$type": "$action",
                                                                         "path": "$context.goToPage",
@@ -79,7 +79,7 @@
                                                                 "props": {
                                                                     "specialType": "arrowRight",
                                                                     "type": "text",
-                                                                    "style": "& div:last-child{color:var(--trood-red);}",
+                                                                    "style": "& div:last-child{color:#e95c5c;}",
                                                                     "onClick": {
                                                                         "$type": "$action",
                                                                         "path": "$context.goToPage",

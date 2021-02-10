@@ -42,9 +42,9 @@ const withTooltip = WrappedComponent => {
           delayUpdate={100}
           delayHide={100}
           border
-          borderColor="var(--trood-border)"
-          backgroundColor="var(--trood-background-light)"
-          textColor="var(--trood-text-gray)"
+          borderColor="#e8e8e8" // var(--trood-border)
+          backgroundColor="#f8f8f8" // var(--trood-background-light)
+          textColor="#7d7d7d" // var(--trood-text-gray)
         >
           {getTooltip(tooltip)}
         </ReactTooltip>
