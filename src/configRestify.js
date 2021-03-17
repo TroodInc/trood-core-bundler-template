@@ -184,6 +184,18 @@ const configRestify = () => {
     apiPrefix: FILE_API_PREFIX,
     allowedNoTokenEndpoints: FILE_ALLOWED_NO_TOKEN_ENDPOINTS,
     httpCodesCallbacks: defaultHttpCodesCallbacks,
+    transformArrayResponse: response => {
+      if (Array.isArray(response)) {
+        return {
+          data: response,
+          count: response.length,
+        }
+      }
+      return {
+        data: response.data,
+        count: response.totalCount,
+      }
+    },
   }
   apiDefinitions[SEARCH_API_NAME] = {
     getToken,
