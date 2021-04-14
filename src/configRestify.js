@@ -86,7 +86,9 @@ const configRestify = () => {
     }
     return {
       401: auth.actions.logoutFront,
-      403: auth.actions.logoutFront,
+      403: () => modals.actions.showErrorPopup(
+        intlObject.intl.formatMessage(localeService.generalMessages.accessDenied),
+      ),
       ...customCodes,
     }
   }
@@ -103,11 +105,7 @@ const configRestify = () => {
       apiHost: library.endpoint || process.env.DEFAULT_API_HOST || window.location.host,
       apiPrefix: '',
       allowedNoTokenEndpoints: DEFAULT_ALLOWED_NO_TOKEN_ENDPOINTS,
-      httpCodesCallbacks: code => defaultHttpCodesCallbacks(code, {
-        403: () => modals.actions.showErrorPopup(
-          intlObject.intl.formatMessage(localeService.generalMessages.accessDenied),
-        ),
-      }),
+      httpCodesCallbacks: defaultHttpCodesCallbacks,
       ...API_TYPES[library.type],
     }
     Object.keys(library.models)
