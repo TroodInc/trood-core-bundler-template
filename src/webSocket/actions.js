@@ -34,29 +34,25 @@ const onMessage = event => dispatch => {
   try {
     const dataParsed = objectToCamel(JSON.parse(event.data))
 
-    if (Array.isArray(dataParsed) && dataParsed.length > 0) {
-      dataParsed.forEach(item => {
-        const { domain, messageType, type, data } = item
-        if (data && data.id && domain === WS_DOMAINS.custodian) {
-          const entityName = snakeToCamel(type)
+    const { domain, messageType, type, data } = dataParsed
+    if (data && data.id && domain === WS_DOMAINS.custodian) {
+      const entityName = snakeToCamel(type)
 
-          switch (messageType) {
-            case WS_MESSAGE_TYPES.create:
-            case WS_MESSAGE_TYPES.update:
-              dispatch(api.actions.entityManager[entityName].updateById(data.id, data))
-              break
-            case WS_MESSAGE_TYPES.delete:
-              dispatch(api.actions.entityManager[entityName].updateById(data.id, { $deleted: true }))
-              break
-            default:
-          }
-        }
-
-        Object.values(WS_ON_MESSAGE_CALLBACKS).forEach(callback => {
-          if (typeof callback === 'function') callback(item)
-        })
-      })
+      switch (messageType) {
+        case WS_MESSAGE_TYPES.create:
+        case WS_MESSAGE_TYPES.update:
+          dispatch(api.actions.entityManager[entityName].updateById(data.id, data))
+          break
+        case WS_MESSAGE_TYPES.delete:
+          dispatch(api.actions.entityManager[entityName].updateById(data.id, { $deleted: true }))
+          break
+        default:
+      }
     }
+
+    Object.values(WS_ON_MESSAGE_CALLBACKS).forEach(callback => {
+      if (typeof callback === 'function') callback(dataParsed)
+    })
   } catch (e) {
     console.warn('Failed to parse WS message data', e, event.data)
   }
