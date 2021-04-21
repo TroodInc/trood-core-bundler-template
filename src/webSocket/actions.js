@@ -8,7 +8,8 @@ import { getToken } from '$trood/storage'
 import { objectToCamel, snakeToCamel } from '$trood/helpers/namingNotation'
 
 import {
-  WS_URL,
+  WS_API_HOST,
+  WS_API_PREFIX,
   WS_PROTOCOL,
   WS_STATES,
 
@@ -78,7 +79,7 @@ const initAction = dispatch => {
   const token = getToken()
 
   if (token && !socket) {
-    const ws = new WebSocket(`${WS_URL}?token=${token}`)
+    const ws = new WebSocket(`${WS_API_HOST}${WS_API_PREFIX}?token=${token}`)
     let pingInterval
 
     ws.onopen = () => {
