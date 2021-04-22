@@ -14,9 +14,10 @@ export const WS_MESSAGE_TYPES = {
   [snakeToCamel(WS_MESSAGE_TYPE_UI)]: WS_MESSAGE_TYPE_UI,
 }
 
-export const WS_URL =
+export const WS_API_HOST =
   process.env.WEBSOCKET_API_HOST ||
   (typeof window !== 'undefined' ? `${window.location.protocol.replace('http', 'ws')}//${window.location.host}` : '')
+export const WS_API_PREFIX = '/events/ws/'
 export const WS_PROTOCOL = 'WS'
 export const WS_PING_MESSAGE_TEXT = 'ping'
 export const WS_PING_MESSAGE_INTERVAL = 29000
