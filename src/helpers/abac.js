@@ -6,6 +6,7 @@ const allow = 'allow'
 const any = '*'
 
 const checkRule = (key, rule, values) => {
+  if (!key.indexOf('ctx.') && !values.ctx) return true
   if (rule === any) return true
   if (key === 'or' || key === 'and') {
     const arrayComparer = key === 'or' ? 'some' : 'every'

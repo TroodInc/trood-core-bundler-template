@@ -34,7 +34,7 @@ const getIsAllowPage = (
     data: {
       obj = {},
       sbj = {},
-      ctx = {},
+      ctx,
     } = {},
   } = {},
 ) => {

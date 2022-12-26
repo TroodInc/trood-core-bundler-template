@@ -87,7 +87,7 @@ export const createEntityForm = (modelName, parents = []) => (
         values: {
           obj: modelToEdit,
           sbj,
-          ctx: data,
+          ctx: { data },
         },
       })
       mask.forEach(key => {
