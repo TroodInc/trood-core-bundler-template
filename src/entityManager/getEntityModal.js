@@ -326,7 +326,7 @@ const getEntityEditComponent = (entityComponentName) => (modelName, modelConfig)
                 const entities = this.props[modelName + 'Entities']
                 const objectToCheck = {
                   ...(model.id && { obj: entities.getById(model.id) }),
-                  ctx: model,
+                  ctx: { data: model },
                   resource: entities.modelConfig.endpoint,
                 }
                 const editMask = editMaskChecker(objectToCheck).mask.map(item => snakeToCamel(item))

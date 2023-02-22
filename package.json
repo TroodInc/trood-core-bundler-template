@@ -39,7 +39,7 @@
     "gulp-rename": "^2.0.0",
     "gulp-template": "^5.0.0",
     "history": "^4.10.1",
-    "html-to-react": "^1.4.2",
+    "html-to-react": "1.4.8",
     "html-webpack-plugin": "4.0.0-beta.11",
     "immutable": "4.0.0-rc.12",
     "lodash": "^4.17.15",
