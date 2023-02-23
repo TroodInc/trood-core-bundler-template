@@ -27,8 +27,6 @@ import '@formatjs/intl-relativetimeformat/polyfill-locales'
 
 const locales = lodashGet(systemConfig, ['services', 'locale', 'availableLocales']) || []
 
-const defaultLocale = lodashGet(systemConfig, ['services', 'locale', 'defaultLocale'])
-
 class LocalizeServiceProvider extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
@@ -67,8 +65,9 @@ class LocalizeServiceProvider extends PureComponent {
     }
     moment.locale(localeServiceForm.selectedLocale)
 
-    let fileName = localeServiceForm.selectedLocale
-    if (!locales.find(l => l.code === fileName)) fileName = defaultLocale
+    let currentLocale = localeServiceForm.selectedLocale || DEFAULT_LOCALE
+    if (!locales.find(l => l.code === currentLocale)) currentLocale = DEFAULT_LOCALE
+    let fileName = currentLocale
     if (process.env.PROD) fileName = `${fileName}_${__webpack_hash__}`
     apiActions
       .callGet({
@@ -79,7 +78,7 @@ class LocalizeServiceProvider extends PureComponent {
       .then(({ data }) => {
         this.setState(() => ({
           messages: data,
-          locale: localeServiceForm.selectedLocale || DEFAULT_LOCALE,
+          locale: currentLocale,
         }))
       })
   }

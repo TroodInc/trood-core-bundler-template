@@ -1,6 +1,8 @@
+import lodashGet from 'lodash/get'
 import { snakeToCamel } from '$trood/helpers/namingNotation'
+import systemConfig from '$trood/config'
 
-export const DEFAULT_LOCALE = 'en'
+export const DEFAULT_LOCALE = lodashGet(systemConfig, ['services', 'locale', 'defaultLocale']) || 'en'
 
 export const intlObject = {
   intl: undefined,
