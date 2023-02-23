@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { IntlProvider } from 'react-intl'
 import moment from 'moment'
+import lodashGet from 'lodash/get'
 
 import { api, forms } from 'redux-restify'
 
@@ -16,11 +17,17 @@ import { DEFAULT_LOCALE } from '../../constants'
 
 import IntlInjector from '../IntlInjector'
 
+import systemConfig from '$trood/config'
+
 //Polyfils
 import '@formatjs/intl-pluralrules/polyfill'
 import '@formatjs/intl-pluralrules/polyfill-locales'
 import '@formatjs/intl-relativetimeformat/polyfill'
 import '@formatjs/intl-relativetimeformat/polyfill-locales'
+
+const locales = lodashGet(systemConfig, ['services', 'locale', 'availableLocales']) || []
+
+const defaultLocale = lodashGet(systemConfig, ['services', 'locale', 'defaultLocale'])
 
 class LocalizeServiceProvider extends PureComponent {
   static propTypes = {
@@ -61,6 +68,7 @@ class LocalizeServiceProvider extends PureComponent {
     moment.locale(localeServiceForm.selectedLocale)
 
     let fileName = localeServiceForm.selectedLocale
+    if (!locales.find(l => l.code === fileName)) fileName = defaultLocale
     if (process.env.PROD) fileName = `${fileName}_${__webpack_hash__}`
     apiActions
       .callGet({
