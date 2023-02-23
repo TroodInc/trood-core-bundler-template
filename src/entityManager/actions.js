@@ -21,6 +21,8 @@ import { linkChildWithParent } from './getEntityModal'
 
 import localeService, { intlObject } from '$trood/localeService'
 
+import { ABAC_CUSTODIAN_DOMAIN } from '$trood/mainConstants'
+
 
 export const createEntityForm = (modelName, parents = []) => (
   id,
@@ -81,7 +83,7 @@ export const createEntityForm = (modelName, parents = []) => (
       }
       const { mask } = ruleChecker({
         rules,
-        domain: 'custodian',
+        domain: ABAC_CUSTODIAN_DOMAIN,
         resource: modelName,
         action: id ? 'dataPatch' : 'dataPost',
         values: {
@@ -191,7 +193,7 @@ const generalEditEntity = (showModal) => (modelName, parents = []) => (model, co
     const sbj = auth.selectors.getActiveAccount(getState())
     const { access } = ruleChecker({
       rules,
-      domain: 'custodian',
+      domain: ABAC_CUSTODIAN_DOMAIN,
       resource: modelName,
       action: model && model.id ? 'dataPatch' : 'dataPost',
       values: {

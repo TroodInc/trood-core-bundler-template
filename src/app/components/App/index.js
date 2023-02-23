@@ -37,6 +37,8 @@ import {
 import { getWindowMediaFlags } from '../../selectors'
 import { AppContext } from '../../constants'
 
+import { ABAC_CUSTODIAN_DOMAIN } from '$trood/mainConstants'
+
 
 class App extends Component {
   static propTypes = {
@@ -137,7 +139,7 @@ class App extends Component {
 
   checkRule(args) {
     const {
-      domain = 'custodian',
+      domain = ABAC_CUSTODIAN_DOMAIN,
       resource,
       action,
       obj,

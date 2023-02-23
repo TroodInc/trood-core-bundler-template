@@ -1,3 +1,6 @@
+import { snakeToCamel } from './helpers/namingNotation'
+
+
 export const INIT_ACTION = '@@INIT'
 export const ROUTER_LOCATION_CHANGE_ACTION = '@@router/LOCATION_CHANGE'
 export const STATE_REPLACE_ACTION = 'STATE_REPLACE'
@@ -40,3 +43,6 @@ export const DEFAULT_DATE_TIME_FORMAT = 'YYYY-MM-DDTHH:mm:ss.SZ'
 export const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD'
 
 export const DEFAULT_SCROLLING_CONTAINER_ID = 'troodAppScroll'
+
+export const ABAC_FRONTEND_DOMAIN = snakeToCamel(process.env.ABAC_FRONTEND_DOMAIN || 'FRONTEND')
+export const ABAC_CUSTODIAN_DOMAIN = snakeToCamel(process.env.ABAC_FRONTEND_DOMAIN || 'CUSTODIAN')

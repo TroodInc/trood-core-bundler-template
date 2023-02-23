@@ -54,6 +54,8 @@ import { snakeToCamel } from '$trood/helpers/namingNotation'
 import { ModalComponents, ModalContext } from './components/ModalComponents'
 import { AuthManagerContext } from '$trood/auth'
 
+import { ABAC_CUSTODIAN_DOMAIN } from '$trood/mainConstants'
+
 const formatMessage = msg => {
   if (!msg || !msg.defaultMessage || !intlObject.intl) return msg
   return intlObject.intl.formatMessage(msg)
@@ -199,7 +201,7 @@ const getEntityFormSubmit = (modelName, formActions, entityId, isEditing, state,
 const getCheckAccess = (modelName, isEditing, sbj, obj, rules) => (ctx) => {
   return ruleChecker({
     rules,
-    domain: 'custodian',
+    domain: ABAC_CUSTODIAN_DOMAIN,
     resource: modelName,
     action: isEditing ? 'dataPatch' : 'dataPost',
     values: {
@@ -525,7 +527,7 @@ const getEntityEditComponent = (entityComponentName) => (modelName, modelConfig)
     if (stateProps.isEditing) {
       const { access } = ruleChecker({
         rules,
-        domain: 'custodian',
+        domain: ABAC_CUSTODIAN_DOMAIN,
         resource: modelName,
         action: 'dataDelete',
         values: {

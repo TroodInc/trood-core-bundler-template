@@ -11,11 +11,13 @@ import {
   getAllPaths,
 } from '$trood/pageManager'
 
+import { ABAC_FRONTEND_DOMAIN } from '$trood/mainConstants'
+
 
 export const menuRenderers = getPagesHeaderRenderers(systemConfig.pages)
 
 const getProfileNeededFields = (permissions = {}) => {
-  let frontendPermissions = permissions.frontend || {}
+  let frontendPermissions = permissions[ABAC_FRONTEND_DOMAIN] || {}
   frontendPermissions = Object.values(frontendPermissions)
   frontendPermissions = frontendPermissions.reduce((memo, curr) => {
     if (typeof curr !== 'object') return memo

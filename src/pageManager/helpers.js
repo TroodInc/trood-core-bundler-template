@@ -8,6 +8,8 @@ import { getPageLayoutProps } from './pageLayouts'
 
 import urlSchema, { getBaseUrl } from './urlSchema'
 
+import { ABAC_FRONTEND_DOMAIN } from '$trood/mainConstants'
+
 
 const getAbacPageId = id => `${id}Page`
 
@@ -40,7 +42,7 @@ const getIsAllowPage = (
 ) => {
   const { access } = ruleChecker({
     rules,
-    domain: 'frontend',
+    domain: ABAC_FRONTEND_DOMAIN,
     resource: pageId,
     action: pageViewAction,
     values: { obj, sbj, ctx },
