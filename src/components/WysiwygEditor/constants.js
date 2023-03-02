@@ -1,69 +1,57 @@
-import { defineMessages } from 'react-intl'
+import styles from './index.css'
 
-import { ICONS_TYPES } from '../TIcon'
-
-
-const BOLD_STYLE = 'bold'
-const ITALIC_STYLE = 'italic'
-const UNDERLINE_STYLE = 'underline'
-const TEXT_COLOR_STYLE = 'textColor'
-const BACKGROUND_COLOR_STYLE = 'backgroundColor'
-
-export const DEFAULT_STYLES = {
-  [BOLD_STYLE]: BOLD_STYLE,
-  [ITALIC_STYLE]: ITALIC_STYLE,
-  [UNDERLINE_STYLE]: UNDERLINE_STYLE,
-  [TEXT_COLOR_STYLE]: TEXT_COLOR_STYLE,
-  [BACKGROUND_COLOR_STYLE]: BACKGROUND_COLOR_STYLE,
+export const TOOLBAR = {
+  options: ['inline', 'fontSize', 'list', 'textAlign', 'colorPicker', 'link'],
+  inline: {
+    className: styles.inline,
+    options: ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript'],
+    bold: { className: styles.button },
+    italic: { className: styles.button },
+    underline: { className: styles.button },
+    strikethrough: { className: styles.button },
+    superscript: { className: styles.button },
+    subscript: { className: styles.button },
+  },
+  fontSize: {
+    options: [8, 9, 10, 11, 12, 14, 16, 18, 24, 30, 36, 48, 60, 72, 96],
+    className: styles.dropdown,
+  },
+  list: {
+    className: styles.inline,
+    options: ['unordered', 'ordered'],
+    unordered: { className: styles.button },
+    ordered: { className: styles.button },
+  },
+  textAlign: {
+    className: styles.inline,
+    options: ['left', 'center', 'right', 'justify'],
+    left: { className: styles.button },
+    center: { className: styles.button },
+    right: { className: styles.button },
+    justify: { className: styles.button },
+  },
+  colorPicker: {
+    className: styles.color,
+    popupClassName: styles.colorPopup,
+    colors: [
+      '#fff',
+      '#979696',
+      '#312f2f',
+      '#e4a642',
+      '#e95c5c',
+      '#ff00d2',
+      '#4dad33',
+      '#0070d2',
+      '#5d00d2',
+    ],
+    options: ['text'],
+  },
+  link: {
+    className: styles.inline,
+    showOpenOptionOnHover: true,
+    defaultTargetOption: '_self',
+    options: ['link', 'unlink'],
+    link: { className: styles.button },
+    unlink: { className: styles.button },
+  },
 }
-
-export const DEFAULT_COLORS = [
-  'black',
-  'white',
-  'gray',
-  'red',
-  'yellow',
-  'green',
-  'blue',
-  'aqua',
-  'purple',
-]
-
-export const DEFAULT_STYLES_SCHEMA = {
-  [BOLD_STYLE]: {
-    style: 'BOLD',
-    icon: ICONS_TYPES.bold,
-  },
-  [ITALIC_STYLE]: {
-    style: 'ITALIC',
-    icon: ICONS_TYPES.italic,
-  },
-  [UNDERLINE_STYLE]: {
-    style: 'UNDERLINE',
-    icon: ICONS_TYPES.underline,
-  },
-}
-
-export const getColorStylesSchema = (colors, bg) => colors.map(color => ({
-  style: `${bg ? 'bg' : ''}color-${color}`,
-  color,
-  icon: ICONS_TYPES.square,
-}))
-
-export const getColorStylesMap = (colors, bg) => colors.reduce((memo, curr) => ({
-  ...memo,
-  [`${bg ? 'bg' : ''}color-${curr}`]: {
-    [bg ? 'background' : 'color']: curr,
-  },
-}), {})
-
-export const messages = defineMessages({
-  textColor: {
-    id: 'components.WysiwygEditor.text_color',
-    defaultMessage: 'Text color',
-  },
-  backgroundColor: {
-    id: 'components.WysiwygEditor.background_color',
-    defaultMessage: 'Background color',
-  },
-})

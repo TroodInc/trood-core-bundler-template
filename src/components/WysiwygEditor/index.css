@@ -1,15 +1,52 @@
-@global-import './draftEditor.css';
+@global-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 .root {
-  display: flex;
-  flex-flow: column nowrap;
-  min-height: 100px;
-  height: 100%;
   width: 100%;
-  flex: 1;
 }
 
-.menu {
+.root .toolbar {
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  font-size: inherit;
+  padding: 0;
   border-bottom: 1px solid var(--trood-gray-border);
-  margin-bottom: 10px;
+  margin: 0 0 6px;
+  gap: 12px;
+}
+
+.root .toolbar .inline {
+  gap: 6px;
+}
+
+.root .toolbar .dropdown {
+  margin: 0;
+  min-width: 60px;
+}
+
+.root .toolbar .button {
+  min-width: 20px;
+  margin: 0;
+}
+
+.root .toolbar .color {
+  min-width: 20px;
+  margin: 0;
+}
+
+.root .toolbar .colorPopup {
+  width: auto;
+  height: auto;
+  min-width: 140px;
+}
+
+.root .toolbar .colorPopup > :last-child {
+  overflow: auto;
+}
+
+.root .editor > div {
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  height: auto;
 }

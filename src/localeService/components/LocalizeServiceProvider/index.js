@@ -12,7 +12,7 @@ import { api, forms } from 'redux-restify'
 import { STATIC_API_NAME } from '$trood/staticApiUrlSchema'
 import { noSlashEnforceUrl } from '$trood/apiUrlSchema'
 
-import { DEFAULT_LOCALE } from '../../constants'
+import { DEFAULT_LOCALE, checkCurrentLocale } from '../../constants'
 
 import IntlInjector from '../IntlInjector'
 
@@ -21,6 +21,7 @@ import '@formatjs/intl-pluralrules/polyfill'
 import '@formatjs/intl-pluralrules/polyfill-locales'
 import '@formatjs/intl-relativetimeformat/polyfill'
 import '@formatjs/intl-relativetimeformat/polyfill-locales'
+
 
 class LocalizeServiceProvider extends PureComponent {
   static propTypes = {
@@ -58,9 +59,11 @@ class LocalizeServiceProvider extends PureComponent {
     if (prevProps && localeServiceForm.selectedLocale === prevProps.localeServiceForm.selectedLocale) {
       return
     }
-    moment.locale(localeServiceForm.selectedLocale)
+    const currentLocale = checkCurrentLocale(localeServiceForm.selectedLocale)
 
-    let fileName = localeServiceForm.selectedLocale
+    moment.locale(currentLocale)
+
+    let fileName = currentLocale
     if (process.env.PROD) fileName = `${fileName}_${__webpack_hash__}`
     apiActions
       .callGet({
@@ -71,7 +74,7 @@ class LocalizeServiceProvider extends PureComponent {
       .then(({ data }) => {
         this.setState(() => ({
           messages: data,
-          locale: localeServiceForm.selectedLocale || DEFAULT_LOCALE,
+          locale: currentLocale,
         }))
       })
   }
