@@ -11,8 +11,8 @@
 }
 
 .canvas {
-  border-radius: 5px;
   box-sizing: border-box;
+  border: 1px solid var(--trood-gray-border);
 }
 
 .root .range {
