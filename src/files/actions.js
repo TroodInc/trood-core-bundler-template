@@ -53,6 +53,6 @@ export const openFile = (file, windowRef) => (dispatch) => {
   }
 }
 
-export const editImage = (image, onSubmit) => (dispatch) => {
-  dispatch(modals.actions.showModal(true, IMAGE_EDITOR_MODAL, { image, onSubmit }))
+export const editImage = (image, onSubmit, props = {}) => (dispatch) => {
+  dispatch(modals.actions.showModal(true, IMAGE_EDITOR_MODAL, { ...props, image, onSubmit }))
 }

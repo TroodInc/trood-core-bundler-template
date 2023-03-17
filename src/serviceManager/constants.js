@@ -14,6 +14,7 @@ export const SERVICE_FILE_SERVICE = 'fileService'
 export const SERVICE_SEARCH_SERVICE = 'searchService'
 export const SERVICE_WS_SERVICE = 'webSocketService'
 export const SERVICE_REPORTING_SERVICE = 'reportingService'
+export const AUTH_SERVICE = 'authService'
 
 export const TROOD_SERVICES = {
   [SERVICE_MAIL_SERVICE]: SERVICE_MAIL_SERVICE,
@@ -22,6 +23,7 @@ export const TROOD_SERVICES = {
   [SERVICE_SEARCH_SERVICE]: SERVICE_SEARCH_SERVICE,
   [SERVICE_WS_SERVICE]: SERVICE_WS_SERVICE,
   [SERVICE_REPORTING_SERVICE]: SERVICE_REPORTING_SERVICE,
+  [AUTH_SERVICE]: AUTH_SERVICE,
 }
 
 // Here we define what props will be injected by trood services.
@@ -72,6 +74,12 @@ export const SERVICES_PROPS = {
     dispatchProps: {
       reportingActions: (dispatch) => bindActionCreators(reportingService.actions, dispatch),
     },
+  },
+  [TROOD_SERVICES.authService]: {
+    stateProps: {
+      accountEntities: (state) => api.selectors.entityManager.account.getEntities(state),
+    },
+    dispatchProps: {},
   },
 }
 

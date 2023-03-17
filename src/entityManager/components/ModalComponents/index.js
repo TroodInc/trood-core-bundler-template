@@ -30,8 +30,9 @@ const ModalComponentWrapper = type => props => {
     modelName,
     // eslint-disable-next-line react-hooks/rules-of-hooks
   } = useContext(ModalContext)
-  const { fieldName } = props
-  if (getMask.includes(Array.isArray(fieldName) ? fieldName[0] : fieldName)) return null
+  const { fieldName, extraModelName } = props
+  const firstFieldName = Array.isArray(fieldName) ? fieldName[0] : fieldName
+  if (getMask.includes(firstFieldName)) return null
 
   const onChange = e => changeField(fieldName, e)
   const onInvalid = errs => setFieldError(fieldName, errs)
@@ -39,8 +40,9 @@ const ModalComponentWrapper = type => props => {
   const value = getNestedObjectField(model, fieldName)
   const errors = getNestedObjectField(modelErrors, fieldName)
   let { label } = props
-  if (!label && localeService.entityMessages[modelName][fieldName]) {
-    label = intlObject.intl.formatMessage(localeService.entityMessages[modelName][fieldName])
+  const lastFieldName = Array.isArray(fieldName) ? fieldName[fieldName.length - 1] : fieldName
+  if (!label && localeService.entityMessages[extraModelName || modelName][lastFieldName]) {
+    label = intlObject.intl.formatMessage(localeService.entityMessages[extraModelName || modelName][lastFieldName])
   }
 
   const commonProps = {

@@ -19,6 +19,8 @@ const avatarUUIDRegExp = new RegExp(`^${UUID_REGEXP.source}$`)
 class TAvatar extends PureComponent {
   static propTypes = {
     size: PropTypes.number,
+    width: PropTypes.number,
+    height: PropTypes.number,
     defaultAvatar: PropTypes.string,
     host: PropTypes.string,
     round: PropTypes.bool,
@@ -51,13 +53,17 @@ class TAvatar extends PureComponent {
 
   editImage(value) {
     if (value) {
-      const { filesActions } = this.props
+      const { filesActions, size, width, height } = this.props
       const reader = new FileReader()
       reader.onload = file =>
         filesActions.editImage(
           file.target.result,
           img => filesActions.uploadFile(img.imgFile)
             .then(this.props.onChange),
+          {
+            width: (width || size) * 2,
+            height: (height || size) * 2,
+          },
         )
       reader.readAsDataURL(value)
     }
@@ -69,6 +75,8 @@ class TAvatar extends PureComponent {
       defaultAvatar,
       host,
       size,
+      width,
+      height,
       round,
       editable,
       onClear,
@@ -95,7 +103,7 @@ class TAvatar extends PureComponent {
       <div {...{
         className: classNames(style.root, className),
         style: {
-          width: size,
+          width: width || size,
         },
       }}>
         {label &&
@@ -105,7 +113,7 @@ class TAvatar extends PureComponent {
         }
         <div {...{
           className: classNames(style.avatarBox, { [style.round]: round }),
-          style: { height: size },
+          style: { height: height || size },
         }}>
           {avatar && onClear &&
             <TIcon {...{
