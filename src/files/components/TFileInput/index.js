@@ -7,7 +7,7 @@ import { defineMessages } from 'react-intl'
 
 import { intlObject } from '$trood/localeService'
 
-import style from './index.css'
+import styles from './index.css'
 
 import TIcon from '$trood/components/TIcon'
 import { ICONS_TYPES } from '$trood/components/TIcon/constants'
@@ -104,6 +104,8 @@ class TFileInput extends PureComponent {
       connectDropTarget,
     } = this.props
 
+    const style = withStyling ? styles : { fileInput: styles.fileInput}
+
     const label = isOver ? intlObject.intl.formatMessage(messages.dropFile) : this.props.label
 
     let background
@@ -141,7 +143,7 @@ class TFileInput extends PureComponent {
           </div>
         }
         <label {...{
-          className: classNames(withStyling && style.inputContainer, errors.length && style.error),
+          className: classNames(style.inputContainer, errors.length && style.error),
           'data-cy': 'upload_button',
           style: {
             ...backgroundStyle,
@@ -151,7 +153,7 @@ class TFileInput extends PureComponent {
           {isOver &&
             <div className={style.fileOver} />
           }
-          <div className={withStyling ? style.label : ''}>
+          <div className={style.label}>
             {isUploading && loadingProgress !== 0 ? `${loadingProgress.toFixed()}%` : label}
           </div>
           {!isUploading && subLabel &&
