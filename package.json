@@ -82,7 +82,7 @@
     "reduce-reducers": "^1.0.4",
     "redux": "^4.0.5",
     "redux-batched-actions": "^0.4.1",
-    "redux-restify": "git+https://github.com/Nileff/redux-restify.git",
+    "redux-restify": "^0.16.4",
     "redux-thunk": "^2.3.0",
     "regenerator-runtime": "^0.13.3",
     "sanitize-html": "^1.22.0",
