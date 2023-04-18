@@ -214,7 +214,9 @@ const configRestify = () => {
     apiHost: JOURNAL_API_HOST,
     apiPrefix: JOURNAL_API_PREFIX,
     allowedNoTokenEndpoints: JOURNAL_ALLOWED_NO_TOKEN_ENDPOINTS,
-    getPaginationQuery: (query, page, pageSize) => {
+    getPaginationQuery: (query, page, pageSize, pagination) => {
+      if (!pagination || pageSize >= Number.MAX_SAFE_INTEGER) return query
+      if (/limit\u0028[0-9]+\u002c[0-9]+\u0029/.test(query.q)) return query // for custom limit
       const limitStr = `limit(${(page - 1) * pageSize},${pageSize})`
       return {
         ...query,
