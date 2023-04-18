@@ -2,6 +2,7 @@ import { bindActionCreators } from 'redux'
 
 import { api, forms } from 'redux-restify'
 
+import auth from '$trood/auth'
 import files from '$trood/files'
 import search from '$trood/search'
 import webSocket from '$trood/webSocket'
@@ -78,6 +79,14 @@ export const SERVICES_PROPS = {
   [TROOD_SERVICES.authService]: {
     stateProps: {
       accountEntities: (state) => api.selectors.entityManager.account.getEntities(state),
+      authData: (state) => auth.selectors.getAuthData(state),
+      isHasAuthData: (state) => auth.selectors.getIsHasAuthData(state),
+      isAuthenticated: (state) => auth.selectors.getIsAuthenticated(state),
+      profileId: (state) => auth.selectors.getProfileId(state),
+      profile: (state) => auth.selectors.getProfile(state),
+      profileIsLoading: (state) => auth.selectors.getProfileIsLoading(state),
+      activeAccount: (state) => auth.selectors.getActiveAccount(state),
+      permissions: (state) => auth.selectors.getPermissions(state),
     },
     dispatchProps: {},
   },

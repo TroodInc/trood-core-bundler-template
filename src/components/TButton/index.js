@@ -129,7 +129,6 @@ class TButton extends PureComponent {
     disabled: false,
     thin: false,
     className: '',
-    onClick: () => {},
   }
 
   constructor(props) {

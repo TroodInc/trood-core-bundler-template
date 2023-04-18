@@ -26,23 +26,18 @@ import {
 } from '$trood/authApiUrlSchema'
 
 
-const restoreNull = (data = {}) => {
-  if (typeof data !== 'object' || data === null) return data
-  if (Array.isArray(data)) {
-    return data.map(item => restoreNull(item))
+const restoreNull = (val) => {
+  if (val === undefined || val === null) return null
+  if (Array.isArray(val)) {
+    return val.map(restoreNull)
   }
-  return Object.keys(data).reduce((memo, curr) => {
-    let currValue = data[curr]
-    if (currValue === undefined) {
-      currValue = null
-    } else if (typeof currValue === 'object') {
-      currValue = restoreNull(currValue)
-    }
-    return {
+  if (typeof val === 'object') {
+    return Object.entries(val).reduce((memo, [k, v]) => ({
       ...memo,
-      [curr]: currValue,
-    }
-  }, {})
+      [k]: restoreNull(v),
+    }), {})
+  }
+  return val
 }
 
 export const updateProfile = (modelName, model) => dispatch => {
