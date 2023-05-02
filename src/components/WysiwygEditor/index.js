@@ -62,7 +62,7 @@ class WysiwygEditor extends PureComponent {
   }
 
   render() {
-    const { className, placeholder, locale } = this.props
+    const { className, toolbarClassName, editorClassName, placeholder, locale } = this.props
 
     const { editorState } = this.state
 
@@ -72,8 +72,8 @@ class WysiwygEditor extends PureComponent {
         toolbar: TOOLBAR,
         editorState,
         wrapperClassName: classNames(className, styles.root),
-        toolbarClassName: styles.toolbar,
-        editorClassName: styles.editor,
+        toolbarClassName: classNames(toolbarClassName, styles.toolbar),
+        editorClassName: classNames(editorClassName, styles.editor),
         onEditorStateChange: this.onChange,
         localization: locale ? { locale } : undefined,
         handlePastedText: () => false,
