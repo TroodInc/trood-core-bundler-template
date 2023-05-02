@@ -76,6 +76,7 @@ class WysiwygEditor extends PureComponent {
         editorClassName: styles.editor,
         onEditorStateChange: this.onChange,
         localization: locale ? { locale } : undefined,
+        handlePastedText: () => false,
       }} />
     )
   }
