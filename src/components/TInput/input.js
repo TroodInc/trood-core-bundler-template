@@ -448,6 +448,8 @@ class Input extends PureComponent {
       className,
       labelClassName,
       inputClassName,
+      editorClassName,
+      toolbarClassName,
       type,
       disabled,
       autoFocus,
@@ -511,6 +513,8 @@ class Input extends PureComponent {
             <WysiwygEditor {...{
               ...inputProps,
               ref: undefined,
+              editorClassName,
+              toolbarClassName,
             }} />
           )
         case INPUT_TYPES.multi:
