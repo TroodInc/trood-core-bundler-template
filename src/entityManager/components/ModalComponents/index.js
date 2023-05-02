@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import classNames from 'classnames'
 import TInput from '$trood/components/TInput'
 import TCheckbox from '$trood/components/TCheckbox'
 import DateTimePicker, { PICKER_TYPES } from '$trood/components/DateTimePicker'
@@ -20,7 +21,7 @@ const validateDateTime = {
   timeRequired: false,
 }
 
-const ModalComponentWrapper = type => props => {
+const ModalComponentWrapper = type => ({ className, ...props }) => {
   const {
     editMask,
     getMask,
@@ -48,7 +49,7 @@ const ModalComponentWrapper = type => props => {
   const commonProps = {
     label,
     disabled: editMask.includes(Array.isArray(fieldName) ? fieldName[0] : fieldName),
-    className: modalsStyle.control,
+    className: classNames(className, modalsStyle.control),
     errors,
     onInvalid: onInvalid,
     onValid: onValid,
