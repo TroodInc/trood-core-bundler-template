@@ -5,6 +5,7 @@ import deepEqual from 'deep-equal'
 import { REPORT_TYPES, getReportingLoadingPropName } from './constants'
 
 import { getDisplayName } from '$trood/helpers/react'
+import objectHash from 'object-hash'
 
 
 export default (
@@ -50,6 +51,12 @@ export default (
       const currentFilter = memoizedFilter(this.props)
       const type = connectionCode ? REPORT_TYPES.config : REPORT_TYPES.prepared
 
+      this.uniqPropName = propName + objectHash({
+        currentQuery,
+        currentFilter,
+        type,
+      })
+
       const hasChanges = !deepEqual(this.prevQuery, currentQuery) ||
         !deepEqual(this.prevFilter, currentFilter) ||
         !deepEqual(this.reportId, reportId) ||
@@ -57,7 +64,7 @@ export default (
 
       if (hasChanges) {
         this.props.reportingActions.getReportByQuery({
-          propName,
+          propName: this.uniqPropName,
           reportId,
           type,
           connectionCode,
@@ -78,12 +85,13 @@ export default (
       } = this.props
 
       const reportLoadingPropName = getReportingLoadingPropName(propName)
+      const reportLoadingUniqPropName = getReportingLoadingPropName(this.uniqPropName)
       return (
         <WrappedComponent {...{
           ...other,
           reportingServiceData,
-          [propName]: reportingServiceData[propName],
-          [reportLoadingPropName]: reportingServiceData[reportLoadingPropName],
+          [propName]: reportingServiceData[this.uniqPropName],
+          [reportLoadingPropName]: reportingServiceData[reportLoadingUniqPropName],
         }} />
       )
     }
