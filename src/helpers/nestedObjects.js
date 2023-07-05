@@ -1,6 +1,5 @@
 import uuidV4 from 'uuid/v4'
 import deepEqual from 'deep-equal'
-import mergeWith from 'lodash/mergeWith'
 
 import { isDefAndNotNull, isPureObject } from '$trood/helpers/def'
 
@@ -94,13 +93,24 @@ export const replaceNulls = mutateObject(
 
 export const deepEqualWithUndefines = (a, b) => deepEqual(removeUndefinedKeys(a), removeUndefinedKeys(b))
 
-const arraysCustomizer = (objValue, srcValue) => {
-  if (Array.isArray(objValue)) {
-    return srcValue
+const merge = (first, second) => {
+  if (!first) return second
+  if (!second) return first
+  if (typeof second !== 'object' || second === null || typeof first !== typeof second || Array.isArray(second)) {
+    return second
   }
-  return undefined
+  const existsKeys = Object.keys({ ...first, ...second })
+  const result = {}
+  existsKeys.forEach(key => {
+    result[key] = merge(first[key], second[key])
+  })
+  return result
 }
 
 export const mergeAndReplaceArrays = (...args) => {
-  return mergeWith({}, ...args, arraysCustomizer)
+  let obj
+  args.forEach(arg => {
+    obj = merge(obj, arg)
+  })
+  return obj
 }
