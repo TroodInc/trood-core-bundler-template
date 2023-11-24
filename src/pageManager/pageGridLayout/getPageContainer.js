@@ -93,8 +93,9 @@ const getPageContainer = (pageConfig, entityPageModelName, entityPageModelIdSele
       if (!Number.isNaN(+modelId)) {
         modelId = +modelId
       }
-      model = entityPageEntities.getById(modelId)
-      modelIsLoading = entityPageEntities.getIsLoadingById(modelId)
+      const query = props?.page?.query
+      model = entityPageEntities.getById(modelId, { query })
+      modelIsLoading = entityPageEntities.getIsLoadingById(modelId, { query })
 
       const currentChildFormRegexp = getChildFormRegexp({ parentModel: entityPageModelName, parentId: modelId })
       childForms = forms.selectors.getForm(currentChildFormRegexp)(state)

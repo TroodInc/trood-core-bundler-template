@@ -51,6 +51,7 @@ import { currentLayout } from '$trood/layoutsManager'
 import localeService, { intlObject } from '$trood/localeService'
 
 import ErrorBoundary from '$trood/components/ErrorBoundary'
+import LoadingBlockContainer from '$trood/components/LoadingBlockContainer'
 
 
 const getEntityManagerContext = (modelName, entityId) => {
@@ -98,6 +99,10 @@ const PageGridLayout = (props) => {
     layoutProps,
     ...other
   } = props
+
+  if (other.modelIsLoading) {
+    return <LoadingBlockContainer isBlocked={other.modelIsLoading} />
+  }
 
   return (
     <AppContext.Consumer>
