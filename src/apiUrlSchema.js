@@ -37,7 +37,7 @@ export const API_TYPES = {
     }) => {
       const url = `${apiHost}${apiPrefix}${modelEndpoint}${entityId ? `/${entityId}` : ''}`
       if (crudAction === CRUD_ACTIONS.read || crudAction === CRUD_ACTIONS.delete) return url
-      return `${url}?depth=3`
+      return `${url}`
     },
     getPaginationQuery: (query, page, pageSize, pagination) => {
       if (!pagination || pageSize >= Number.MAX_SAFE_INTEGER) return query

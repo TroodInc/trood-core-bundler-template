@@ -29,6 +29,7 @@ export const createEntityForm = (modelName, parents = []) => (
   {
     defaults = {},
     values = {},
+    query,
     isSubmitted = false,
   } = {},
 ) => async (dispatch, getState) => {
@@ -52,7 +53,7 @@ export const createEntityForm = (modelName, parents = []) => (
   }
 
   const modelToEdit =
-    await api.selectors.entityManager[modelName].getEntities(state).asyncGetById(id, { forceLoad: true })
+    await api.selectors.entityManager[modelName].getEntities(state).asyncGetById(id, { forceLoad: true, query })
   const rules = auth.selectors.getPermissions(state)
   const sbj = auth.selectors.getActiveAccount(state)
 
@@ -71,6 +72,7 @@ export const createEntityForm = (modelName, parents = []) => (
       tempId: true,
       isSubmitted: true,
     },
+    query: query || { depth: 3 },
     transformBeforeSubmit: (_, data) => {
       let submitData = { ...data }
       const baseTransformBeforeSubmit = RESTIFY_CONFIG.registeredForms[baseFormName].transformBeforeSubmit
