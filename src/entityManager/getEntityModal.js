@@ -23,6 +23,8 @@ import auth from '$trood/auth'
 import TButton from '$trood/components/TButton'
 import { BUTTON_COLORS } from '$trood/components/TButton/constants'
 import TIcon, { ICONS_TYPES } from '$trood/components/TIcon'
+import LoadingBlockContainer from '$trood/components/LoadingBlockContainer'
+
 
 import {
   getEditFormName,
@@ -312,9 +314,13 @@ const getEntityEditComponent = (entityComponentName) => (modelName, modelConfig)
         prevForm,
         buttons,
         model,
+        modelIsLoading,
         modelFormActions,
         modelErrors,
       } = this.props
+
+      if (modelIsLoading) return <LoadingBlockContainer isBlocked={modelIsLoading} />
+
       const contextValue = memoizedGetEntityManagerContext(entityId, parents, prevForm, nextParents)
       return (
         <div {...{
@@ -431,10 +437,12 @@ const getEntityEditComponent = (entityComponentName) => (modelName, modelConfig)
   const dataCyName = MODAL_NAME_FUNCS[entityComponentName](modelName)
 
   const stateToProps = (state, props) => {
+    const { readQuery, query } = props
     const currentEntities = applySelectors('entityModal')(state, entitiesToGet)
     const currentPropsEntities = getCurrentPropsEntities(currentEntities)
     let modelFormName
     let model
+    let modelIsLoading = false
     let serverModel
     let title
     let modelErrors
@@ -455,11 +463,13 @@ const getEntityEditComponent = (entityComponentName) => (modelName, modelConfig)
       modelErrors = forms.selectors.getErrors(modelFormName)(state)
       modelValid = forms.selectors.getIsValid(modelFormName)(state)
       if (props.isEditing) {
-        serverModel = currentEntities[modelName].getById(props.entityId)
+        serverModel = currentEntities[modelName].getById(props.entityId, { query: readQuery || query })
       }
       // Calc props for viewing modal
     } else if (entityComponentName === ENTITY_COMPONENT_VIEW) {
-      model = currentEntities[modelName].getById(props.entityId)
+      model = currentEntities[modelName].getById(props.entityId, { query: readQuery || query })
+      modelIsLoading = model?.$loading &&
+        currentEntities[modelName].getIsLoadingById(props.entityId, { query: readQuery || query })
       serverModel = model
       title = formatMessage(props.title) || formatMessage(currentModel.name)
     }
@@ -488,6 +498,7 @@ const getEntityEditComponent = (entityComponentName) => (modelName, modelConfig)
       dataCyName,
       modelFormName,
       model,
+      modelIsLoading,
       serverModel,
       modelErrors,
       modelValid,
@@ -547,7 +558,14 @@ const getEntityEditComponent = (entityComponentName) => (modelName, modelConfig)
 
     let editAction
     if (entityComponentName === ENTITY_COMPONENT_VIEW && !currentModel.notEdit && access) {
-      editAction = () => dispatchProps.dispatch(entitiesActions[modelName].editChildEntity(stateProps.model))
+      editAction = () => dispatchProps.dispatch(entitiesActions[modelName].editChildEntity(
+        stateProps.model,
+        {
+          query: stateProps.query,
+          readQuery: stateProps.readQuery,
+          writeQuery: stateProps.writeQuery,
+        },
+      ))
     }
 
     let unbindedFormActions

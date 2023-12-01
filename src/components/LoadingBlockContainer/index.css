@@ -1,5 +1,6 @@
 .root {
   position: relative;
+  min-height: 70px;
 }
 
 .blockingArea {

@@ -30,6 +30,8 @@ export const createEntityForm = (modelName, parents = []) => (
     defaults = {},
     values = {},
     query,
+    readQuery,
+    writeQuery,
     isSubmitted = false,
   } = {},
 ) => async (dispatch, getState) => {
@@ -52,8 +54,11 @@ export const createEntityForm = (modelName, parents = []) => (
     }
   }
 
-  const modelToEdit =
-    await api.selectors.entityManager[modelName].getEntities(state).asyncGetById(id, { forceLoad: true, query })
+  const modelToEdit = id &&
+    await api.selectors.entityManager[modelName].getEntities(state).asyncGetById(id, {
+      forceLoad: true,
+      query: readQuery || query,
+    })
   const rules = auth.selectors.getPermissions(state)
   const sbj = auth.selectors.getActiveAccount(state)
 
@@ -72,7 +77,7 @@ export const createEntityForm = (modelName, parents = []) => (
       tempId: true,
       isSubmitted: true,
     },
-    query: query || { depth: 3 },
+    query: writeQuery || query || { depth: 3 },
     transformBeforeSubmit: (_, data) => {
       let submitData = { ...data }
       const baseTransformBeforeSubmit = RESTIFY_CONFIG.registeredForms[baseFormName].transformBeforeSubmit
@@ -154,24 +159,28 @@ const changeModalQuery = (modalProps, history, add) => {
   }
 }
 
-export const viewEntity = (modelName, parents) => (model, { history, title, closeOnEdit }) => (dispatch) => {
-  const modelId = typeof model === 'object' ? model.id : model
-  const modalProps = {
-    modalType: 'view',
-    modelName,
-    modelId,
-  }
-  changeModalQuery(modalProps, history, true)
+export const viewEntity = (modelName, parents) =>
+  (model, { history, title, query, readQuery, writeQuery, closeOnEdit }) => (dispatch) => {
+    const modelId = typeof model === 'object' ? model.id : model
+    const modalProps = {
+      modalType: 'view',
+      modelName,
+      modelId,
+    }
+    changeModalQuery(modalProps, history, true)
 
-  dispatch(modals.actions.showModal(true, getViewModalName(modelName), {
-    entityId: modelId,
-    isEditing: true,
-    parents,
-    title,
-    closeOnEdit,
-    closeAction: () => changeModalQuery(modalProps, history, false),
-  }))
-}
+    dispatch(modals.actions.showModal(true, getViewModalName(modelName), {
+      entityId: modelId,
+      isEditing: true,
+      parents,
+      title,
+      query,
+      readQuery,
+      writeQuery,
+      closeOnEdit,
+      closeAction: () => changeModalQuery(modalProps, history, false),
+    }))
+  }
 
 /**
  * Start edit entity, shows modal
