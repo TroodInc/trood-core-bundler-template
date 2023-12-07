@@ -41,6 +41,7 @@ class ModalWrapper extends PureComponent {
   render() {
     const {
       name,
+      mode,
       show,
       shouldCloseOnOverlayClick,
       closeOnEdit,
@@ -50,10 +51,12 @@ class ModalWrapper extends PureComponent {
       title,
       size,
       order,
+      minimizeAction,
       cancelAction,
       deleteAction,
       editAction,
       buttons,
+      viewModal,
     } = this.props
 
     const closeAndCancel = (e = {}) => {
@@ -76,6 +79,15 @@ class ModalWrapper extends PureComponent {
         type: ICONS_TYPES.clear,
         className: title ? style.close : style.closeAbsolute,
         onClick: closeAndCancel,
+        size: 25,
+      }} />
+    )
+
+    const minimizeButton = (
+      <TIcon {...{
+        type: mode === 'minimized' ? ICONS_TYPES.maximize : ICONS_TYPES.minus,
+        className: style.minimize,
+        onClick: minimizeAction,
         size: 25,
       }} />
     )
@@ -115,6 +127,37 @@ class ModalWrapper extends PureComponent {
       )
     }
 
+    if (mode === 'minimized') {
+      return (
+        <Modal {...{
+          ...modalProps,
+          isOpen: show,
+          onRequestClose: closeAndCancel,
+          shouldCloseOnOverlayClick: false,
+          className: style.minimizedModal,
+          style: {
+            overlay: {
+              zIndex: 5000 + (order || 0),
+              bottom: 30 + ((order - 1) * 55),
+            },
+          },
+          overlayClassName: style.minimizedOverlay,
+        }} >
+          <CSSTransition {...transitionProps}>
+            <div className={classNames(style.minimizedRoot, className)} data-cy={name}>
+              {
+                title &&
+                <div className={style.title}>
+                  <div className={style.titleText}>{title}</div>
+                  {minimizeButton}
+                </div>
+              }
+            </div>
+          </CSSTransition>
+        </Modal>
+      )
+    }
+
     return (
       <Modal {...{
         ...modalProps,
@@ -131,7 +174,7 @@ class ModalWrapper extends PureComponent {
       }} >
         <div className={style.closeOverlay} onClick={(shouldCloseOnOverlayClick ? closeAndCancel : undefined)} />
         <CSSTransition {...transitionProps}>
-          <div className={classNames(style.root, className)} data-cy={name}>
+          <div className={classNames(style.root, className, viewModal && style.viewModal)} data-cy={name}>
             {
               title &&
               <div className={style.title}>
@@ -177,6 +220,10 @@ class ModalWrapper extends PureComponent {
                   <div className={style.fullButtons}>
                     {buttons(this.props)}
                   </div>
+                }
+                {mode === 'normal' && minimizeButton}
+                {(mode === 'normal' && viewModal && size !== MODAL_SIZES.full) &&
+                  <div className={style.delimeter} />
                 }
                 {closeAction && closeButton}
               </div>

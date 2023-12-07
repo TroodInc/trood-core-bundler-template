@@ -23,6 +23,7 @@ class ModalsComp extends Component {
   render() {
     const {
       openByNameMap,
+      modeByNameMap,
       paramsByNameMap,
       modalsOrderByNameMap,
       confirmModalOpen = false,
@@ -47,6 +48,7 @@ class ModalsComp extends Component {
             <ModalComp {...{
               key: typeof key === 'function' ? index : key,
               openByNameMap,
+              modeByNameMap,
               paramsByNameMap,
               modalsOrderByNameMap,
               ...other,
@@ -106,6 +108,7 @@ const stateToProps = (state, props) => {
   return ({
     ...props,
     openByNameMap: selectors.getOpenByNameMap(state),
+    modeByNameMap: selectors.getModeByNameMap(state),
     paramsByNameMap: selectors.getModalsPropsByNameMap(state),
     modalsOrderByNameMap: selectors.getModalsOrderByNameMap(state),
     confirmModalOpen: selectors.getConfirmModalOpen(state),

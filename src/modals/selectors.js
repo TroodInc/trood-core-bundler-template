@@ -11,11 +11,16 @@ export const getModal = (modalName) => (state) => state.modals[modalName]
 
 export const getOpenByNameMap = (state) => Object.keys(state.modals).reduce((memo, key) => ({
   ...memo,
-  [key]: !!state.modals[key],
+  [key]: !!state.modals[key].open,
+}), {})
+
+export const getModeByNameMap = (state) => Object.keys(state.modals).reduce((memo, key) => ({
+  ...memo,
+  [key]: state.modals[key].mode,
 }), {})
 
 export const getModalsPropsByNameMap = (state) => Object.keys(state.modals).reduce((memo, key) => {
-  if (!state.modals[key]) {
+  if (!state.modals[key]?.open) {
     return memo
   }
   return {

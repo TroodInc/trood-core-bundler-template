@@ -6,6 +6,7 @@ export const NAME = 'modals'
 
 const actionsTypesModals = [
   'SHOW_MODAL',
+  'TOGGLE_MINIMIZE',
 ]
 
 export const ACTIONS_TYPES = {

@@ -40,6 +40,7 @@ const registerModal = (
     } = dispatchProps
 
     const mergedProps = mergeProps(stateProps, dispatchProps)
+    const minimizeAction = () => dispatch(actions.toggleModalMinimize(name))
     const closingActions = defaultCloseModalActions.reduce((memo, action) => ({
       ...memo,
       [action]: (additionalAction) => {
@@ -67,6 +68,7 @@ const registerModal = (
       ...props,
       ...mergedProps,
       model: mergedProps.model || {}, // Some workaround for deleted forms, so we don't check in every modal
+      minimizeAction,
       ...closingActions,
     }
   }
@@ -90,15 +92,18 @@ const registerModal = (
     render() {
       const {
         openByNameMap,
+        modeByNameMap,
         paramsByNameMap,
         modalsOrderByNameMap,
         ...other
       } = this.props
+
       return (
         <ConnectedModalWrapper {...{
           name,
           key: 'modal',
           show: !!openByNameMap[name],
+          mode: modeByNameMap[name],
           ...paramsByNameMap[name],
           order: modalsOrderByNameMap[name],
         }}>

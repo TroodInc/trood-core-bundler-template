@@ -5,6 +5,8 @@
   right: 0;
   left: 0;
   bottom: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   background-color: transparent;
   transition:
@@ -25,6 +27,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.minimizedOverlay {
+  composes: overlay;
+  top: unset;
+  left: unset;
+  width: unset;
+  height: unset;
+  bottom: 30px;
+  right: 30px;
 }
 
 .closeOverlay {
@@ -74,6 +86,11 @@
   overflow: hidden;
 }
 
+.minimizedModal {
+  padding: 0;
+  overflow: visible;
+}
+
 .root {
   transition: all 100ms linear;
   position: relative;
@@ -86,6 +103,11 @@
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.15);
   flex-direction: column;
   margin: auto 0;
+}
+
+.minimizedRoot {
+  composes: root;
+  border: none;
 }
 
 .title {
@@ -101,14 +123,23 @@
   position: relative;
 }
 
+.title > :first-child:not(.titleText) {
+  margin-left: auto;
+}
+
+.minimizedRoot .title > :not(:last-child),
+.modal:not(.full) .root:not(.viewModal) .title > :not(:last-child) {
+  margin-right: 20px;
+}
+
+.title .titleText {
+  margin-right: auto !important;
+}
+
 .children {
   flex: 1;
   display: flex;
   flex-direction: column;
-}
-
-.titleText {
-  margin-right: auto;
 }
 
 .toolBarIcon,
@@ -120,6 +151,15 @@
   align-items: center;
   cursor: pointer;
   color: var(--trood-gray-extra-dark);
+}
+
+.minimize {
+  composes: close;
+}
+
+.minimize svg {
+  width: 70%;
+  height: 70%;
 }
 
 .closeAbsolute {

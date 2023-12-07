@@ -178,6 +178,7 @@ export const viewEntity = (modelName, parents) =>
       readQuery,
       writeQuery,
       closeOnEdit,
+      viewModal: true,
       closeAction: () => changeModalQuery(modalProps, history, false),
     }))
   }
