@@ -75,7 +75,6 @@ class TTable extends PureComponent {
     header: [],
     body: [],
     checking: false,
-    onCheckedChange: () => {},
     onRowClick: () => {},
     className: '',
     rowClassName: '',
@@ -130,8 +129,8 @@ class TTable extends PureComponent {
     return this.state.check.reduce((a, b) => +a + +b, 0)
   }
 
-  getChecked() {
-    return this.state.check
+  getChecked(check) {
+    return (check || this.state.check)
       .map((item, i) => (item ? { index: i, item: this.props.body[i] } : null))
       .filter(item => item !== null)
   }
@@ -139,15 +138,21 @@ class TTable extends PureComponent {
   checkItem(index) {
     const check = this.state.check.slice()
     check[index] = !check[index]
-    this.setState({ check }, () => this.props.onCheckedChange(this.getChecked()))
+    if (typeof this.props.onCheckedChange === 'function') {
+      this.props.onCheckedChange(this.getChecked(check))
+    } else {
+      this.setState({ check })
+    }
   }
 
   checkAll() {
-    const check = this.props.body.length === this.getCheckedCount()
-    this.setState(
-      { check: this.props.body.map(() => !check) },
-      () => this.props.onCheckedChange(this.getChecked()),
-    )
+    const isCheckAll = this.props.body.length === this.getCheckedCount()
+    const check = this.props.body.map(() => !isCheckAll)
+    if (typeof this.props.onCheckedChange === 'function') {
+      this.props.onCheckedChange(this.getChecked(check))
+    } else {
+      this.setState({ check })
+    }
   }
 
   render() {
