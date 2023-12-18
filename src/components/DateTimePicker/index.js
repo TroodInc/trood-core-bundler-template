@@ -195,7 +195,7 @@ class DateTimePicker extends PureComponent {
   handleValidate(value = this.props.value) {
     const { minDate, maxDate } = this.props.validate
     const errors = []
-    if ((minDate && moment(value).isBefore(minDate)) || (maxDate && moment(value).isAfter(maxDate))) {
+    if (value && ((minDate && moment(value).isBefore(minDate)) || (maxDate && moment(value).isAfter(maxDate)))) {
       errors.push(intlObject.intl.formatMessage(localeService.generalMessages.outOfRangeValue))
     }
     this.setState({ dateTimeErrors: errors }, this.callOnInvalid)
