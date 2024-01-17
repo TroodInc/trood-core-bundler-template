@@ -151,7 +151,7 @@ class TInput extends PureComponent {
   }
 
   getInputSettings() {
-    const { type, value, validate } = this.props
+    const { type, value, validate, zeroIsValue } = this.props
     const properties = {
       ...validate,
       formatValue: formatToFunctions[type] || (v => v),
@@ -159,6 +159,7 @@ class TInput extends PureComponent {
       minLen: validate.minLen || (formatLengthFunctions[type] || (() => 0))(value),
       include: validate.include || includeForTypes[type],
       exclude: validate.exclude || excludeForTypes[type],
+      zeroIsValue,
     }
 
     if (!properties.format) {
