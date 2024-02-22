@@ -67,6 +67,7 @@ class TCurrency extends PureComponent {
       value,
       short,
       trimCount,
+      decimalRequired,
     } = this.props
 
     if (short) {
@@ -78,7 +79,17 @@ class TCurrency extends PureComponent {
         </span>
       )
     }
-    return toNumber(value.toString(), trimCount)
+    let val = value.toString()
+
+    if (decimalRequired) {
+      let decimal = Math.round((value % 1) * (10 ** decimalRequired)).toString()
+      while (decimal.length < decimalRequired) {
+        decimal = '0' + decimal
+      }
+      val = parseInt(val) + '.' + decimal
+    }
+
+    return toNumber(val, trimCount)
   }
 
   render() {
