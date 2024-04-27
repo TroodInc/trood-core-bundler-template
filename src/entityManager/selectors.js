@@ -58,7 +58,7 @@ export const getChildEntitiesByModel =
       return {
         ...memo,
         [getChildEntityName(key)]: {
-          getChildArray: (filterSubmitted = false) => {
+          getChildArray: (filterSubmitted = false, oldFirst = false) => {
             let currentArray = []
             // By checking model type, we define, if the model is form, or restify model
             if (model && !model.$modelType && model[currentChildModelField]) {
@@ -82,14 +82,17 @@ export const getChildEntitiesByModel =
                 })
                 return editChildForm || item
               })
-            return currentChildForms
+            const createdArray = currentChildForms
               .filter(form => {
                 if (!filterSubmitted) {
                   return !form.id && form.isSubmitted
                 }
                 return !form.id
               })
-              .concat(editedArray)
+            if (oldFirst) {
+              return editedArray.concat(createdArray)
+            }
+            return createdArray.concat(editedArray)
           },
           getIsLoadingChildArray: () => {
             if (model && !model.$modelType && model.id && model[currentChildModelField]) {

@@ -462,7 +462,7 @@ const getEntityEditComponent = (entityComponentName) => (modelName, modelConfig)
       model = forms.selectors.getForm(modelFormName)(state)
       modelErrors = forms.selectors.getErrors(modelFormName)(state)
       modelValid = forms.selectors.getIsValid(modelFormName)(state)
-      if (props.isEditing) {
+      if (props.isEditing && props.idToEdit) {
         serverModel = currentEntities[modelName].getById(props.entityId, { query: readQuery || query })
       }
       // Calc props for viewing modal

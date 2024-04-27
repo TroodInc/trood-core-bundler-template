@@ -265,6 +265,7 @@ const generalEditEntity = (showModal) => (modelName, parents = []) => (model, co
         onDelete: config.onDelete,
         entityId: currentForm.form.id || currentForm.form.tempId,
         isEditing: isEditing || !!currentForm.form.id,
+        idToEdit: currentForm.form.id,
         parents,
         prevForm,
       }))
