@@ -35,11 +35,11 @@ const ModalComponentWrapper = type => ({ className, ...props }) => {
   const firstFieldName = Array.isArray(fieldName) ? fieldName[0] : fieldName
   if (getMask.includes(firstFieldName)) return null
 
-  const onChange = e => changeField(fieldName, e)
-  const onInvalid = errs => setFieldError(fieldName, errs)
-  const onValid = () => resetFieldError(fieldName)
-  const value = getNestedObjectField(model, fieldName)
-  const errors = getNestedObjectField(modelErrors, fieldName)
+  const onChange = fieldName ? e => changeField(fieldName, e) : () => {}
+  const onInvalid = fieldName ? errs => setFieldError(fieldName, errs) : () => {}
+  const onValid = fieldName ? () => resetFieldError(fieldName) : () => {}
+  const value = fieldName ? getNestedObjectField(model, fieldName) : undefined
+  const errors = fieldName ? getNestedObjectField(modelErrors, fieldName) : undefined
   let { label } = props
   const lastFieldName = Array.isArray(fieldName) ? fieldName[fieldName.length - 1] : fieldName
   if (!label && localeService.entityMessages[extraModelName || modelName][lastFieldName]) {
