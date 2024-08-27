@@ -66,7 +66,7 @@ export const ruleChecker = ({
   const domainDefaultResolution = domainResources._defaultResolution
   const defaultAccess = domainDefaultResolution === allow || globalDefaultResolution === allow
   const resourceKeys = Object.keys(domainResources).filter(key => {
-    const regexp = new RegExp(key.replace('*', '.*'))
+    const regexp = new RegExp('^' + key.replace('*', '.*') + '$')
     return regexp.test(resource)
   }).sort().reverse()
   const resourceActions = resourceKeys.reduce((memo, curr) => ([
