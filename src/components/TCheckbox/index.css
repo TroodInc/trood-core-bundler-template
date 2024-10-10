@@ -46,6 +46,7 @@
 }
 
 .root.disabled {
+  cursor: not-allowed;
   background-color: var(--trood-gray);
   border: 1px solid var(--trood-gray);
 }
@@ -80,7 +81,11 @@
   color: var(--trood-gray-dark);
 }
 
-.disabled .icon {
+.boxRoot.disabled .icon {
+  color: transparent;
+}
+
+.disabled.checked .icon {
   color: var(--trood-gray-text) !important;
 }
 
