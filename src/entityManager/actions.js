@@ -29,6 +29,7 @@ export const createEntityForm = (modelName, parents = []) => (
   {
     defaults = {},
     values = {},
+    crudAction,
     query,
     readQuery,
     writeQuery,
@@ -66,6 +67,7 @@ export const createEntityForm = (modelName, parents = []) => (
   const newForm = forms.createFormConfig({
     baseConfig: baseFormName,
     model: modelName,
+    crudAction,
     defaults: {
       ...defaults,
       id,
@@ -187,7 +189,7 @@ export const viewEntity = (modelName, parents) =>
  * Start edit entity, shows modal
  * @param {number|string|Object} [model] - can be either restify model, restify form or entity id to edit
  */
-const generalEditEntity = (showModal) => (modelName, parents = []) => (model, config = {}) =>
+const generalEditEntity = (showModal, quick) => (modelName, parents = []) => (model, config = {}) =>
   async (dispatch, getState) => {
     const rules = auth.selectors.getPermissions(getState())
     const obj = model
@@ -270,21 +272,31 @@ const generalEditEntity = (showModal) => (modelName, parents = []) => (model, co
         prevForm,
       }))
     } else {
-      dispatch(currentForm.formActions.changeSomeFields({
-        isSubmitted: false,
-        prevForm,
-      }, true))
+      if (quick) {
+        dispatch(currentForm.formActions.changeSomeFields({
+          ...(config.values || {}),
+          isSubmitted: true,
+          prevForm,
+        }, true))
+      } else {
+        dispatch(currentForm.formActions.changeSomeFields({
+          isSubmitted: false,
+          prevForm,
+        }, true))
+      }
     }
     return currentForm
   }
 
 const generalEditModalEntity = generalEditEntity(true)
 const generalEditInlineEntity = generalEditEntity(false)
+const generalQuickEditInlineEntity = generalEditEntity(false, true)
 
 export const editEntity = (modelName) => generalEditModalEntity(modelName)
 export const editChildEntity = generalEditModalEntity
 export const editInlineEntity = (modelName) => generalEditInlineEntity(modelName)
 export const editInlineChildEntity = generalEditInlineEntity
+export const editQuickChildEntity = generalQuickEditInlineEntity
 
 export const deleteEntity = (modelName, parents = []) => (model, onDelete) => (dispatch, getState) => {
   return new Promise(async (resolve) => {
