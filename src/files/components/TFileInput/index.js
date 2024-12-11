@@ -45,6 +45,7 @@ class TFileInput extends PureComponent {
     host: PropTypes.string,
 
     multiple: PropTypes.bool,
+    firePasteEvent: PropTypes.bool,
     disabled: PropTypes.bool,
     accept: PropTypes.string,
 
@@ -78,6 +79,31 @@ class TFileInput extends PureComponent {
     errors: [],
 
     showFileList: false,
+  }
+
+  constructor(props) {
+    super(props)
+    this.handlePaste = this.handlePaste.bind(this)
+  }
+
+  handlePaste(event) {
+    const { onChange, firePasteEvent } = this.props
+    if (firePasteEvent) {
+      const items = (event?.clipboardData || event?.originalEvent?.clipboardData)?.items || []
+      const item = items[0]
+      if (item && item.kind === 'file') {
+        const file = items[0].getAsFile()
+        onChange([file])
+      }
+    }
+  }
+
+  componentDidMount() {
+    window.addEventListener('paste', this.handlePaste)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('paste', this.handlePaste)
   }
 
   render() {
