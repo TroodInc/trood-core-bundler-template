@@ -82,7 +82,7 @@
     "redux-restify": "^0.16.4",
     "redux-thunk": "^2.3.0",
     "regenerator-runtime": "^0.13.3",
-    "sanitize-html": "^2.14.0",
+    "sanitize-html": "^1.27.5",
     "scroll-into-view-if-needed": "^2.2.24",
     "seamless-immutable": "^7.1.4",
     "style-loader": "^1.1.3",
