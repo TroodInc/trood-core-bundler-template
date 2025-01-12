@@ -1,6 +1,6 @@
 import React, { useMemo, useCallback } from 'react'
 import ReactQuill from 'react-quill'
-import debounce from 'lodash/debounce'
+// import debounce from 'lodash/debounce'
 
 import MyTheme from './MyTheme/theme'
 
@@ -85,11 +85,11 @@ const WysiwygEditor = ({
     return config
   }, [link, image, uploadFile, video])
 
-  const innerHandleChange = useCallback(value => {
+  const handleChange = useCallback(value => {
     onChange({ target: { value } })
   }, [onChange])
 
-  const handleChange = useCallback(debounce(innerHandleChange, 500), [innerHandleChange])
+  // const handleChange = useCallback(debounce(innerHandleChange, 500), [innerHandleChange])
 
   return <ReactQuill
     value={value}
