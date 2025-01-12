@@ -448,8 +448,6 @@ class Input extends PureComponent {
       className,
       labelClassName,
       inputClassName,
-      editorClassName,
-      toolbarClassName,
       type,
       disabled,
       autoFocus,
@@ -462,6 +460,7 @@ class Input extends PureComponent {
         required,
         checkOnBlur,
       },
+      ...other
     } = this.props
 
     const {
@@ -510,12 +509,11 @@ class Input extends PureComponent {
       switch (type) {
         case INPUT_TYPES.wysiwyg:
           return (
-            <WysiwygEditor {...{
-              ...inputProps,
-              ref: undefined,
-              editorClassName,
-              toolbarClassName,
-            }} />
+            <WysiwygEditor
+              {...other}
+              {...inputProps}
+              ref={undefined}
+            />
           )
         case INPUT_TYPES.multi:
           return (

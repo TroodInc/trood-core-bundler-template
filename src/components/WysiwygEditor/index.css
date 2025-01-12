@@ -1,52 +1,52 @@
-@global-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+@global-import './quill.css';
 
 .root {
+  position: relative;
   width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  outline: none;
+  overflow-y: auto;
+  padding: 8px 0;
+  tab-size: 4;
+  text-align: left;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
-.root .toolbar {
-  border-radius: 0;
-  border: none;
-  background: transparent;
-  font-size: inherit;
-  padding: 0;
-  border-bottom: 1px solid var(--trood-gray-border);
-  margin: 0 0 6px;
-  gap: 12px;
+.root > * {
+  cursor: text;
 }
 
-.root .toolbar .inline {
-  gap: 6px;
+.root ol,
+.root ul {
+  padding-left: 1.5em;
 }
 
-.root .toolbar .dropdown {
-  margin: 0;
-  min-width: 60px;
+.root ol > li,
+.root ul > li {
+  list-style-type: none;
 }
 
-.root .toolbar .button {
-  min-width: 20px;
-  margin: 0;
+.root ul > li:before {
+  content: '\2022';
 }
 
-.root .toolbar .color {
-  min-width: 20px;
-  margin: 0;
+.root strong,
+.root b {
+  font-weight: bold;
 }
 
-.root .toolbar .colorPopup {
-  width: auto;
-  height: auto;
-  min-width: 140px;
+.root em {
+  font-style: italic;
 }
 
-.root .toolbar .colorPopup > :last-child {
-  overflow: auto;
+.root sub {
+  vertical-align: sub;
+  font-size: smaller;
 }
 
-.root .editor > div {
-  display: flex;
-  flex-flow: column nowrap;
-  flex-grow: 1;
-  height: auto;
+.root sup {
+  vertical-align: super;
+  font-size: smaller;
 }

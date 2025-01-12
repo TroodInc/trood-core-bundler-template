@@ -330,10 +330,10 @@ const getEntityEditComponent = (entityComponentName) => (modelName, modelConfig)
           <EntityManagerContext.Provider value={contextValue}>
             <AuthManagerContext.Consumer>
               {({ checkCustodianCreateRule, checkCustodianUpdateRule, checkCustodianGetRule }) => {
-                const editMaskChecker = model.id ? checkCustodianUpdateRule : checkCustodianCreateRule
+                const editMaskChecker = model?.id ? checkCustodianUpdateRule : checkCustodianCreateRule
                 const entities = this.props[modelName + 'Entities']
                 const objectToCheck = {
-                  ...(model.id && { obj: entities.getById(model.id) }),
+                  ...(model?.id && { obj: entities.getById(model?.id) }),
                   ctx: { data: model },
                   resource: entities.modelConfig.endpoint,
                 }
@@ -581,7 +581,7 @@ const getEntityEditComponent = (entityComponentName) => (modelName, modelConfig)
       modelFormActions = formActions.modelFormActions
       // Define cancel action only for editing modal, cause in view modal we just close it
       if (
-        stateProps.isEditing && stateProps.model && !stateProps.model.id &&
+        stateProps.isEditing && stateProps.model && !stateProps.model?.id &&
         (stateProps.prevForm || stateProps.model.prevForm)
       ) {
         cancelAction = () => {

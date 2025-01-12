@@ -1,92 +1,104 @@
-import classNames from 'classnames'
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import React, { useMemo, useCallback } from 'react'
+import ReactQuill from 'react-quill'
+import debounce from 'lodash/debounce'
 
-import { EditorState, ContentState, convertToRaw } from 'draft-js'
-import draftToHtml from 'draftjs-to-html'
-import htmlToDraft from 'html-to-draftjs'
+import MyTheme from './MyTheme/theme'
 
-import { Editor } from 'react-draft-wysiwyg'
-import { connect } from 'react-redux'
-import { forms } from 'redux-restify'
-
-import { checkCurrentLocale } from '$trood/localeService'
-
-import { TOOLBAR } from './constants'
 import styles from './index.css'
 
 
-/**
- * Component for output Wysiwyg Editor.
- */
+const Quill = ReactQuill.Quill
 
-class WysiwygEditor extends PureComponent {
-  static propTypes = {
-    /** class name for styling component */
-    className: PropTypes.string,
-    /** text value */
-    value: PropTypes.string,
-    /** onChange function */
-    onChange: PropTypes.func,
-  }
+const Size = Quill.import('attributors/style/size')
+Size.whitelist = [8, 9, 10, 11, 12, false, 16, 18, 24, 30, 36, 48, 60, 72, 96]
+  .map(s => s ? `${s}px` : s)
+Quill.register(Size, true)
 
-  static defaultProps = {
-    className: '',
-    value: '',
-    onChange: () => {},
-  }
+const AlignClass = Quill.import('attributors/style/align')
+Quill.register(AlignClass, true)
 
-  constructor(props) {
-    super(props)
+Quill.register({
+  'themes/snow': MyTheme,
+}, true)
 
-    let editorState
-    if (props.value) {
-      const { contentBlocks, entityMap } = htmlToDraft(props.value)
-      const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap)
-      editorState = EditorState.createWithContent(contentState)
-    } else {
-      editorState = EditorState.createEmpty()
+const getImageHandler = (uploadFile) => {
+  return function () {
+    const { quill } = this
+    const range = quill.getSelection()
+    const input = document.createElement('input')
+    input.setAttribute('type', 'file')
+    input.setAttribute('accept', 'image/*')
+    input.click()
+    input.onchange = (e) => {
+      const input = e.target
+      const file = (input && input.files) ? input.files[0] : null
+      uploadFile(file)
+        .then(({ data }) => {
+          const { fileUrl } = data
+          quill.insertText(range.index, '\n')
+          quill.insertEmbed(range.index, 'image', fileUrl)
+        })
+        .catch(console.error)
     }
-    this.state = { editorState }
-
-    this.onChange = this.onChange.bind(this)
-  }
-
-  onChange(editorState) {
-    this.props.onChange({
-      target: {
-        value: draftToHtml(convertToRaw(editorState.getCurrentContent())),
-      },
-    })
-    this.setState({ editorState })
-  }
-
-  render() {
-    const { className, toolbarClassName, editorClassName, placeholder, locale } = this.props
-
-    const { editorState } = this.state
-
-    return (
-      <Editor {...{
-        placeholder,
-        toolbar: TOOLBAR,
-        editorState,
-        wrapperClassName: classNames(className, styles.root),
-        toolbarClassName: classNames(toolbarClassName, styles.toolbar),
-        editorClassName: classNames(editorClassName, styles.editor),
-        onEditorStateChange: this.onChange,
-        localization: locale ? { locale } : undefined,
-        handlePastedText: () => false,
-      }} />
-    )
   }
 }
 
-const mapStateToProps = (state) => {
-  const localeServiceForm = forms.selectors.localeServiceForm.getForm(state)
-  return ({
-    locale: checkCurrentLocale(localeServiceForm.selectedLocale),
-  })
+const WysiwygEditor = ({
+  value,
+  onChange,
+  placeholder,
+
+  link = true,
+  image,
+  uploadFile,
+  video,
+}) => {
+  const modules = useMemo(() => {
+    const config = {
+      toolbar: {},
+    }
+    config.toolbar.container = [
+      [
+        'bold',
+        'italic',
+        'underline',
+        'strike',
+        { script: 'sub'},
+        { script: 'super' },
+        { size: Size.whitelist },
+        { list: 'ordered' },
+        { list: 'bullet' },
+        { align: [] },
+        { color: [] },
+        { background: [] },
+        link && 'link',
+        image && 'image',
+        video && 'video',
+      ].filter(Boolean),
+      ['clean'],
+    ]
+    if (typeof uploadFile === 'function') {
+      config.toolbar.handlers = {
+        image: getImageHandler(uploadFile),
+      }
+    }
+    return config
+  }, [link, image, uploadFile, video])
+
+  const innerHandleChange = useCallback(value => {
+    onChange({ target: { value } })
+  }, [onChange])
+
+  const handleChange = useCallback(debounce(innerHandleChange, 500), [innerHandleChange])
+
+  return <ReactQuill
+    value={value}
+    placeholder={placeholder}
+    onChange={handleChange}
+    className={styles.root}
+    bounds={`.${styles.root}`}
+    modules={modules}
+  />
 }
 
-export default connect(mapStateToProps)(WysiwygEditor)
+export default WysiwygEditor
