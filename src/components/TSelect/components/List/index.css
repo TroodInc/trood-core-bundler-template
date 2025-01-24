@@ -13,6 +13,10 @@
   padding: 0 10px;
 }
 
+.itemWrapper label {
+  flex: 1;
+}
+
 .tileItemWrapper {
   composes: itemWrapper;
   height: 2rem;
