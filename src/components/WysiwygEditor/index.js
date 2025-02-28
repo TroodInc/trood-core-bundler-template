@@ -1,5 +1,6 @@
 import React, { useMemo, useCallback } from 'react'
 import ReactQuill from 'react-quill'
+import QuillResizeImage from 'quill-resize-image'
 // import debounce from 'lodash/debounce'
 
 import MyTheme from './MyTheme/theme'
@@ -16,6 +17,8 @@ Quill.register(Size, true)
 
 const AlignClass = Quill.import('attributors/style/align')
 Quill.register(AlignClass, true)
+
+Quill.register('modules/resize', QuillResizeImage)
 
 Quill.register({
   'themes/snow': MyTheme,
@@ -53,11 +56,11 @@ const WysiwygEditor = ({
   uploadFile,
   video,
 }) => {
-  const modules = useMemo(() => {
-    const config = {
+  const config = useMemo(() => {
+    const modules = {
       toolbar: {},
     }
-    config.toolbar.container = [
+    modules.toolbar.container = [
       [
         'bold',
         'italic',
@@ -77,12 +80,25 @@ const WysiwygEditor = ({
       ].filter(Boolean),
       ['clean'],
     ]
-    if (typeof uploadFile === 'function') {
-      config.toolbar.handlers = {
-        image: getImageHandler(uploadFile),
+    if (image) {
+      modules.resize = {
+        locale: {
+          floatLeft: 'Лево',
+          floatRight: 'Право',
+          center: 'Центр',
+          restore: 'Назад',
+          altTip: 'Зажмите и удерживайте Alt, чтобы зафиксировать пропорции!',
+          inputTip: 'Нажмите Enter, чтобы применить!',
+        },
+      }
+
+      if (typeof uploadFile === 'function') {
+        modules.toolbar.handlers = {
+          image: getImageHandler(uploadFile),
+        }
       }
     }
-    return config
+    return { modules }
   }, [link, image, uploadFile, video])
 
   const handleChange = useCallback(value => {
@@ -92,12 +108,12 @@ const WysiwygEditor = ({
   // const handleChange = useCallback(debounce(innerHandleChange, 500), [innerHandleChange])
 
   return <ReactQuill
+    {...config}
     value={value}
     placeholder={placeholder}
     onChange={handleChange}
     className={styles.root}
     bounds={`.${styles.root}`}
-    modules={modules}
   />
 }
 
