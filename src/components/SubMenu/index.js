@@ -38,25 +38,26 @@ class SubMenu extends PureComponent {
     } = this.props
 
     const currentItem = items.find(item => item.id === selectedItem)
-    if (items.length < 2) return null
 
     return (
       <React.Fragment>
-        <div className={classNames(style.root, thin && style.thin, vertical && style.vertical, className)}>
-          {items.map(item => {
-            if (!item) return undefined
-            return (
-              <div {...{
-                key: item.id,
-                'data-cy': item.id,
-                className: classNames(style.link, item.id === selectedItem && style.active),
-                onClick: () => onChange(item.id),
-              }}>
-                {item.label}
-              </div>
-            )
-          })}
-        </div>
+        {items.length > 1 && (
+          <div className={classNames(style.root, thin && style.thin, vertical && style.vertical, className)}>
+            {items.map(item => {
+              if (!item) return undefined
+              return (
+                <div {...{
+                  key: item.id,
+                  'data-cy': item.id,
+                  className: classNames(style.link, item.id === selectedItem && style.active),
+                  onClick: () => onChange(item.id),
+                }}>
+                  {item.label}
+                </div>
+              )
+            })}
+          </div>
+        )}
         {currentItem && currentItem.content}
       </React.Fragment>
     )
