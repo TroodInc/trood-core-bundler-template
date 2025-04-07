@@ -103,6 +103,7 @@ const ModalComponentWrapper = type => ({ className, ...props }) => {
             multi: false,
             placeHolder: intlObject.intl.formatMessage(localeService.generalMessages.notSet),
             validate: validateInput,
+            clearable: props?.validate?.required === false ? true : undefined,
             ...props,
           }}
         />
