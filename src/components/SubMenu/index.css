@@ -56,3 +56,7 @@
 .root.vertical:not(.thin) .link.active {
   box-shadow: inset 2px 0 var(--trood-blue);
 }
+
+.hidden {
+  display: none;
+}

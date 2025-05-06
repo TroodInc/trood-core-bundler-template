@@ -34,10 +34,12 @@ class SubMenu extends PureComponent {
       items = [],
       className,
       selectedItem,
+      renderHidden,
       onChange,
     } = this.props
 
     const currentItem = items.find(item => item.id === selectedItem)
+    const otherItems = !renderHidden ? null : items.filter(item => item.id !== selectedItem && !!item.content)
 
     return (
       <React.Fragment>
@@ -59,6 +61,13 @@ class SubMenu extends PureComponent {
           </div>
         )}
         {currentItem && currentItem.content}
+        <div className={style.hidden}>
+          {otherItems && otherItems.map(item => (
+            <React.Fragment key={item.id}>
+              {item.content}
+            </React.Fragment>
+          ))}
+        </div>
       </React.Fragment>
     )
   }
