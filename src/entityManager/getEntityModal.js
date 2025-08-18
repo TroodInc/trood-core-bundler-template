@@ -376,7 +376,8 @@ const getEntityEditComponent = (entityComponentName) => (modelName, modelConfig)
           cancelAction,
           isEditing,
         } = this.props
-        const saveButton = (
+
+        const saveButton = currentModel?.modal?.hideSubmit ? null : (
           <TButton {...{
             className: modalsStyle.button,
             label: intlObject.intl.formatMessage(isEditing ? messages.change : localeService.generalMessages.save),
