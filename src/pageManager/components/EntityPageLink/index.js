@@ -23,6 +23,7 @@ const EntityPageLink = ({
   model = {},
   className,
   children,
+  ...other
 }) => {
   return (
     <PageManagerContext.Consumer>
@@ -34,6 +35,7 @@ const EntityPageLink = ({
             to,
             className: classNames(style.root, className, model.$error && style.error),
             'data-cy': `${model.$modelType}Link_${model.id}`,
+            ...other,
           }}>
             {children}
           </Component>
